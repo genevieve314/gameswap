@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='app'>
+<head>
+  <meta charset='UTF-8'>
+  <link rel='stylesheet' href='../bower_components/bootstrap/dist/css/bootstrap.min.css' />
+  <link rel='stylesheet' href='../css/custom.css'/>
+  <script type='text/javascript' src='../bower_components/angular/angular.min.js'></script>
+  <script type='text/javascript' src='../bower_components/angular-ui-router/release/angular-ui-router.min.js'></script>
+  <script type='text/javascript' src='app.js'></script>
+  <script type='text/javascript' src='auth/signin/signin.js'></script>
+  <script type='text/javascript' src='auth/signup/signup.js'></script>
+  <script type='text/javascript' src='main/main.js'></script>
+  <script type='text/javascript' src='results/results.js'></script>
+  <script type='text/javascript' src='services/services.js'></script>
+  <script type='text/javascript' src='userprofile/userprofile.js'></script>
+  <title>Game Swap</title>
+</head>
+<body>
+  <header class='jumbotron'>
+    <h3 class='pull-left'>GameSwap</h3>
+    <a class='pull-right' ui-sref='signin'>Sign In</a>
+    <h2 class='text-center'>
+      Get the game you want, for the game you have.
+    </h1>
+    <div class='text-center'>
+      <form name='searchForm' ng-controller='MainController as main' ng-submit='searchForm.$valid && main.searchGames(game)' novalidate>
+        <input type='text' ng-model='game' placeholder='What game do you want?' required/>
+        <div ng-repeat='result in main.results | orderBy:"[game.platform, distance]"'>
+          Username: {{result.name}} <br>
+          Score: {{result.game.score}} <br>
+          Platform: {{result.game.platform}} <br>
+          Distance: {{result.distance}} Miles <br>
+          <img ng-src='{{result.game.image}}'>
+        </div>
+      </form>
+    </div>
+  </header>
+  <div class='container-fluid'>
+  </div>
+  <div ui-view></div>
+</div>
+<footer>
+  <!-- TODO: How It Works, Terms, Team/Contact Us-->
+</footer>
+</body>
+</html>

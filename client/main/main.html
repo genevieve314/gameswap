@@ -1,0 +1,21 @@
+<header class='jumbotron'>
+  <h3 class='pull-left'>GameSwap</h3>
+  <a class='pull-right' ui-sref='signin'>Sign In</a>
+  <h2 class='text-center'>
+    Get the game you want, for the game you have.
+  </h1>
+  <div class='text-center'>
+    <form name='searchForm' ng-controller='MainController as main' ng-submit='searchForm.$valid && main.searchGames(game)' novalidate>
+      <input type='text' ng-model='game' placeholder='What game do you want?' required/>
+      <div ng-repeat='result in main.results | orderBy:"[game.platform, distance]"'>
+        Username: {{result.name}} <br>
+        Score: {{result.game.score}} <br>
+        Platform: {{result.game.platform}} <br>
+        Distance: {{result.distance}} Miles <br>
+        <img ng-src='{{result.game.image}}'>
+      </div>
+    </form>
+  </div>
+</header>
+<div class='container-fluid'>
+</div>
