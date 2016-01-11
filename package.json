@@ -3,20 +3,21 @@
   "version": "0.0.1",
   "description": "The place to swap games with other gamers and cut out the middleman",
   "main": "server/server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "dependencies": {
+    "mysql": "^2.10.0",
+    "sql": "^0.63.1",
+    "underscore": "^1.8.3",
+    "express": "^4.13.3"
   },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/gameswap/gameswap.git"
   },
-  "author": "",
+  "author": "Fleetwood MacIntosh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gameswap/gameswap/issues"
   },
-  "homepage": "https://github.com/gameswap/gameswap",
-  "dependencies": {
-    "express": "^4.13.3"
-  }
+  "homepage": "https://github.com/gameswap/gameswap"
 }
