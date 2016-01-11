@@ -20,6 +20,12 @@ connection.connect(function(err){
 
 tables.create();
 
+
+
+
+
+
+
 // module.exports.handleQueries = {
 //   example: function(){
 //     connection.query(//add query string and function
