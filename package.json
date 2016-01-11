@@ -1,0 +1,22 @@
+{
+  "name": "gameswap",
+  "version": "0.0.1",
+  "description": "The place to swap games with other gamers and cut out the middleman",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gameswap/gameswap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gameswap/gameswap/issues"
+  },
+  "homepage": "https://github.com/gameswap/gameswap",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
