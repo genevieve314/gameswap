@@ -50,6 +50,7 @@ module.exports = {
     });
   },
 
+
   addGame: function (title, platform, rating, description, callback) {
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
     var checkValues = [title, platform]
@@ -64,7 +65,6 @@ module.exports = {
         })
       }
     });
-
 
     connection.query('SELECT LAST_INSERT_ID();', function(err, data){
       if(err){ console.error("error in db addUser: ", err)};
