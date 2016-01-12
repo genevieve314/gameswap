@@ -8,18 +8,18 @@ angular
       this.submitted = true;
       this.results = [];
       for(var i = 0; i < this.users.length; i++) {
-        if(this.users[i].game.name === game) {
+        if(this.users[i].game.name.toLowerCase() === game.toLowerCase()) {
           this.results.push(this.users[i]);
         }
       }
     };
     //TODO: database version
-    this.searchGames = function(game) {
-      MainService.searchGamesDb().
-      then(function() {
-
-      });
-    };
+    // this.searchGames = function(game) {
+    //   MainService.searchGamesDb().
+    //   then(function() {
+    //
+    //   });
+    // };
   });
 
 //hardcoded for now to test
