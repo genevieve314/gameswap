@@ -44,11 +44,11 @@ module.exports = {
       console.log("data in addUser: ", data);
     });
 
-    connection.query('SELECT LAST_INSERT_ID();', function(err, data)){
+    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
       if(err){ console.error("error in db addUser: ", err)};
       callback(data);
     });
-  }
+  },
 
   addGame: function(title, platform, rating, description, callback){
     var sql = 'INSERT into Games (title, platform, rating, description) values(?, ?, ?, ?) WHERE NOT EXISTS (SELECT * FROM Games WHERE title = ' + title + ' AND platform =' + platform + ');';
@@ -58,7 +58,7 @@ module.exports = {
       if(err){ console.error('error in db addGame: ', err)};
     });
 
-    connection.query('SELECT LAST_INSERT_ID();', function(err, data)){
+    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
       if(err){ console.error("error in db addUser: ", err)};
       console.log('data in addGames: ', data);
       callback(data);
@@ -99,7 +99,7 @@ module.exports = {
 //example insert query string
   // insert into employee
   // (first, last, age, address, city, state)
-  // values ('Luke', 'Duke', 45, '2130 Boars Nest', 
+  // values ('Luke', 'Duke', 45, '2130 Boars Nest',
   //         'Hazard Co', 'Georgia');
   //
   // SELECT LAST_INSERT_ID()';
@@ -113,10 +113,7 @@ module.exports = {
   //               WHERE cr.Name = c.cName)
 
 //example insert with data from another table
-  // INSERT INTO action_2_members (campaign_id, mobile, vote, vote_date)  
+  // INSERT INTO action_2_members (campaign_id, mobile, vote, vote_date)
   // SELECT campaign_id, from_number, received_msg, date_received
   // FROM `received_txts`
   // WHERE `campaign_id` = '8'
-
-
-
