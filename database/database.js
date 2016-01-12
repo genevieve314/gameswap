@@ -55,25 +55,23 @@ module.exports = {
     var values = [title, platform, rating, description];
 
     connection.query(sql, values, function(err){
-      if(err) console.error('error in db addGame: ', err);
+      if (err) console.error('error in db addGame: ', err);
     });
 
-    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
-      if(err){ console.error("error in db addUser: ", err)};
+    connection.query('SELECT LAST_INSERT_ID();', function (err, data) {
+      if(err) console.error("error in db addUser: ", err);
       console.log('data in addGames: ', data);
       callback(data);
     });
 
   },
 
-  addOffering: function(userid, gameid, condition, callback){
+  addOffering: function (userid, gameid, condition, callback){
     var sql = 'INSERT into Offering (userid, gameid, condition) values( ?, ?, ?);';
     var values = [userid, gameid, condition];
 
     connection.query(sql, values, function (err) {
-      if (err) {
-        console.error('error in db addOffering: ', err)
-      };
+      if (err) console.error('error in db addOffering: ', err);
     })
   },
 
@@ -82,8 +80,27 @@ module.exports = {
     var values = [userid, gameid, condition];
 
     connection.query(sql, values, function (err) {
-      if (err) { console.error('error in db addSeeking: ', err)
-      };
+      if (err) console.error('error in db addSeeking: ', err);
+    })
+  },
+
+  searchOffering: function (title, callback) {
+    var sql = 'SELECT Games.tite, Games.rating, Games.description, Games.platform, Game.thumbnail, Offering.condition, Offering.createdat, Users.username, Users.email FROM Games, Offering, Users WHERE Games.title LIKE ? AND Games.id = Offering.gameid AND Offering.userid = Users.id;';
+    var values = title;
+
+    connection.query(sql, values, function (err, data) {
+      if (err) console.error('error in db searchOffering: ', err);
+      callback(data);
+    })
+  },
+
+  searchSeeking: function (title, callback) {
+    var sql = 'SELECT Games.tite, Games.rating, Games.description, Games.platform, Game.thumbnail, Seeking.createdat, Users.username, Users.email FROM Games, Seeking, Users WHERE Games.title LIKE ? AND Games.id = Seeking.gameid AND Seeking.userid = Users.id;';
+    var values = title;
+
+    connection.query(sql, values, function (err, data) {
+      if (err) console.error('error in db searchSeeking: ', err);
+      callback(data);
     })
   }
 }
