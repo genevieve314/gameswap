@@ -1,0 +1,22 @@
+angular.module('auth.signup', [])
+
+.controller('SignupController', function($location, $window, AuthServices){
+
+	var user = {};
+	var signup = this;
+
+	signup.submit = function(){
+		user.username = signup.username;
+	 	user.password = signup.password;
+	 	user.email = signup.email;
+	 	console.log(user);
+	 	AuthServices.submitNewUser(user)
+	 		.then(function(token){
+	 		//	$window.localStorage.setItem('com.gameswap', token);  // com.gameswap is placeholder
+        	//	$location.path('/userprofile');
+	 		})
+	 		.catch(function(error) {
+        		console.error(error);
+      		}); 	
+	}
+})

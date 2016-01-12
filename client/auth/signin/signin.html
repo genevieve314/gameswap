@@ -1,0 +1,12 @@
+<div id='container'>
+	<h1>This is the signIN view</h1>
+	<div ng-controller='SigninController as signin'>
+    	Email: <input type='text' ng-model='signin.email' /><br><br>
+    	Password: <input type="password" ng-model='signin.password' /><br><br>
+    	<button ng-click='signin.submit(signin)'>sign in</button>
+  		<p>Don't have a GameSwap account? <a ui-sref="signup">Click here to sign up!</a></p>
+
+  		<p><a ui-sref="main">Go back to main</a></p>
+
+	</div>
+</div>
