@@ -20,11 +20,5 @@ module.exports = {
 	connection.query(this.messages, function(err){
   		if(err) console.error('error while creating messages table: ', err);
 		});
-  }	
-}
-
-
-
-
-		
-
+  }
+};

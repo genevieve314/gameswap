@@ -1,23 +1,34 @@
-<header class='jumbotron'>
-  <h3 class='pull-left'>GameSwap</h3>
-  <a class='pull-right' ui-sref='signin'>Sign In</a>
-  <h2 class='text-center'>
-    Get the game you want, for the game you have.
-  </h1>
-  <div class='text-center' ng-controller='MainController as main'>
-    <form name='searchForm' ng-submit='searchForm.$valid && main.searchGames(game)' novalidate>
-      <input type='text' ng-model='game' placeholder='What game do you want?' required/>
-      <div ng-if='main.results.length | orderBy:"[game.platform, distance]"'>
+<section ng-controller='MainController as main'>
+  <header class='jumbotron'>
+    <h3 class='pull-left'>GameSwap</h3>
+    <a class='pull-right' ui-sref='signin'>Sign In</a>
+    <h2 class='text-center'>
+      Get the game you want, for the game you have.
+    </h1>
+    <div class='text-center' >
+      <form name='searchForm' ng-submit='searchForm.$valid && main.searchGames(game)' novalidate>
+        <input type='text' ng-model='game' placeholder='What game do you want?' required/>
+      </div>
+    </form>
+  </header>
+  <div class='container-fluid'>
+    <div ng-if='main.results.length | orderBy:"[game.platform, distance]"'>
+      <div class = 'text-center'>
+        There are {{main.results.length}} gamers near you who have {{main.results[0].game.name}}. The closest one is:
+      </div>
+      <div class = 'col-md-4 text-center'>
         Username: {{main.results[0].name}} <br>
         Score: {{main.results[0].game.score}} <br>
         Platform: {{main.results[0].game.platform}} <br>
         Distance: {{main.results[0].distance}} Miles <br>
-        <img ng-src='{{main.results[0].game.image}}'>
+        <img class= 'boxart' ng-src='{{main.results[0].game.image}}'>
       </div>
-      <div ng-if='this.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
-    </form>
-    <a ui-sref='signup' ng-show='main.results.length'>Sign up</a>
+      <div class = 'col-md-8'>
+        <!-- TODO: Change to Google Maps API-->
+        <img class = 'center-block' ng-src='http://www.destination360.com/north-america/us/california/santa-monica/best-western-gateway-hotel-santa-monica-map.gif'>
+      </div>
+    </div>
+    <div class='text-center' ng-if='main.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
+    <a class='pull-right' ui-sref='signup' ng-show='main.results.length'>Sign up</a>
   </div>
-</header>
-<div class='container-fluid'>
-</div>
+</section>
