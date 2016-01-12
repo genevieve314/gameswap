@@ -15,7 +15,7 @@ angular
     };
     //TODO: database version
     // this.searchGames = function(game) {
-    //   MainService.searchGamesDb().
+    //   MainService.searchGamesDb(game).
     //   then(function() {
     //
     //   });
