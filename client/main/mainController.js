@@ -14,12 +14,12 @@ angular
       }
     };
     //TODO: database version
-    this.searchGames = function(game) {
+    /*this.searchGames = function(game) {
       MainService.searchGamesDb().
       then(function() {
 
       });
-    };
+    };*/
   });
 
 //hardcoded for now to test
