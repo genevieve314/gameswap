@@ -3,7 +3,7 @@ input {
   vertical-align: middle;
 }
 
-img {
+.boxart {
   max-width: 200px;
   max-height: 200px;
 }
