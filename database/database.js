@@ -1,26 +1,44 @@
 var mysql = require('mysql');
-var tables = require('tables');
+var tables = require('./tables.js');
 
-var connection = mysql.createConnection({
+
+connection = mysql.createConnection({
   host: 'localhost',
-  port: '8080',
-  user: 'admin',
+  port: '3306',
+  user: 'root',
   password: 'password',
-  database: 'gameswap'
+  database: 'gameswap',
+  multipleStatements: true
 });
 
 connection.connect(function(err){
-  if(err){
-    console.error('error connecting: ' + err.stack);
-    return;
+    if(err){
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+
+    console.log('connected as id ' + connection.threadId);
+  });
+
+tables.create()
+
+module.exports = {
+  findUser: function(email){
+    connection.query('SELECT * FROM Users WHERE email = ?', email, function(err, data){
+        if(err) console.error("error in findUser: ", err);
+        console.log("data in findUser: ", data);
+        return data;
+      })
+    )
+
+    //returns username and password
+  },
+  addUser: function(email, username, password){
+    connection.query()
+
+    //returns success
   }
-
-  console.log('connected as id ' + connection.threadId);
-});
-
-tables.create();
-
-
+}
 
 
 
@@ -51,7 +69,7 @@ tables.create();
   //                   }
   //               });
 
-//how to insert multiple values into sql string while escaping
-  // var sql = "SELECT * FROM ? WHERE ? = ?";
-  // var inserts = ['users', 'id', userId];
-  // sql = mysql.format(sql, inserts);
+how to insert multiple values into sql string while escaping
+  var sql = "SELECT * FROM ? WHERE ? = ?";
+  var inserts = ['users', 'id', userId];
+  sql = mysql.format(sql, inserts);
