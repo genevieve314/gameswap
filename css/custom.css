@@ -1,0 +1,9 @@
+input {
+  width: 50%;
+  vertical-align: middle;
+}
+
+img {
+  max-width: 200px;
+  max-height: 200px;
+}
