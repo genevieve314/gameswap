@@ -4,7 +4,7 @@ angular
   var searchGamesDb = function(){
     return $http({
       method: 'GET',
-      url: ''
+      url: '/games'
     })
     .success(function(resp){
       return resp.data;
