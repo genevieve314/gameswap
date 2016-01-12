@@ -13,7 +13,7 @@ angular
         }
       }
     };
-    //database version
+    //TODO: database version
     this.searchGames = function(game) {
       MainService.searchGamesDb().
       then(function() {
