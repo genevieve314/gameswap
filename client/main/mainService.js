@@ -1,10 +1,11 @@
 angular
   .module('main.service', [])
   .service('MainService', function($http) {
-  var searchGamesDb = function(){
+  var searchGamesDb = function(game){
     return $http({
-      method: 'GET',
-      url: '/games'
+      method: 'POST',
+      url: '/games',
+      data: game
     })
     .success(function(resp){
       return resp.data;
