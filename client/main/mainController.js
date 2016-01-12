@@ -1,10 +1,11 @@
 angular
-  .module('main', [])
-  .controller('MainController', function($http) {
+  .module('main.controller', [])
+  .controller('MainController', function(MainService) {
+    //hardcoded version
     this.games = games;
     this.users = users;
-    this.results = [];
     this.searchGames = function(game) {
+      this.submitted = true;
       this.results = [];
       for(var i = 0; i < this.users.length; i++) {
         if(this.users[i].game.name === game) {
@@ -12,9 +13,16 @@ angular
         }
       }
     };
+    //database version
+    this.searchGames = function(game) {
+      MainService.searchGamesDb().
+      then(function() {
+
+      });
+    };
   });
 
-//hardcorded for now to test
+//hardcoded for now to test
 var games = [
   {
     name: 'Fallout 4',

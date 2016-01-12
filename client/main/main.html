@@ -4,17 +4,19 @@
   <h2 class='text-center'>
     Get the game you want, for the game you have.
   </h1>
-  <div class='text-center'>
-    <form name='searchForm' ng-controller='MainController as main' ng-submit='searchForm.$valid && main.searchGames(game)' novalidate>
+  <div class='text-center' ng-controller='MainController as main'>
+    <form name='searchForm' ng-submit='searchForm.$valid && main.searchGames(game)' novalidate>
       <input type='text' ng-model='game' placeholder='What game do you want?' required/>
-      <div ng-repeat='result in main.results | orderBy:"[game.platform, distance]"'>
-        Username: {{result.name}} <br>
-        Score: {{result.game.score}} <br>
-        Platform: {{result.game.platform}} <br>
-        Distance: {{result.distance}} Miles <br>
-        <img ng-src='{{result.game.image}}'>
+      <div ng-if='main.results.length | orderBy:"[game.platform, distance]"'>
+        Username: {{main.results[0].name}} <br>
+        Score: {{main.results[0].game.score}} <br>
+        Platform: {{main.results[0].game.platform}} <br>
+        Distance: {{main.results[0].distance}} Miles <br>
+        <img ng-src='{{main.results[0].game.image}}'>
       </div>
+      <div ng-if='this.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
     </form>
+    <a ui-sref='signup' ng-show='main.results.length'>Sign up</a>
   </div>
 </header>
 <div class='container-fluid'>
