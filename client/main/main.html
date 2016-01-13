@@ -1,12 +1,13 @@
 <section ng-controller='MainController as main'>
   <header class='jumbotron'>
     <h3 class='pull-left'>GameSwap</h3>
-    <a class='pull-right' ui-sref='signin'>Sign In</a>
+    <a class='pull-right' ui-sref='signin'>Sign In</a> <br>
+    <a class='pull-right' ui-sref='userprofile'>List a Swap</a>
     <h2 class='text-center'>
       Get the game you want, for the game you have.
     </h1>
     <div class='text-center' >
-      <form name='searchForm' ng-submit='searchForm.$valid && main.searchGames(game)' novalidate>
+      <form name='searchForm' ng-submit='searchForm.$valid && main.searchOfferings(game)' novalidate>
         <input type='text' ng-model='game' placeholder='What game do you want?' required/>
       </div>
     </form>

@@ -2,31 +2,37 @@ angular
 .module('main.controller', [])
 .controller('MainController', function(MainService) {
   //hardcoded version
+  // var scope = this;
   this.games = games;
   this.users = users;
-  this.searchGames = function(game) {
-    this.submitted = true;
-    this.hasPlaystation = false;
-    this.hasXbox = false;
-    this.results = [];
-    this.psGames = [];
-    this.xboxGames = [];
-    for(var i = 0; i < this.users.length; i++) {
-      if(this.users[i].game.name.toLowerCase() === game.toLowerCase()) {
-        this.results.push(this.users[i]);
-        if(this.users[i].game.platform === 'Playstation 4') {
-          if(this.hasPlaystation === false) {
-            this.hasPlaystation = true;
+  this.searchOfferings = function(game) {
+    MainService.searchOfferings(game)
+    .then(function(data) {
+      this.submitted = true;
+      this.hasPlaystation = false;
+      this.hasXbox = false;
+      this.results = data;
+      this.psGames = [];
+      this.xboxGames = [];
+      for(var i = 0; i < this.users.length; i++) {
+        if(this.users[i].game.name.toLowerCase() === game.toLowerCase()) {
+          this.results.push(this.users[i]);
+          if(this.users[i].game.platform === 'Playstation 4') {
+            if(this.hasPlaystation === false) {
+              this.hasPlaystation = true;
+            }
+            this.psGames.push(this.users[i]);
+          } else if(this.users[i].game.platform === 'Xbox One') {
+            if(this.hasPlaystation === false) {
+              this.hasXbox = true;
+            }
+            this.xboxGames.push(this.users[i]);
           }
-          this.psGames.push(this.users[i]);
-        } else if(this.users[i].game.platform === 'Xbox One') {
-          if(this.hasPlaystation === false) {
-            this.hasXbox = true;
-          }
-          this.xboxGames.push(this.users[i]);
         }
       }
-    }
+    }.bind(this), function(error){
+      console.error(error);
+    }.bind(this));
   };
   this.displayPlaystation = function() {
     this.hasXbox = false;
