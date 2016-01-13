@@ -12,11 +12,7 @@ connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-    if (err) {
-      console.error('error connecting: ' + err.stack);
-      return;
-    }
-
+    if (err) console.error('error connecting: ' + err.stack);
     console.log('connected as id ' + connection.threadId);
   });
 
@@ -28,9 +24,7 @@ module.exports = {
     var values = email;
 
     connection.query(sql, values, function (err, data) {
-      if (err) {
-        console.error("error in db findUser: ", err)
-      };
+      if (err) console.error("error in db findUser: ", err);
       callback(data);
     });
   },
@@ -45,13 +39,15 @@ module.exports = {
       // console.log("data in addUser: ", data);
     });
 
-    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
-      if(err){ console.error("error in db addUser: ", err)};
+    connection.query('SELECT id FROM Users WHERE email = ?;', email, function(err, data){
+      if(err) console.error("error in db addUser: ", err);
       callback(data);
     });
   },
 
-  addGame: function (title, platform, rating, description, callback) {
+
+  addGame: function (title, platform, rating, description) {
+
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
     var checkValues = [title, platform]
     var insert = 'INSERT IGNORE into Games (title, platform, rating, description) values(?, ?, ?, ?);';
@@ -65,31 +61,41 @@ module.exports = {
         })
       }
     });
-
-    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
-      if(err){ console.error("error in db addUser: ", err)};
-      console.log('data in addGames: ', data);
-
-      callback(data);
-    });
-
   },
+  addOffering: function (userid, title, platform, condition){
+    var check = 'SELECT id FROM Games WHERE title = ? AND platform = ?;';
+    var checkValues = [title, platform];
+    var insert = 'INSERT into Offering (userid, game_condition, gameid) values( ?, ?, ?);';
+    var insertValues = [userid, condition];
 
-  addOffering: function (userid, gameid, condition, callback){
-    var sql = 'INSERT into Offering (userid, gameid, game_condition) values( ?, ?, ?);';
-    var values = [userid, gameid, condition];
 
-    connection.query(sql, values, function (err) {
-      if (err) console.error('error in db addOffering: ', err);
+    connection.query(check, checkValues, function (err, data) {
+      if (err) console.error('error 1 in db addOffering: ', err);
+
+      console.log('game id in addOffering: ', data[0].id);
+
+      insertValues.push(data[0].id);
+      connection.query(insert, insertValues, function(err, data){
+        if (err) console.error('error 2 in db addOffering: ', err);
+      })
     })
   },
 
-  addSeeking: function (userid, gameid, callback) {
-    var sql = 'INSERT into Seeking (userid, gameid) values( ?, ?);';
-    var values = [userid, gameid];
+  addSeeking: function (userid, title, platform){
+    var check = 'SELECT id FROM Games WHERE title = ? AND platform = ?;';
+    var checkValues = [title, platform];
+    var insert = 'INSERT into Seeking (userid, gameid) values( ?, ?);';
+    var insertValues = [userid];
 
-    connection.query(sql, values, function (err) {
-      if (err) console.error('error in db addSeeking: ', err);
+    connection.query(check, checkValues, function (err, data) {
+      if (err) console.error('error 1 in db addSeeking: ', err);
+
+      console.log('game id in addSeeking: ', data[0].id);
+
+      insertValues.push(data[0].id);
+      connection.query(insert, insertValues, function(err, data){
+        if (err) console.error('error 2 in db addSeeking: ', err);
+      })
     })
   },
 
@@ -108,6 +114,24 @@ module.exports = {
 
     connection.query(sql, function (err, data) {
       if (err) console.error('error in db searchSeeking: ', err);
+      callback(data);
+    })
+  },
+
+  allOfferingByUser: function (userid, callback) {
+    var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Offering.createdat FROM Games, Offering WHERE Games.id = Offering.gameid AND Offering.userid = '" + userid + "';";
+
+    connection.query(sql, function (err, data) {
+      if (err) console.error('error in db allSeeking: ', err);
+      callback(data);
+    })
+  },
+
+  allSeekingByUser: function (userid, callback) {
+    var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Seeking.createdat FROM Games, Seeking WHERE Games.id = Seeking.gameid AND Seeking.userid = '" + userid + "';";
+
+    connection.query(sql, function (err, data) {
+      if (err) console.error('error in db allSeeking: ', err);
       callback(data);
     })
   }
