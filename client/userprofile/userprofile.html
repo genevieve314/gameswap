@@ -5,6 +5,19 @@
 			<h3>username: {{ profile.username }}</h3>
 			<h3>email: {{ profile.email }}</h3>
 
+			<div ng-show='profile.hasAddress === true'>
+				<h3>address:</h3> {{ profile.address }}
+			</div>
+
+			<div ng-show='profile.hasAddress === false'>
+				<h3>Add your address information:</h3> 
+				<input type='text' ng-model='profile.street' placeholder="Street"/><br>
+				<input type='text' ng-model='profile.apt' placeholder="Apartment #"/><br>
+				<input type='text' ng-model='profile.city' placeholder="City"/><br>
+				<input type='text' ng-model='profile.state' placeholder="State"/><br>
+				<input type='text' ng-model='profile.zip' placeholder="Zip Code"/><br>
+			</div>
+
 			<h3>games you are currently offering: </h3>
 			<div ng-repeat='game in profile.gamesOffered'>
 				<div>Title: {{ game.title }}  Platform: {{ game.platform }}</div>
@@ -16,7 +29,7 @@
 
 			<h3>games you are currently seeking: </h3>
 			<div ng-repeat='game in profile.gamesSeeking'>
-				<div>Title: {{ game.title }}  Platform: {{ game.platform }}</div>
+				<div>Title: {{ game.title }}  Platform: {{ game.platform }}  Condition: {{ game.condition }}</div>
 			</div>
 			<div>
 				Add a new title: <input type="text" ng-model='profile.gameToSeek' />

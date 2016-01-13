@@ -14,6 +14,32 @@ angular.module('profile.service', [])
 		})
 	};
 
+	// ASK ERIC ABOUT ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+
+	var getOfferingList = function($http){
+		return $http({
+			method: 'GET',
+			//url: ''   // ASK ERIC ABOUT DB ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+		})
+		.then(function(resp){
+			return resp.data;
+		}, function(error) {
+  			console.error('ERROR!!! ', error);
+		})
+	};
+
+	var getSeekingList = function($http){
+		return $http({
+			method: 'GET',
+			// url: ''  // ASK ERIC ABOUT ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+		})
+		.then(function(resp){
+			return resp.data;
+		}, function(error) {
+  			console.error('ERROR!!! ', error);
+		})
+	};
+
 	var addGameOffering = function(game){
 		return $http({
 			method: 'POST',
@@ -43,6 +69,8 @@ angular.module('profile.service', [])
 
 	return {
 		getProfileData: getProfileData,
+		getOfferingList: getOfferingList,
+		getSeekingList: getSeekingList,
 		addGameOffering: addGameOffering,
 		addGameSeeking: addGameSeeking
 	};

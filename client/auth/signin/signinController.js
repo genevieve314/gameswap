@@ -11,11 +11,13 @@ angular.module('auth.signin', [])
 	 	AuthServices.checkSignin(user)
 	 		.then(function(token){
 	 			console.log('successfully submited to DB');
+	 			console.log('the token is: ', token);
 	 			$window.localStorage.setItem('com.gameswap', token);  // com.gameswap is placeholder
         		$location.path('/userprofile');
 	 		})
 	 		.catch(function(error) {
         		console.error(error);
+        									// add red error messages to DOM, clear fields
       		}); 
 	}
 })

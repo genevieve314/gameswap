@@ -1,6 +1,6 @@
 angular.module('auth.service', [])  
 
-.factory('AuthServices', function($http) {
+.factory('AuthServices', function($http, $location) {
 
 	var submitNewUser = function(userData) {
 		console.log('userData ', userData);
@@ -10,9 +10,10 @@ angular.module('auth.service', [])
 			data: userData
 		}).then(function(resp) {
 			console.log('resp ', resp);
-			return resp.data.token;   //  FIGURE OUT WHAT THIS TOKEN BUSINESS MEANS
+			return resp.data.token;   //  VERIFY THAT TOKEN WILL BE HERE
 		}, function(error) {
   			console.error('ERROR!!! ', error);
+  							  //  HANDLE REDIRECT IN CONTROLLER (USING $LOCATION, PROBABLY)
 		})
 	};
 
@@ -24,15 +25,22 @@ angular.module('auth.service', [])
 			data: userData
 		}).then(function(resp) {
 			console.log('resp ', resp);
-			return resp.data.token;   //  FIGURE OUT WHAT THIS TOKEN BUSINESS MEANS
+			return resp.data.token;   //  VERIFY THAT TOKEN WILL BE HERE
 		}, function(error) {
-  			console.error('ERROR!!! ', error);
+  			console.error('ERROR!!! Redirecting to index ', error);
+  			$location.path('/');
+  								//  HANDLE REDIRECT IN CONTROLLER??? (USING $LOCATION, PROBABLY)
 		})
 	};
 
+	var isAuth = function () {
+    	return !!$window.localStorage.getItem('com.gameswap');
+  	};
+
 	return {
 		submitNewUser: submitNewUser,
-		checkSignin: checkSignin
+		checkSignin: checkSignin,
+		isAuth: isAuth
 	};
 
 })
