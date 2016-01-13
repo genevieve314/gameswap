@@ -30,15 +30,12 @@ router.post('/signin',function(req, res, next){
   db.findUser(email,function(data){
     if(data.length){
       var foundUser = data[0];
-      console.log('password', password);
-      console.log('hash',foundUser.password);
-      console.log(bcrypt.compare)
-      console.log(bcrypt.compareSync(password,foundUser.password));
+
       if(bcrypt.compareSync(password,foundUser.password)){
         foundUser.id;
         console.log('success logging in');
         req.session.email = email;
-        auth.authenticateUser(foundUser.id, email, res);
+        auth.authenticateUser(foundUser.id, email, res, req);
       }else {
         console.log('failed logging in')
         res.sendStatus(500);
@@ -75,9 +72,9 @@ router.post('/signup',function(req, res, next){
 
 router.get('/profile', auth.checkUser, function(req, res, next){
   //return json of user data
-  var user = req.session.email;
+  // var user = req.session.email;
   var userInfo = {};
-  findUser(user,function(info){
+  findUser(req.user.email,function(info){
     info = info[0];
     userInfo.firstname = info[firstname];
     userInfo.lastname = info[lastname];
@@ -101,13 +98,15 @@ router.put('/profile/update', auth.checkUser, function(req, res, next){
 });
 
 router.post('/addtoofferings', auth.checkUser, function(req, res, next){
-  //TODO NEED FIND GAME
-  //find game
-    //if no game exists
-      //add game to games table
-  //add game id, user id and condition to offering table
-
+  var title = req.body.game.title
+  var platform = req.body.game.platform
+  var condition = 1;
+  var description = 'default description';
+  console.log('adding', title, 'on', platform, 'to offerings');
+  db.addtoofferings(req.user.id, title, platform, condition);
+  res.sendStatus(201);
 });
+
 router.post('/searchofferings', function(req, res, next){
   var game = req.body.game;
   console.log('searching offering for ',req.body.game);
