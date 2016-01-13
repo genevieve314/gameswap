@@ -70,10 +70,17 @@ router.post('/signup',function(req, res, next){
   });
 });
 
-router.get('/profile', auth.checkUser, function(req, res, next){
+router.post('/profile', auth.checkUser, function(req, res, next){
   //return json of user data
   // var user = req.session.email;
   var userInfo = {};
+  var offerings, seeking;
+  db.allOfferingByUser(req.user.id,function(data){
+    offerings = data;
+  });
+  db.allSeekingByUser(req.user.id,function(data){
+    seeking = data;
+  });
   findUser(req.user.email,function(info){
     info = info[0];
     userInfo.firstname = info[firstname];
@@ -85,6 +92,8 @@ router.get('/profile', auth.checkUser, function(req, res, next){
     userInfo.city = info[city];
     userInfo.state = info[state];
     userInfo.zip = info[zip];
+    userInfo.offerings = offerings;
+    userInfo.seeking = seeking;
   });
   console.log('route: ', req.url);
   res.json(userInfo);
@@ -102,9 +111,11 @@ router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var platform = req.body.game.platform
   var condition = 1;
   var description = 'default description';
+  db.addGame(title, platform, rating, description);
   console.log('adding', title, 'on', platform, 'to offerings');
   db.addtoofferings(req.user.id, title, platform, condition);
   res.sendStatus(201);
+
 });
 
 router.post('/searchofferings', function(req, res, next){
@@ -122,7 +133,12 @@ router.post('/searchofferings', function(req, res, next){
 
 });
 router.post('/addtoseeking', auth.checkUser, function(req, res, next){
-
+  var title = req.body.game.title
+  var platform = req.body.game.platform;
+  db.addGame(title, platform, rating, description);
+  console.log('adding', title, 'on', platform, 'to seeking');
+  db.addtoofferings(req.user.id, title, platform);
+  res.sendStatus(201);
 
 });
 
