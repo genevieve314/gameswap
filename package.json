@@ -19,5 +19,15 @@
   "bugs": {
     "url": "https://github.com/gameswap/gameswap/issues"
   },
+<<<<<<< fe0848e037bfab5e70bd82b2805ee3847976a3f8
   "homepage": "https://github.com/gameswap/gameswap"
+=======
+  "homepage": "https://github.com/gameswap/gameswap",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "express-session": "^1.13.0"
+  }
+>>>>>>> [chore] Addded psuedo code to routes
 }
