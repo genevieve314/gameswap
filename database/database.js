@@ -27,8 +27,8 @@ module.exports = {
     var sql = 'SELECT * FROM Users WHERE email = ?;'
     var values = email;
 
-    connection.query(sql, values, function (err, data) { 
-      if (err) { 
+    connection.query(sql, values, function (err, data) {
+      if (err) {
         console.error("error in db findUser: ", err)
       };
       callback(data);
@@ -43,8 +43,9 @@ module.exports = {
       if (err) console.error('error in db addUser: ', err);
     });
 
-    connection.query('SELECT LAST_INSERT_ID();', function (err, data) {
-      if (err) console.error("error in db addUser: ", err);
+
+    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
+      if(err){ console.error("error in db addUser: ", err)};
       callback(data);
     });
   },
@@ -64,8 +65,10 @@ module.exports = {
       }
     });
 
-    connection.query('SELECT LAST_INSERT_ID();', function (err, data) {
-      if(err) console.error("error 3 in db addGame: ", err);
+
+    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
+      if(err){ console.error("error in db addUser: ", err)};
+      console.log('data in addGames: ', data);
       callback(data);
     });
 
@@ -123,7 +126,7 @@ module.exports = {
 //example insert query string
   // insert into employee
   // (first, last, age, address, city, state)
-  // values ('Luke', 'Duke', 45, '2130 Boars Nest', 
+  // values ('Luke', 'Duke', 45, '2130 Boars Nest',
   //         'Hazard Co', 'Georgia');
   //
   // SELECT LAST_INSERT_ID()';
@@ -137,10 +140,7 @@ module.exports = {
   //               WHERE cr.Name = c.cName)
 
 //example insert with data from another table
-  // INSERT INTO action_2_members (campaign_id, mobile, vote, vote_date)  
+  // INSERT INTO action_2_members (campaign_id, mobile, vote, vote_date)
   // SELECT campaign_id, from_number, received_msg, date_received
   // FROM `received_txts`
   // WHERE `campaign_id` = '8'
-
-
-
