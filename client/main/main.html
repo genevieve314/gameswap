@@ -13,15 +13,26 @@
   </header>
   <div class='container-fluid'>
     <div ng-if='main.results.length | orderBy:"[game.platform, distance]"'>
-      <div class = 'text-center'>
+      <div class='text-center'>
         There are {{main.results.length}} gamers near you who have {{main.results[0].game.name}}. The closest one is:
       </div>
-      <div class = 'col-md-4 text-center'>
-        Username: {{main.results[0].name}} <br>
-        Score: {{main.results[0].game.score}} <br>
-        Platform: {{main.results[0].game.platform}} <br>
-        Distance: {{main.results[0].distance}} Miles <br>
-        <img class= 'boxart' ng-src='{{main.results[0].game.image}}'>
+      <div class='col-md-4 text-center' ng-show='main.hasPlaystation === true'>
+        Username: {{main.psGames[0].name}} <br>
+        Score: {{main.psGames[0].game.score}} <br>
+        Platform: {{main.psGames[0].game.platform}} <br>
+        Distance: {{main.psGames[0].distance}} Miles <br>
+        <img class='boxart' ng-src='{{main.psGames[0].game.image}}'> <br>
+        <button ng-click='main.displayPlaystation()'>PS4</button>
+        <button ng-click='main.displayXbox()'>Xbox One</button>
+      </div>
+      <div class='col-md-4 text-center' ng-show='main.hasXbox === true'>
+        Username: {{main.xboxGames[0].name}} <br>
+        Score: {{main.xboxGames[0].game.score}} <br>
+        Platform: {{main.xboxGames[0].game.platform}} <br>
+        Distance: {{main.xboxGames[0].distance}} Miles <br>
+        <img class='boxart' ng-src='{{main.xboxGames[0].game.image}}'> <br>
+        <button ng-click='main.displayPlaystation()'>PS4</button>
+        <button ng-click='main.displayXbox()'>Xbox One</button>
       </div>
       <div class = 'col-md-8'>
         <!-- TODO: Change to Google Maps API-->

@@ -1,26 +1,50 @@
 angular
-  .module('main.controller', [])
-  .controller('MainController', function(MainService) {
-    //hardcoded version
-    this.games = games;
-    this.users = users;
-    this.searchGames = function(game) {
-      this.submitted = true;
-      this.results = [];
-      for(var i = 0; i < this.users.length; i++) {
-        if(this.users[i].game.name.toLowerCase() === game.toLowerCase()) {
-          this.results.push(this.users[i]);
+.module('main.controller', [])
+.controller('MainController', function(MainService) {
+  //hardcoded version
+  this.games = games;
+  this.users = users;
+  this.searchGames = function(game) {
+    this.submitted = true;
+    this.hasPlaystation = false;
+    this.hasXbox = false;
+    this.results = [];
+    this.psGames = [];
+    this.xboxGames = [];
+    for(var i = 0; i < this.users.length; i++) {
+      if(this.users[i].game.name.toLowerCase() === game.toLowerCase()) {
+        this.results.push(this.users[i]);
+        if(this.users[i].game.platform === 'Playstation 4') {
+          if(this.hasPlaystation === false) {
+            this.hasPlaystation = true;
+          }
+          this.psGames.push(this.users[i]);
+        } else if(this.users[i].game.platform === 'Xbox One') {
+          if(this.hasPlaystation === false) {
+            this.hasXbox = true;
+          }
+          this.xboxGames.push(this.users[i]);
         }
       }
-    };
-    //TODO: database version
-    // this.searchGames = function(game) {
-    //   MainService.searchGamesDb(game).
-    //   then(function() {
-    //
-    //   });
-    // };
-  });
+    }
+  };
+  this.displayPlaystation = function() {
+    this.hasXbox = false;
+    this.hasPlaystation = true;
+  };
+  this.displayXbox = function() {
+    this.hasXbox = true;
+    this.hasPlaystation = false;
+  };
+
+  //TODO: database version
+  // this.searchGames = function(game) {
+  //   MainService.searchGamesDb(game).
+  //   then(function() {
+  //
+  //   });
+  // };
+});
 
 //hardcoded for now to test
 var games = [
