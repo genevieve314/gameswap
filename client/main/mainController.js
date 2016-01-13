@@ -1,10 +1,6 @@
 angular
 .module('main.controller', [])
 .controller('MainController', function(MainService) {
-  //hardcoded version
-  // var scope = this;
-  this.games = games;
-  this.users = users;
   this.searchOfferings = function(game) {
     MainService.searchOfferings({game: game})
     .then(function(data) {
@@ -14,19 +10,18 @@ angular
       this.results = data.results;
       this.psGames = [];
       this.xboxGames = [];
-      for(var i = 0; i < this.users.length; i++) {
-        if(this.users[i].game.name.toLowerCase() === game.toLowerCase()) {
-          this.results.push(this.users[i]);
-          if(this.users[i].game.platform === 'Playstation 4') {
+      for(var i = 0; i < this.results.length; i++) {
+        if(this.results[i].game.name.toLowerCase() === game.toLowerCase()) {
+          if(this.results[i].game.platform === 'Playstation 4') {
             if(this.hasPlaystation === false) {
               this.hasPlaystation = true;
             }
-            this.psGames.push(this.users[i]);
-          } else if(this.users[i].game.platform === 'Xbox One') {
+            this.psGames.push(this.results[i]);
+          } else if(this.results[i].game.platform === 'Xbox One') {
             if(this.hasPlaystation === false) {
               this.hasXbox = true;
             }
-            this.xboxGames.push(this.users[i]);
+            this.xboxGames.push(this.results[i]);
           }
         }
       }
@@ -41,6 +36,9 @@ angular
   this.displayXbox = function() {
     this.hasXbox = true;
     this.hasPlaystation = false;
+  };
+  this.addRecipient = function(recipient) {
+    MainService.addRecipient(recipient);
   };
 
   //TODO: database version
