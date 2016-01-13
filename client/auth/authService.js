@@ -6,7 +6,7 @@ angular.module('auth.service', [])
 		console.log('userData ', userData);
 		return $http({
 			method: 'POST',
-			//url:    , // TBD 
+			url: '/signup',
 			data: userData
 		}).then(function(resp) {
 			console.log('resp ', resp);
@@ -20,7 +20,7 @@ angular.module('auth.service', [])
 		console.log('userData ', userData);
 		return $http({
 			method: 'POST',
-			//url:    , // TBD 
+			url: '/signin',
 			data: userData
 		}).then(function(resp) {
 			console.log('resp ', resp);

@@ -1,0 +1,28 @@
+<div id='container'>
+	<h1>Your GameSwap user profile:</h1>
+	<div ng-controller='ProfileController as profile'>
+		<div id='profile-info'>
+			<h3>username: {{ profile.username }}</h3>
+			<h3>email: {{ profile.email }}</h3>
+
+			<h3>games you are currently offering: </h3>
+			<div ng-repeat='game in profile.gamesOffered'>
+				<div>Title: {{ game.title }}  Platform: {{ game.platform }}</div>
+			</div>
+			<div>
+				Add a new title: <input type="text" ng-model='profile.gameToOffer' />
+    			<button ng-click='profile.addOffer(profile.gameToOffer)'>Add me</button>
+    		</div>
+
+			<h3>games you are currently seeking: </h3>
+			<div ng-repeat='game in profile.gamesSeeking'>
+				<div>Title: {{ game.title }}  Platform: {{ game.platform }}</div>
+			</div>
+			<div>
+				Add a new title: <input type="text" ng-model='profile.gameToSeek' />
+    			<button ng-click="profile.addSeek(profile.gameToSeek); profile.gameToSeek=''">Add me</button>
+    		</div>
+			
+		</div>
+	</div>
+</div>
