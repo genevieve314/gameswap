@@ -18,13 +18,16 @@ app.use(session({
   saveUninitialized: true
 }))
 app.use(function(req,res,next){
+  console.log('path:',req.path)
   console.log('req.session',req.session);
   next();
 });
+console.log(routes)
+app.use('/',routes);
 
 app.use(express.static(__dirname+'/../client'));
 
-app.use('/*', routes);
+
 
 app.listen(PORT,function(){
   console.log('listening on port 3000');
