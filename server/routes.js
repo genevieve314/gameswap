@@ -111,9 +111,13 @@ router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var platform = req.body.game.platform
   var condition = 1;
   var description = 'default description';
+
   db.addGame(title, platform, rating, description);
+
   console.log('adding', title, 'on', platform, 'to offerings');
-  db.addtoofferings(req.user.id, title, platform, condition);
+  
+  db.addOffering(req.user.id, title, platform, condition);
+
   res.sendStatus(201);
 
 });
@@ -135,9 +139,13 @@ router.post('/searchofferings', function(req, res, next){
 router.post('/addtoseeking', auth.checkUser, function(req, res, next){
   var title = req.body.game.title
   var platform = req.body.game.platform;
+
   db.addGame(title, platform, rating, description);
+
   console.log('adding', title, 'on', platform, 'to seeking');
-  db.addtoofferings(req.user.id, title, platform);
+
+  db.addSeeking(req.user.id, title, platform);
+
   res.sendStatus(201);
 
 });
