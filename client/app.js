@@ -1,12 +1,12 @@
 angular
   .module('app', [
-  	
- //	'signin', 
- // 'signup',  
-  	'main.controller', 
-  	'main.service', 
-  	'results.controller', 
-  	'results.service', 
+
+ //	'signin',
+ // 'signup',
+  	'main.controller',
+  	'main.service',
+  	'results.controller',
+  	'results.service',
   	'userprofile',
   	'profile.service',
   	'auth.signin',
@@ -19,7 +19,7 @@ angular
 	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
-		.state('main', {  
+		.state('main', {
 			url: '/',
 			templateUrl: './main/main.html',
 			controller: 'MainController'
