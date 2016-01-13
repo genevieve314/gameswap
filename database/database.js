@@ -39,11 +39,6 @@ module.exports = {
     var sql = 'INSERT into Users (email, username, password) values(?, ?, ?);';
     var values = [email, username, password];
 
-    connection.query('SELECT LAST_INSERT_ID();', function(err, data){
-      if(err){ console.error("error in db addUser: ", err)};
-      callback(data);
-    });
-  },
 
     connection.query(sql, values, function(err){
       if(err){ console.error('error in db addUser: ', err)};
@@ -55,12 +50,6 @@ module.exports = {
       callback(data);
     });
   },
-
-  addGame: function(title, platform, rating, description, callback){
-    var sql = 'INSERT into Games (title, platform, rating, description) values(?, ?, ?, ?) WHERE NOT EXISTS (SELECT * FROM Games WHERE title = ' + title + ' AND platform =' + platform + ');';
-    var values = [title, platform, rating, description];
-
-
 
   addGame: function (title, platform, rating, description, callback) {
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'

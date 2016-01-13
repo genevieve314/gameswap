@@ -87,7 +87,7 @@ router.get('/profile',utilities.checkUser, function(req, res, next){
     userInfo.zip = info[zip];
   });
   console.log('route: ', req.url);
-  res.sendjson(userInfo);
+  res.json(userInfo);
 });
 
 router.put('/profile/update',utilities.checkUser,function(req, res, next){
@@ -104,7 +104,17 @@ router.post('/addtoofferings',function(req, res, next){
   //add game id, user id and condition to offering table
 
 });
-router.get('/searchoffering', function(req, res, next){
+router.post('/searchofferings', function(req, res, next){
+  var game = req.body.game;
+  console.log('searching for ',req.body.game);
+  if(game){
+    db.searchOffering(game, function(results){
+      res.json({results: results});
+    });
+  }else {
+    res.sendStatus(500);
+  }
+
 
 });
 router.post('/addtoseeking',function(req, res, next){
@@ -114,7 +124,7 @@ router.post('/addtoseeking',function(req, res, next){
   //add game id, user id and condition to seeking table
 
 });
-router.get('/searchseeking', function(req, res, next){
+router.post('/searchseeking', function(req, res, next){
 
 });
 router.get('/getmessages');

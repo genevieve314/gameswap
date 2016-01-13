@@ -6,12 +6,12 @@ angular
   this.games = games;
   this.users = users;
   this.searchOfferings = function(game) {
-    MainService.searchOfferings(game)
+    MainService.searchOfferings({game: game})
     .then(function(data) {
       this.submitted = true;
       this.hasPlaystation = false;
       this.hasXbox = false;
-      this.results = data;
+      this.results = data.results;
       this.psGames = [];
       this.xboxGames = [];
       for(var i = 0; i < this.users.length; i++) {
