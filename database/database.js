@@ -45,6 +45,15 @@ module.exports = {
     });
   },
 
+  addUserProfile: function (userid, phone, street, city, state, zip, geoloc, profilepic){
+    var sql = "UPDATE Users SET phone = ?, street = ?, city = ?, state = ?, zip = ?, geoloc = ?, profilepic = ? WHERE id = '" + userid + "';"
+    var values = [phone, street, city, state, zip, geoloc, profilepic];
+
+    connection.query(sql, values, function(err){
+      if (err) console.error('error in db addUserProfile: ', err);
+    })
+  }
+
   addGame: function (title, platform, rating, description) {
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
     var checkValues = [title, platform]
@@ -98,7 +107,7 @@ module.exports = {
   },
 
   searchOffering: function (title, callback) {
-    var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Offering.game_condition, Offering.createdat, Users.username, Users.email FROM Games, Offering, Users WHERE Games.title = '" + title + "' AND Games.id = Offering.gameid AND Offering.userid = Users.id;";
+    var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Offering.game_condition, Offering.createdat, Users.username, Users.email, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Offering, Users WHERE Games.title = '" + title + "' AND Games.id = Offering.gameid AND Offering.userid = Users.id;";
     var values = title;
 
     connection.query(sql, function (err, data) {
@@ -108,7 +117,7 @@ module.exports = {
   },
 
   searchSeeking: function (title, callback) {
-    var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Seeking.createdat, Users.username, Users.email FROM Games, Seeking, Users WHERE Games.title = '" + title + "' AND Games.id = Seeking.gameid AND Seeking.userid = Users.id;";
+    var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Seeking.createdat, Users.username, Users.email, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Seeking, Users WHERE Games.title = '" + title + "' AND Games.id = Seeking.gameid AND Seeking.userid = Users.id;";
 
     connection.query(sql, function (err, data) {
       if (err) console.error('error in db searchSeeking: ', err);
@@ -136,34 +145,3 @@ module.exports = {
 }
 
 
-
-
-
-
-
-// how to insert multiple values into sql string while escaping
-//   var sql = "SELECT * FROM ? WHERE ? = ?";
-//   var inserts = ['users', 'id', userId];
-//   sql = mysql.format(sql, inserts);
-
-//example insert query string
-  // insert into employee
-  // (first, last, age, address, city, state)
-  // values ('Luke', 'Duke', 45, '2130 Boars Nest',
-  //         'Hazard Co', 'Georgia');
-  //
-  // SELECT LAST_INSERT_ID()';
-
-//example insert where not exists
-  // INSERT Competitors (cName)
-  // SELECT DISTINCT Name
-  // FROM CompResults cr
-  // WHERE
-  //    NOT EXISTS (SELECT * FROM Competitors c
-  //               WHERE cr.Name = c.cName)
-
-//example insert with data from another table
-  // INSERT INTO action_2_members (campaign_id, mobile, vote, vote_date)
-  // SELECT campaign_id, from_number, received_msg, date_received
-  // FROM `received_txts`
-  // WHERE `campaign_id` = '8'
