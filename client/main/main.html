@@ -25,6 +25,7 @@
         <img class='boxart' ng-src='{{main.psGames[0].game.image}}'> <br>
         <button ng-click='main.displayPlaystation()'>PS4</button>
         <button ng-click='main.displayXbox()'>Xbox One</button>
+        <a onclick='main.addRecipient({{main.psGames[0].name}})' ui-sref='messages'>Send a Message to Swap Now</a>
       </div>
       <div class='col-md-4 text-center' ng-show='main.hasXbox === true'>
         Username: {{main.xboxGames[0].name}} <br>
@@ -34,6 +35,7 @@
         <img class='boxart' ng-src='{{main.xboxGames[0].game.image}}'> <br>
         <button ng-click='main.displayPlaystation()'>PS4</button>
         <button ng-click='main.displayXbox()'>Xbox One</button>
+        <a onclick='main.addRecipient({{main.xboxGames[0].name}})' ui-sref='messages'>Send a Message to Swap Now</a>
       </div>
       <div class = 'col-md-8'>
         <!-- TODO: Change to Google Maps API-->
