@@ -39,8 +39,10 @@ module.exports = {
     var sql = 'INSERT into Users (email, username, password) values(?, ?, ?);';
     var values = [email, username, password];
 
-    connection.query(sql, values, function (err) {
-      if (err) console.error('error in db addUser: ', err);
+
+    connection.query(sql, values, function(err){
+      if(err){ console.error('error in db addUser: ', err)};
+      // console.log("data in addUser: ", data);
     });
 
     connection.query('SELECT LAST_INSERT_ID();', function(err, data){
@@ -48,7 +50,6 @@ module.exports = {
       callback(data);
     });
   },
-
 
   addGame: function (title, platform, rating, description, callback) {
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
@@ -68,6 +69,7 @@ module.exports = {
     connection.query('SELECT LAST_INSERT_ID();', function(err, data){
       if(err){ console.error("error in db addUser: ", err)};
       console.log('data in addGames: ', data);
+
       callback(data);
     });
 
