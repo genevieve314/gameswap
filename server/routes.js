@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var utilities = require('./utilities');
-console.log('utilities: ',utilities)
-
+var auth = require('./auth');
 var db = require('../database/database');
 
 var bcrypt = require('bcrypt');
@@ -32,11 +30,15 @@ router.post('/signin',function(req, res, next){
   db.findUser(email,function(data){
     if(data.length){
       var foundUser = data[0];
-      if(bcrypt.compare(password,foundUser.password)){
-        req.session.userId = foundUser.id;
-        req.session.email = foundUser.email;
-        console.log('success logging in')
-        res.redirect('/');
+      console.log('password', password);
+      console.log('hash',foundUser.password);
+      console.log(bcrypt.compare)
+      console.log(bcrypt.compareSync(password,foundUser.password));
+      if(bcrypt.compareSync(password,foundUser.password)){
+        foundUser.id;
+        console.log('success logging in');
+        req.session.email = email;
+        auth.authenticateUser(foundUser.id, email, res);
       }else {
         console.log('failed logging in')
         res.sendStatus(500);
@@ -59,18 +61,19 @@ router.post('/signup',function(req, res, next){
       var hash = bcrypt.hashSync(password,10);
       db.addUser(email, username, hash, function(user){
         // console.log('user', user.pop());
-        req.session.userId = user['LAST_INSERT_ID()'];
+        id =  user['LAST_INSERT_ID()'];
         req.session.email = email;
-        res.redirect('/');
+        auth.authenticateUser(id, email, res);
       });
 
     }else {
+      console.log('user found!')
       res.sendStatus(500);
     }
   });
 });
 
-router.get('/profile',utilities.checkUser, function(req, res, next){
+router.get('/profile', auth.checkUser, function(req, res, next){
   //return json of user data
   var user = req.session.email;
   var userInfo = {};
@@ -90,14 +93,15 @@ router.get('/profile',utilities.checkUser, function(req, res, next){
   res.json(userInfo);
 });
 
-router.put('/profile/update',utilities.checkUser,function(req, res, next){
+router.put('/profile/update', auth.checkUser, function(req, res, next){
   //TODO
   var user = req.session.userId;
   res.sendStatus(201)
 
 });
 
-router.post('/addtoofferings',function(req, res, next){
+router.post('/addtoofferings', auth.checkUser, function(req, res, next){
+  //TODO NEED FIND GAME
   //find game
     //if no game exists
       //add game to games table
@@ -106,9 +110,10 @@ router.post('/addtoofferings',function(req, res, next){
 });
 router.post('/searchofferings', function(req, res, next){
   var game = req.body.game;
-  console.log('searching for ',req.body.game);
+  console.log('searching offering for ',req.body.game);
   if(game){
     db.searchOffering(game, function(results){
+      console.log('results offerings :',results);
       res.json({results: results});
     });
   }else {
@@ -117,21 +122,23 @@ router.post('/searchofferings', function(req, res, next){
 
 
 });
-router.post('/addtoseeking',function(req, res, next){
-  //find game
-    //if no game exists
-      //add game to games table
-  //add game id, user id and condition to seeking table
+router.post('/addtoseeking', auth.checkUser, function(req, res, next){
+
 
 });
-router.post('/searchseeking', function(req, res, next){
 
+router.post('/searchseeking', auth.checkUser, function(req, res, next){
+  var game = req.body.game;
+  console.log('searching seeking for ',req.body.game);
+  if(game){
+    db.searchSeeking(game, function(results){
+      res.json({results: results});
+    });
+  }else {
+    res.sendStatus(500);
+  }
 });
 router.get('/getmessages');
 router.post('/addmessage');
 
-// router.use('/*',function(req, res){
-//   console.log('/* error, url:',req.url);
-//   res.sendStatus(404);
-// });
 module.exports = router;

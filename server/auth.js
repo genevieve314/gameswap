@@ -1,40 +1,23 @@
-var bcrypt = require('bcrpyt');
 
-var users = {};
+var jwt = require('jwt-simple');
+var secret = 'temp secret';
+var scope = 'full access';
 
-var authentication = {};
-
-authentication.signin = function(req, res, next){
-  var user = user[req.useremail];
-  if(user){
-    if(bcrypt.compare(user.password,req.password)){
-      //success
-      console.log('logged user in');
-      res.redirect('/');
-    }else {
-      console.error('password for user:'+user, 'didnt match!');
-      res.sendStatus(500);
-    }
-  }else {
-    console.error('email: ',req.useremail,'not found!');
-    res.sendStatus(500);
+module.exports.checkUser = function(req, res, next){
+  var decodedToken = jwt.dencode(req.body.token,secret)
+  if(decodedToken.scope === scope){
+    next();
   }
+  console.log('Token doesn\'t match');
+  res.sendStatus(500);
 };
 
-authentication.signup = function(req, res, next){
+module.exports.authenticateUser = function(id, email, res){
 
-  if(req.useremail){
-    res.sendStatus(500)
-  }else {
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(req.password, salt, function(err, hash){
-        if(err){
-          throw err;
-        }
-        users[req.useremail] = {username: req.username, password: hash};
-        req.session.user = req.useremail;
-      });
-    });
-  }
-  res.sendStatus(200);
+  var payload = {id: id, email: email, scope: scope};
+
+  var token = jwt.encode(payload, secret);
+  console.log('successfully authenticated user');
+  res.set('token', token);
+  res.json({token: token});
 };
