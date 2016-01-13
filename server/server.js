@@ -1,5 +1,5 @@
 var express = require('express');
-console.log('express = ',express);
+// console.log('express = ',express);
 var bodyParser = require('body-parser');
 var session = require('express-session')
 var routes = require('./routes');
@@ -22,7 +22,7 @@ app.use(function(req,res,next){
   console.log('req.session',req.session);
   next();
 });
-console.log(routes)
+// console.log(routes)
 app.use('/',routes);
 
 app.use(express.static(__dirname+'/../client'));

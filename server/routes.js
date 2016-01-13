@@ -53,16 +53,17 @@ router.post('/signup',function(req, res, next){
   var username = req.body.user.username;
   var email = req.body.user.email;
   var password = req.body.user.password;
-  console.log('BODY>> ',req.body)
+  // console.log('BODY>> ',req.body)
   db.findUser(email,function(data){
     if(!data.length){
       var hash = bcrypt.hashSync(password,10);
       db.addUser(email, username, hash, function(user){
-        console.log(user[0])
-        req.sessions.userId = user.id;
+        // console.log('user', user.pop());
+        req.session.userId = user['LAST_INSERT_ID()'];
         req.session.email = email;
+        res.redirect('/');
       });
-      res.redirect('/');
+
     }else {
       res.sendStatus(500);
     }
@@ -95,6 +96,29 @@ router.put('/profile/update',utilities.checkUser,function(req, res, next){
   res.sendStatus(201)
 
 });
+
+router.post('/addtoofferings',function(req, res, next){
+  //find game
+    //if no game exists
+      //add game to games table
+  //add game id, user id and condition to offering table
+
+});
+router.get('/searchoffering', function(req, res, next){
+
+});
+router.post('/addtoseeking',function(req, res, next){
+  //find game
+    //if no game exists
+      //add game to games table
+  //add game id, user id and condition to seeking table
+
+});
+router.get('/searchseeking', function(req, res, next){
+
+});
+router.get('/getmessages');
+router.post('/addmessage');
 
 // router.use('/*',function(req, res){
 //   console.log('/* error, url:',req.url);
