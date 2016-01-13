@@ -1,8 +1,5 @@
 angular
   .module('app', [
-
- //	'signin',
- // 'signup',
   	'main.controller',
   	'main.service',
   	'results.controller',
@@ -12,7 +9,9 @@ angular
   	'auth.signin',
   	'auth.signup',
   	'auth.service',
-  	'ui.router'])
+  	'ui.router',
+    'messages.controller',
+    'messages.service'])
 
   .config(function($stateProvider, $urlRouterProvider){
 
@@ -44,4 +43,9 @@ angular
 			templateUrl: './userprofile/userprofile.html',
 			controller: 'ProfileController'
 		})
-})
+    .state('messages', {
+      url: '/messages',
+      templateUrl: './messages/messages.html',
+      controller: 'MessagesController'
+    });
+});

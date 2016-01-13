@@ -10,4 +10,10 @@ angular
       throw error;
     }.bind(this));
   };
+  this.addRecipient = function(recipient) {
+    this.recipient = recipient;
+  };
+  this.getRecipient = function() {
+    return this.recipient;
+  };
 });
