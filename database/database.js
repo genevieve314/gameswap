@@ -71,7 +71,6 @@ module.exports = {
     });
   },
 
-
   addOffering: function (userid, title, platform, condition){
     var check = 'SELECT id FROM Games WHERE title = ? AND platform = ?;';
     var checkValues = [title, platform];
@@ -80,8 +79,6 @@ module.exports = {
 
     connection.query(check, checkValues, function (err, data) {
       if (err) console.error('error 1 in db addOffering: ', err);
-
-
       console.log('game id in addOffering: ', data[0].id);
       insertValues.push(data[0].id);
       connection.query(insert, insertValues, function(err, data){
@@ -98,24 +95,18 @@ module.exports = {
 
     connection.query(check, checkValues, function (err, data) {
       if (err) console.error('error 1 in db addSeeking: ', err);
-
-
       console.log('game id in addSeeking: ', data[0].id);
-
-
       insertValues.push(data[0].id);
+
       connection.query(insert, insertValues, function(err, data){
         if (err) console.error('error 2 in db addSeeking: ', err);
       })
+
     })
   },
 
   searchOffering: function (title, callback) {
-
-
     var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Offering.game_condition, Offering.createdat, Users.username, Users.id, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Offering, Users WHERE Games.title = '" + title + "' AND Games.id = Offering.gameid AND Offering.userid = Users.id;";
-
-
     var values = title;
 
     connection.query(sql, function (err, data) {
@@ -125,11 +116,7 @@ module.exports = {
   },
 
   searchSeeking: function (title, callback) {
-
-
     var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Seeking.createdat, Users.username, Users.id, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Seeking, Users WHERE Games.title = '" + title + "' AND Games.id = Seeking.gameid AND Seeking.userid = Users.id;";
-
-
 
     connection.query(sql, function (err, data) {
       if (err) console.error('error in db searchSeeking: ', err);
