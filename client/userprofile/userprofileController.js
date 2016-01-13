@@ -1,25 +1,53 @@
 angular.module('userprofile', [])
-  .controller('ProfileController', function(){
-  	//ProfileServices, MainService
+  .controller('ProfileController', function(AuthServices, ProfileServices){
+  	
   	// will need to issue a GET request of some kind wherein we grab the user info
-  //	var user = ProfileServices.getProfileData(); // assuming this will be an object 
+    var user;
 
-    var user = {};  // temporary till the backend is finished
-  
-  /*	this.username = user.username;
-  	this.email = user.email;  */
-    if(user.address) {
-      this.hasAddress = true;
-      this.address = user.address;
-    } else {
-      this.hasAddress = false;
-    }
+    this.loadProfile = function() {
+     // var user = {};  // temporary till the backend is finished
+      user = ProfileServices.getProfileData();
+    /*    .then(function(resp) {
+          console.log("resp in ProfileServices.getProfileData() ", resp);
+          return resp;
+        }); */
+
+      // OR try...
+      /*
+        ProfileServices.getProfileData()
+        .then(function(resp) {
+          console.log("resp in ProfileServices.getProfileData() ", resp);
+          user = resp;
+        });
+
+*/      
+      console.log("user in loadProfile func ", user);
+     	this.username = user.username;
+  	  this.email = user.email;  
+
+      if(user.address) {
+        this.hasAddress = true;
+        this.address = user.address;
+      } else {
+        this.hasAddress = false;
+      }
+
+    //  this.getOffering();
+     // this.getSeeking();
+    };
 
     //  WILL NEED TO ADD FUNCTION(S) FOR ADDING AN ADDRESS
 
+    this.submitAddress = function(address) {  	
+      console.log("address obj: ", address);
+
+      // NEED TO RE-RENDER WITH UPDATED ADDRESS INFO (poss done in services)
+      this.loadProfile();
+    };
+
 
     //this.address = user.address || "Click the 'add address' button to add your address:";
-  	this.gamesOffered = [{title: "galaga", platform: "PS4", condition: "good"}, {title: "tempest", platform: "Xbox", condition: "like new"}];  // user.gamesOffered
+  	this.gamesOffered = [{title: "sonic", platform: "PS4", condition: "good"}, {title: "mario bros", platform: "Xbox", condition: "like new"}, {title: "donkey kong", platform: "Xbox"}];  // user.gamesOffered
   	this.gamesSeeking = [{title: "dig-dug", platform: "Xbox"}, {title: "pacman", platform: "PS4"}];  // user.gamesSeeking
 
     this.getOffering = function(){
@@ -29,7 +57,7 @@ angular.module('userprofile', [])
         this.gamesOffered.push({
           title: game.title,
           platform: game.platform,
-          condition: game.condition || 'good'      // if game.condition is undefined, set to 'good'
+          condition: game.condition || 'terrible'      // if game.condition is undefined, set to 'good'
         });
       };
     };
@@ -52,24 +80,22 @@ angular.module('userprofile', [])
   			  platform: 'PS4' //  add DOM field for this	
   			})
 
-  		console.log(this.gamesOffered);
-
-  		// need to call function to re-render offer and seek lists???
-
+  		this.getOffering(); // need to call function to re-render offer and seek lists???
   	};
 
   	this.addSeek = function(game) {
   		this.gamesSeeking.push(
   			{ title: game,
-  			  platform: 'PS4' //  add DOM field for this	
+  			  platform: 'PS4'
   			})
 
-  		console.log(this.gamesSeeking);
-
-  		// need to call function to re-render offer and seek lists???
-
+      this.getSeeking();    // re-render the seeking library
   	};
 
+  	this.signOut = function(){
+  		AuthServices.signOut();
+  	}
 
+    this.loadProfile();
 
   })
