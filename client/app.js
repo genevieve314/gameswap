@@ -8,6 +8,7 @@ angular
   	'results.controller', 
   	'results.service', 
   	'userprofile',
+  	'profile.service',
   	'auth.signin',
   	'auth.signup',
   	'auth.service',

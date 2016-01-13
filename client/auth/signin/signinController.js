@@ -1,7 +1,6 @@
 angular.module('auth.signin', [])
 
 .controller('SigninController', function($location, $window, AuthServices){
-	//this.title = "SIGN IN";
 	var user = {};
 	var signin = this;
 
@@ -11,8 +10,9 @@ angular.module('auth.signin', [])
 	 	console.log(user);
 	 	AuthServices.checkSignin(user)
 	 		.then(function(token){
-	 		//	$window.localStorage.setItem('com.gameswap', token);  // com.gameswap is placeholder
-        	//	$location.path('/userprofile');
+	 			console.log('successfully submited to DB');
+	 			$window.localStorage.setItem('com.gameswap', token);  // com.gameswap is placeholder
+        		$location.path('/userprofile');
 	 		})
 	 		.catch(function(error) {
         		console.error(error);
