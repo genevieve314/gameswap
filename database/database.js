@@ -43,7 +43,6 @@ module.exports = {
       if (err) console.error('error in db addUser: ', err);
     });
 
-
     connection.query('SELECT LAST_INSERT_ID();', function(err, data){
       if(err){ console.error("error in db addUser: ", err)};
       callback(data);
