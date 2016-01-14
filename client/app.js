@@ -82,5 +82,5 @@ angular
       $location.path('/signin');
     }
   });
->>>>>>> profileFunctionality
+
 });

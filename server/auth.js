@@ -4,6 +4,7 @@ var secret = 'temp secret';
 var scope = 'full access';
 
 module.exports.checkUser = function(req, res, next){
+  console.log('req.body.token = ',req.body.token);
   var decodedToken = jwt.decode(req.body.token,secret)
   if(decodedToken.scope === scope){
     req.user = {};
