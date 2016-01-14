@@ -114,6 +114,7 @@ router.put('/profile/update', auth.checkUser, function(req, res, next){
 router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var title = req.body.game.title
   var platform = req.body.game.platform
+  var rating = 100;
   var condition = 'default condition';
   var description = 'default description';
 
