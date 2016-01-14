@@ -161,7 +161,12 @@ router.post('/searchseeking', auth.checkUser, function(req, res, next){
     res.sendStatus(500);
   }
 });
-router.get('/getmessages');
-router.post('/addmessage');
+router.get('/getmessages', function(req, res, next){
+
+});
+router.post('/addmessage', auth.checkUser, function(req, res, next){
+  var user = req.user.id;
+  var message = 
+});
 
 module.exports = router;

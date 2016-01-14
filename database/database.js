@@ -45,8 +45,7 @@ module.exports = {
     });
   },
 
-<<<<<<< 9c43547c8709d5257d2bd705d19f33dd1b6d76f3
-=======
+
   addUserProfile: function (userid, phone, street, city, state, zip, geoloc, profilepic){
     var sql = "UPDATE Users SET phone = ?, street = ?, city = ?, state = ?, zip = ?, geoloc = ?, profilepic = ? WHERE id = '" + userid + "';"
     var values = [phone, street, city, state, zip, geoloc, profilepic];
@@ -55,10 +54,8 @@ module.exports = {
       if (err) console.error('error in db addUserProfile: ', err);
     })
   },
->>>>>>> [feature] adds messages querie to database
 
   addGame: function (title, platform, rating, description) {
-
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
     var checkValues = [title, platform]
     var insert = 'INSERT IGNORE into Games (title, platform, rating, description) values(?, ?, ?, ?);';
