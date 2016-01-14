@@ -176,7 +176,7 @@ router.get('/getmessagesfrom', function(req, res, next){
   })
 });
 
-router.get('/getmessagesto', function(req, res, next){
+router.get('/getmessages', function(req, res, next){
   var userto = req.user.id;
 
   db.allMessagesByUserTo(userto, function(results){
