@@ -46,6 +46,16 @@ module.exports = {
   },
 
 
+  addUserProfile: function (userid, phone, street, city, state, zip, geoloc, profilepic){
+    var sql = "UPDATE Users SET phone = ?, street = ?, city = ?, state = ?, zip = ?, geoloc = ?, profilepic = ? WHERE id = '" + userid + "';"
+    var values = [phone, street, city, state, zip, geoloc, profilepic];
+
+    connection.query(sql, values, function(err){
+      if (err) console.error('error in db addUserProfile: ', err);
+    })
+  },
+
+
 
 
 
@@ -146,6 +156,8 @@ module.exports = {
     })
   },
 
+
+
   addMessage: function (useridfrom, useridto, text) {
     var sql = "INSERT into Messages (userto, userfrom, message) values (?, ?, ?);";
     var values = [useridto, useridfrom, text];
@@ -175,36 +187,3 @@ module.exports = {
     })
   }
 }
-
-
-
-
-
-
-
-// how to insert multiple values into sql string while escaping
-//   var sql = "SELECT * FROM ? WHERE ? = ?";
-//   var inserts = ['users', 'id', userId];
-//   sql = mysql.format(sql, inserts);
-
-//example insert query string
-  // insert into employee
-  // (first, last, age, address, city, state)
-  // values ('Luke', 'Duke', 45, '2130 Boars Nest',
-  //         'Hazard Co', 'Georgia');
-  //
-  // SELECT LAST_INSERT_ID()';
-
-//example insert where not exists
-  // INSERT Competitors (cName)
-  // SELECT DISTINCT Name
-  // FROM CompResults cr
-  // WHERE
-  //    NOT EXISTS (SELECT * FROM Competitors c
-  //               WHERE cr.Name = c.cName)
-
-//example insert with data from another table
-  // INSERT INTO action_2_members (campaign_id, mobile, vote, vote_date)
-  // SELECT campaign_id, from_number, received_msg, date_received
-  // FROM `received_txts`
-  // WHERE `campaign_id` = '8'
