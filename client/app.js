@@ -33,7 +33,7 @@ angular
 			templateUrl: './auth/signup/signup.html',
 			controller: 'SignupController'
 		})
-		.state('results', {	
+		.state('results', {
 			url: '/results',
 			templateUrl: './results/results.html',
 			controller: 'ResultsController'
