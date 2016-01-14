@@ -81,7 +81,7 @@ router.post('/profile', auth.checkUser, function(req, res, next){
   db.allSeekingByUser(req.user.id,function(data){
     seeking = data;
   });
-  findUser(req.user.email,function(info){
+  db.findUser(req.user.email,function(info){
     info = info[0];
     userInfo.firstname = info[firstname];
     userInfo.lastname = info[lastname];
@@ -115,7 +115,7 @@ router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   db.addGame(title, platform, rating, description);
 
   console.log('adding', title, 'on', platform, 'to offerings');
-  
+
   db.addOffering(req.user.id, title, platform, condition);
 
   res.sendStatus(201);
