@@ -6,15 +6,18 @@ var scope = 'full access';
 module.exports.checkUser = function(req, res, next){
   console.log('req.body.token = ',req.body.token);
   var decodedToken = jwt.decode(req.body.token,secret)
+  console.log('decoded token ',decodedToken);
   if(decodedToken.scope === scope){
     req.user = {};
     req.user.id = decodedToken.id;
     req.user.email = decodedToken.email;
     console.log('user check successful');
     next();
+  }else {
+    console.log('Token doesn\'t match');
+    res.sendStatus(500);
   }
-  console.log('Token doesn\'t match');
-  res.sendStatus(500);
+
 };
 
 module.exports.authenticateUser = function(id, email, res, req){

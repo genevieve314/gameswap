@@ -75,6 +75,7 @@ router.post('/profile', auth.checkUser, function(req, res, next){
   // var user = req.session.email;
   var userInfo = {};
   var offerings, seeking;
+  console.log()
   db.allOfferingByUser(req.user.id,function(data){
     offerings = data;
   });
@@ -82,21 +83,25 @@ router.post('/profile', auth.checkUser, function(req, res, next){
     seeking = data;
   });
   db.findUser(req.user.email,function(info){
+
     info = info[0];
-    userInfo.firstname = info[firstname];
-    userInfo.lastname = info[lastname];
-    userInfo.username = info[username];
-    userInfo.email = info[email];
-    userInfo.phone = info[phone];
-    userInfo.street = info[street];
-    userInfo.city = info[city];
-    userInfo.state = info[state];
-    userInfo.zip = info[zip];
+    userInfo.firstname = info['firstname'];
+    userInfo.lastname = info['lastname'];
+    userInfo.username = info['username'];
+    userInfo.email = info['email'];
+    userInfo.phone = info['phone'];
+    userInfo.street = info['street'];
+    userInfo.city = info['city'];
+    userInfo.state = info['state'];
+    userInfo.zip = info['zip'];
     userInfo.offerings = offerings;
     userInfo.seeking = seeking;
+
+    console.log('route: ', req.url);
+    console.log('userInfo',userInfo);
+    res.json(userInfo);
   });
-  console.log('route: ', req.url);
-  res.json(userInfo);
+
 });
 
 router.put('/profile/update', auth.checkUser, function(req, res, next){
@@ -109,7 +114,7 @@ router.put('/profile/update', auth.checkUser, function(req, res, next){
 router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var title = req.body.game.title
   var platform = req.body.game.platform
-  var condition = 1;
+  var condition = 'default condition';
   var description = 'default description';
 
   db.addGame(title, platform, rating, description);
