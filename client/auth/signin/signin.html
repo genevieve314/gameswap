@@ -3,7 +3,7 @@
 	<div ng-controller='SigninController as signin'>
     	Email: <input type='text' ng-model='signin.email' /><br><br>
     	Password: <input type="password" ng-model='signin.password' /><br><br>
-    	<button ng-click='signin.submit(signin)'>sign in</button>
+    	<button ng-click='signin.submit(signin); signin.email=""; signin.password=""'>sign in</button>
   		<p>Don't have a GameSwap account? <a ui-sref="signup">Click here to sign up!</a></p>
 
   		<p><a ui-sref="main">Go back to main</a></p>
