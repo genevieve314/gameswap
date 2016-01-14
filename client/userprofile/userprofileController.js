@@ -65,13 +65,13 @@ angular.module('userprofile', [])
   	this.addOffer = function(game) {
       ProfileServices.addGameOffering({
   			  title: game.title,
-  			  platform: game.platform,   //  add DOM field for this
-          condition: game.condition //  add DOM field for this	
+  			  platform: game.platform,   
+          condition: game.condition 	
   			}).then(function(resp){
           console.log('resp in this.addOffer promise: ', resp);
           console.log('calling this.loadProfile in this.addOffer promise: ', resp);
 
-          loadProfile(); // re-render the seeking library
+          loadProfile(); // re-render the library
 
         });
   	};
@@ -79,11 +79,13 @@ angular.module('userprofile', [])
   	this.addSeek = function(game) {
       ProfileServices.addGameSeeking({
           title: game.title,
-          platform: game.platform //  add DOM field for this  
+          platform: game.platform //  
         }).then(function(resp){
           console.log('resp in this.addSeek promise: ', resp);
           console.log('calling this.loadProfile in this.addSeek promise: ');
-          loadProfile(); 
+
+          loadProfile(); // re-render the library
+
         });
   	};
 

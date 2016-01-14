@@ -5,6 +5,8 @@
 			<h3>username: {{ profile.username }}</h3>
 			<h3>email: {{ profile.email }}</h3>
 
+<!--  Uncomment when update profile functionality is added on backend
+
 			<div ng-show='profile.hasAddress === true'>
 				<h3>address:</h3> {{ profile.address }}
 			</div>
@@ -19,10 +21,14 @@
 				<button ng-click='profile.submitAddress(profile.address)'>Update</button>
 			</div>
 
+-->
+
 			<h3>games you are currently offering: </h3>
+			<br>
 			<div ng-repeat='game in profile.gamesOffered'>
-				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   Condition: {{ game.condition }}</div>
+				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   <!-- Condition: {{ game.condition }} --></div>
 			</div>
+			<br>
 			<div>
 				Add a new title: <input type="text" ng-model='profile.gameToOffer.title' /> 
 				Platform: <select ng-model='profile.gameToOffer.platform' >
@@ -30,20 +36,25 @@
       				<option value="Playstation 4">PlayStation 4</option>
       				<option value="Xbox One">Xbox One</option>
     			</select>
+
+<!-- commenting out 'condition' for the time being till it's added on backend
+
     			Condition: <select ng-model='profile.gameToOffer.condition'>
       				<option value="">Please Choose</option>
       				<option value="Excellent">Excellent</option>
       				<option value="Good">Good</option>
       				<option value="Poor">Poor</option>
     			</select>
-
+-->
     			<button ng-click='profile.addOffer(profile.gameToOffer); profile.gameToOffer=""'>Add me</button>
     		</div>	
 
 			<h3>games you are currently seeking: </h3>
+			<br>
 			<div ng-repeat='game in profile.gamesSeeking'>
 				<div>Title: {{ game.title }}  Platform: {{ game.platform }}</div>
 			</div>
+			<br>
 			<div>
 				Add a new title: <input type="text" ng-model='profile.gameToSeek.title' />
 					Platform: <select ng-model='profile.gameToSeek.platform' >
@@ -53,6 +64,7 @@
     			</select>
     			<button ng-click="profile.addSeek(profile.gameToSeek); profile.gameToSeek=''">Add me</button>
     		</div>
+    		<br>
     		<div>
     			<button ng-click="profile.signOut()">Sign Out</button>
     		</div>
