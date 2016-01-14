@@ -57,8 +57,6 @@ module.exports = {
 
 
 
-
-
   addGame: function (title, platform, rating, description) {
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
     var checkValues = [title, platform]
