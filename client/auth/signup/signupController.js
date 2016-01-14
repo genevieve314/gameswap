@@ -10,7 +10,7 @@ angular.module('auth.signup', [])
 	 	user.password = signup.password;
 	 	user.email = signup.email;
 	 	console.log(user);
-	 	AuthServices.submitNewUser({user:user})
+	 	AuthServices.submitNewUser({user: user})
 	 		.then(function(token){
 	 			$window.localStorage.setItem('com.gameswap', token); 
         		$location.path('/userprofile');

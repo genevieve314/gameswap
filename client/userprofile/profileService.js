@@ -18,12 +18,12 @@ angular.module('profile.service', [])
   			console.error('ERROR in getProfileData: ', error);
 		})
 	};
-
+/*
 	var getOfferingList = function($http){
 		var token = $window.localStorage.getItem('com.gameswap');
 		return $http({
 			method: 'POST',
-			//url: ''   // ASK ERIC ABOUT DB ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+			url: null   // ASK ERIC ABOUT DB ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
 			data: {token: token}
 		})
 		.then(function(resp){
@@ -31,8 +31,8 @@ angular.module('profile.service', [])
 		}, function(error) {
   			console.error('ERROR in getOfferingList: ', error);
 		})
-	};
-
+	};*/
+/*
 	var getSeekingList = function($http){
 		var token = $window.localStorage.getItem('com.gameswap');
 
@@ -46,7 +46,7 @@ angular.module('profile.service', [])
 		}, function(error) {
   			console.error('ERROR in getSeekingList: ', error);
 		})
-	};
+	};*/
 
 	var addGameOffering = function(game){
 		var token = $window.localStorage.getItem('com.gameswap');
@@ -81,8 +81,8 @@ angular.module('profile.service', [])
 
 	return {
 		getProfileData: getProfileData,
-		getOfferingList: getOfferingList,
-		getSeekingList: getSeekingList,
+		//getOfferingList: getOfferingList,
+		//getSeekingList: getSeekingList,
 		addGameOffering: addGameOffering,
 		addGameSeeking: addGameSeeking
 	};

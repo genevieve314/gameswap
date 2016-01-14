@@ -13,7 +13,7 @@ angular.module('auth.service', [])
 			return resp.data.token;   
 		}, function(error) {
   			console.error('Sign up ERROR!!! ', error);
-  							  //  HANDLE REDIRECT IN CONTROLLER (USING $LOCATION, PROBABLY)
+  
 		})
 	};
 
@@ -22,14 +22,14 @@ angular.module('auth.service', [])
 		return $http({
 			method: 'POST',
 			url: '/signin',
-			data: userData
+			data: {user: userData}
 		}).then(function(resp) {
 			console.log('resp ', resp);
 			return resp.data.token;  
 		}).catch(function(error) {
   			console.error('ERROR!!! Redirecting to signin ', error);
   			$location.path('/signin');
-  								//  HANDLE REDIRECT IN CONTROLLER??? (USING $LOCATION, PROBABLY)
+  								
 		})
 	};
 

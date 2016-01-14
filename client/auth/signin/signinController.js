@@ -8,12 +8,12 @@ angular.module('auth.signin', [])
 		user.email = signin.email;
 	 	user.password = signin.password;
 	 	console.log(user);
-	 	AuthServices.checkSignin({user: user})
+	 	AuthServices.checkSignin(user)
 	 		.then(function(token){
 	 		  if(token){
 	 			console.log('successfully submited to DB');
 	 			console.log('the token is: ', token);
-	 			$window.localStorage.setItem('com.gameswap', token);  // com.gameswap is placeholder
+	 			$window.localStorage.setItem('com.gameswap', token); 
         		$location.path('/userprofile');
         	  }	
 	 		})

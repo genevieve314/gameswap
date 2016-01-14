@@ -33,7 +33,7 @@ angular
 			templateUrl: './auth/signup/signup.html',
 			controller: 'SignupController'
 		})
-		.state('results', {		// this is where we will provide the search results when users search for games
+		.state('results', {	
 			url: '/results',
 			templateUrl: './results/results.html',
 			controller: 'ResultsController'
@@ -82,5 +82,4 @@ angular
       $location.path('/signin');
     }
   });
-
 });
