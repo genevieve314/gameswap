@@ -71,3 +71,41 @@ db.searchSeeking('game2', function (data) {
 	return data;
 });
 
+
+
+
+
+
+
+// how to insert multiple values into sql string while escaping
+//   var sql = "SELECT * FROM ? WHERE ? = ?";
+//   var inserts = ['users', 'id', userId];
+//   sql = mysql.format(sql, inserts);
+
+//example insert query string
+  // insert into employee
+  // (first, last, age, address, city, state)
+  // values ('Luke', 'Duke', 45, '2130 Boars Nest',
+  //         'Hazard Co', 'Georgia');
+  //
+  // SELECT LAST_INSERT_ID()';
+
+//example insert where not exists
+  // INSERT Competitors (cName)
+  // SELECT DISTINCT Name
+  // FROM CompResults cr
+  // WHERE
+  //    NOT EXISTS (SELECT * FROM Competitors c
+  //               WHERE cr.Name = c.cName)
+
+//example insert with data from another table
+  // INSERT INTO action_2_members (campaign_id, mobile, vote, vote_date)
+  // SELECT campaign_id, from_number, received_msg, date_received
+  // FROM `received_txts`
+  // WHERE `campaign_id` = '8'
+
+//example update data
+  // UPDATE Customers
+  // SET ContactName='Alfred Schmidt', City='Hamburg'
+  // WHERE CustomerName='Alfreds Futterkiste';
+

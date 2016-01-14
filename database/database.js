@@ -45,17 +45,15 @@ module.exports = {
     });
   },
 
-
   addUserProfile: function (userid, phone, street, city, state, zip, geoloc, profilepic){
     var sql = "UPDATE Users SET phone = ?, street = ?, city = ?, state = ?, zip = ?, geoloc = ?, profilepic = ? WHERE id = '" + userid + "';"
     var values = [phone, street, city, state, zip, geoloc, profilepic];
+
 
     connection.query(sql, values, function(err){
       if (err) console.error('error in db addUserProfile: ', err);
     })
   },
-
-
 
   addGame: function (title, platform, rating, description) {
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
@@ -85,7 +83,6 @@ module.exports = {
 
 
       console.log('game id in addOffering: ', data[0].id);
-
       insertValues.push(data[0].id);
       connection.query(insert, insertValues, function(err, data){
         if (err) console.error('error 2 in db addOffering: ', err);
@@ -115,7 +112,9 @@ module.exports = {
 
   searchOffering: function (title, callback) {
 
+
     var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Offering.game_condition, Offering.createdat, Users.username, Users.id, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Offering, Users WHERE Games.title = '" + title + "' AND Games.id = Offering.gameid AND Offering.userid = Users.id;";
+
 
     var values = title;
 
@@ -127,7 +126,9 @@ module.exports = {
 
   searchSeeking: function (title, callback) {
 
+
     var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Seeking.createdat, Users.username, Users.id, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Seeking, Users WHERE Games.title = '" + title + "' AND Games.id = Seeking.gameid AND Seeking.userid = Users.id;";
+
 
 
     connection.query(sql, function (err, data) {
@@ -154,8 +155,6 @@ module.exports = {
     })
   },
 
-
-
   addMessage: function (useridfrom, useridto, text) {
     var sql = "INSERT into Messages (userto, userfrom, message) values (?, ?, ?);";
     var values = [useridto, useridfrom, text];
@@ -164,6 +163,7 @@ module.exports = {
       if (err) console.error('error in db addMessage: ', err);
     })
   },
+
 
   allMessagesByUserFrom: function (userid, callback) {
     var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Messages, Users WHERE Messages.userfrom = ? AND Users.id = Messages.userto;";
