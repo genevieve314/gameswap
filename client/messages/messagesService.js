@@ -2,8 +2,8 @@ angular
 .module('messages.service', [])
 .service('MessagesService', function() {
   this.sendMessage = function(message){
-    return $http.post('/addmessage', message)
-    // TODO: check for token and send with message
+    var token = $window.localStorage.getItem('com.gameswap');
+    return $http.post('/addmessage', message, {token: token})
     .then(function(resp){
       return resp.data;
     }.bind(this), function(error) {

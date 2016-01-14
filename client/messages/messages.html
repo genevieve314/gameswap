@@ -1,10 +1,8 @@
-<!-- TODO: need to check for token which can be found in profileservices (add $window to arguments) and include that in a POST request to get all the messages (instead of a GET request) -->
-
 <section ng-controller='MessagesController as messages'>
-  <form name="MessagesForm" ng-submit='MessagesForm.$valid && Messages.sendMessage(messageText)' novalidate>
+  <form name="MessagesForm" ng-submit='MessagesForm.$valid && Messages.sendMessage(messageText, {{messages.to}})' novalidate>
     <h4>Send a Message</h4>
-    <p>To: {{messages.recipient}}<p>
-      <!-- TODO: Add current user based on profile info -->
+    <p>To: {{messages.to}}<p>
+    <p>From: {{messages.from}}<p>
     <fieldset class="form-group">
       <textarea class="form-control" placeholder="Send a message..." title="Message" ng-model='messageText'></textarea>
     </fieldset>

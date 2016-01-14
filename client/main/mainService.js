@@ -10,6 +10,15 @@ angular
       throw error;
     }.bind(this));
   };
+  this.searchSeeking = function(game){
+    return $http.post('/searchseeking', game)
+    .then(function(resp){
+      console.log('response',resp);
+      return resp.data;
+    }.bind(this), function(error) {
+      throw error;
+    }.bind(this));
+  };
   this.addRecipient = function(recipient) {
     this.recipient = recipient;
   };
