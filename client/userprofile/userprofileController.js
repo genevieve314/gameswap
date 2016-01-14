@@ -8,20 +8,20 @@ angular.module('userprofile', [])
 
     this.getOffering = function(){
       this.gamesOffered = [];
-      var tempArray = ProfileServices.getProfileData().offerings;
-      for(var i = 0; i < tempArray.length; i++) {                       //   Unless it's an array 
+      var tempArray = ProfileServices.getProfileData().offerings; // might need to promisify
+      for(var i = 0; i < tempArray.length; i++) {                    
         this.gamesOffered.push({
           title: game.title,
           platform: game.platform,
-          condition: game.condition || 'terrible'      // if game.condition is undefined, set to 'good'
+          condition: game.condition || 'terrible'   
         });
       };
     };
 
     this.getSeeking = function(){
       this.gamesSeeking = [];
-      var tempArray = ProfileServices.getProfileData().seeking;
-      for(var i = 0; i < tempArray.length; i++) {                       //   Unless it's an array 
+      var tempArray = ProfileServices.getProfileData().seeking;   // might need to promisify
+      for(var i = 0; i < tempArray.length; i++) {                    
         this.gamesSeeking.push({
           title: game.title,
           platform: game.platform
@@ -30,16 +30,8 @@ angular.module('userprofile', [])
     };
 
     var loadProfile = function() {
-     // var user = {};  // temporary till the backend is finished
-    //  user = ProfileServices.getProfileData();
-    /*    .then(function(resp) {
-          console.log("resp in ProfileServices.getProfileData() ", resp);
-          return resp;
-        }); */
-
-      // OR try...
       
-        ProfileServices.getProfileData()
+      ProfileServices.getProfileData()
         .then(function(resp) {
           console.log("resp in ProfileServices.getProfileData() ", resp);
           userInfo.username = resp.username;
@@ -67,35 +59,32 @@ angular.module('userprofile', [])
     this.submitAddress = function(address) {  	
       console.log("address obj: ", address);
 
-      this.loadProfile();
+      loadProfile();
     };
-
-
-    //this.address = user.address || "Click the 'add address' button to add your address:";
-  //	this.gamesOffered = [{title: "sonic", platform: "PS4", condition: "good"}, {title: "mario bros", platform: "Xbox", condition: "like new"}, {title: "donkey kong", platform: "Xbox"}];  // user.gamesOffered
-  //	this.gamesSeeking = [{title: "dig-dug", platform: "Xbox"}, {title: "pacman", platform: "PS4"}];  // user.gamesSeeking
-
-    
 
   	this.addOffer = function(game) {
       ProfileServices.addGameOffering({
-  			  title: game,
-  			  platform: 'PS4' //  add DOM field for this	
+  			  title: game.title,
+  			  platform: game.platform,   //  add DOM field for this
+          condition: game.condition //  add DOM field for this	
   			}).then(function(resp){
+          console.log('resp in this.addOffer promise: ', resp);
           console.log('calling this.loadProfile in this.addOffer promise: ', resp);
-          loadProfile(); 
-        });
 
-  		// need to call function to re-render offer and seek lists???
+          loadProfile(); // re-render the seeking library
+
+        });
   	};
 
   	this.addSeek = function(game) {
       ProfileServices.addGameSeeking({
-  			  title: game,
-  			  platform: 'PS4'
-  			});
-
-      this.loadProfile();    // re-render the seeking library
+          title: game.title,
+          platform: game.platform //  add DOM field for this  
+        }).then(function(resp){
+          console.log('resp in this.addSeek promise: ', resp);
+          console.log('calling this.loadProfile in this.addSeek promise: ');
+          loadProfile(); 
+        });
   	};
 
   	this.signOut = function(){

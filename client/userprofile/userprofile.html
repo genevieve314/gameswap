@@ -24,16 +24,33 @@
 				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   Condition: {{ game.condition }}</div>
 			</div>
 			<div>
-				Add a new title: <input type="text" ng-model='profile.gameToOffer' />
+				Add a new title: <input type="text" ng-model='profile.gameToOffer.title' /> 
+				Platform: <select ng-model='profile.gameToOffer.platform' >
+      				<option value="">Please Choose</option>
+      				<option value="Playstation 4">PlayStation 4</option>
+      				<option value="Xbox One">Xbox One</option>
+    			</select>
+    			Condition: <select ng-model='profile.gameToOffer.condition'>
+      				<option value="">Please Choose</option>
+      				<option value="Excellent">Excellent</option>
+      				<option value="Good">Good</option>
+      				<option value="Poor">Poor</option>
+    			</select>
+
     			<button ng-click='profile.addOffer(profile.gameToOffer); profile.gameToOffer=""'>Add me</button>
-    		</div>
+    		</div>	
 
 			<h3>games you are currently seeking: </h3>
 			<div ng-repeat='game in profile.gamesSeeking'>
 				<div>Title: {{ game.title }}  Platform: {{ game.platform }}</div>
 			</div>
 			<div>
-				Add a new title: <input type="text" ng-model='profile.gameToSeek' />
+				Add a new title: <input type="text" ng-model='profile.gameToSeek.title' />
+					Platform: <select ng-model='profile.gameToSeek.platform' >
+      				<option value="">Please Choose</option>
+      				<option value="Playstation 4">PlayStation 4</option>
+      				<option value="Xbox One">Xbox One</option>
+    			</select>
     			<button ng-click="profile.addSeek(profile.gameToSeek); profile.gameToSeek=''">Add me</button>
     		</div>
     		<div>
