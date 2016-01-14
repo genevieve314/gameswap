@@ -10,7 +10,6 @@ app.listen(PORT,function(){
   console.log('listening on port 3000');
 });
 
-
 db.addUser('test@test.com', 'somedude', 'hashed', function (data){
 	console.log('add user: ', data);
 	return data;
