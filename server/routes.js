@@ -6,21 +6,6 @@ var db = require('../database/database');
 var bcrypt = require('bcrypt');
 
 
-router.post('/searchgames',function(req, res, next){
-  /*
-  search object:
-  {
-    geo: {lat, lng} || null,
-    country: someCountry,
-    state: state,
-    game: {title, platform};
-  }
-  */
-  var location = req.body.location;
-  console.log('route: ', req.url);
-  res.sendStatus(200);
-});
-
 
 router.post('/signin',function(req, res, next){
   console.log('at signin');
@@ -114,7 +99,7 @@ router.put('/profile/update', auth.checkUser, function(req, res, next){
 router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var title = req.body.game.title
   var platform = req.body.game.platform
-  var condition = 'good';
+  var condition = 'default condition';
   var description = 'default description';
   var rating = 5;
 
@@ -192,5 +177,6 @@ router.post('/addmessage', auth.checkUser, function(req, res, next){
   db.addMessage(userfrom, userto, message);
 
 });
+
 
 module.exports = router;
