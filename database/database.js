@@ -45,7 +45,6 @@ module.exports = {
     });
   },
 
-
   addUserProfile: function (userid, phone, street, city, state, zip, geoloc, profilepic){
     var sql = "UPDATE Users SET phone = ?, street = ?, city = ?, state = ?, zip = ?, geoloc = ?, profilepic = ? WHERE id = '" + userid + "';"
     var values = [phone, street, city, state, zip, geoloc, profilepic];
@@ -70,18 +69,17 @@ module.exports = {
       }
     });
   },
+
   addOffering: function (userid, title, platform, condition){
     var check = 'SELECT id FROM Games WHERE title = ? AND platform = ?;';
     var checkValues = [title, platform];
     var insert = 'INSERT into Offering (userid, game_condition, gameid) values( ?, ?, ?);';
     var insertValues = [userid, condition];
 
-
     connection.query(check, checkValues, function (err, data) {
       if (err) console.error('error 1 in db addOffering: ', err);
 
       console.log('game id in addOffering: ', data[0].id);
-
       insertValues.push(data[0].id);
       connection.query(insert, insertValues, function(err, data){
         if (err) console.error('error 2 in db addOffering: ', err);
