@@ -1,26 +1,25 @@
 angular.module('userprofile', [])
   .controller('ProfileController', function(AuthServices, ProfileServices){
   	
-  	// will need to issue a GET request of some kind wherein we grab the user info
     var user;
 
     this.loadProfile = function() {
      // var user = {};  // temporary till the backend is finished
-      user = ProfileServices.getProfileData();
+    //  user = ProfileServices.getProfileData();
     /*    .then(function(resp) {
           console.log("resp in ProfileServices.getProfileData() ", resp);
           return resp;
         }); */
 
       // OR try...
-      /*
+      
         ProfileServices.getProfileData()
         .then(function(resp) {
           console.log("resp in ProfileServices.getProfileData() ", resp);
           user = resp;
         });
 
-*/      
+      
       console.log("user in loadProfile func ", user);
      	this.username = user.username;
   	  this.email = user.email;  
@@ -32,8 +31,8 @@ angular.module('userprofile', [])
         this.hasAddress = false;
       }
 
-    //  this.getOffering();
-     // this.getSeeking();
+        this.getOffering();
+        this.getSeeking();
     };
 
     //  WILL NEED TO ADD FUNCTION(S) FOR ADDING AN ADDRESS
@@ -41,7 +40,6 @@ angular.module('userprofile', [])
     this.submitAddress = function(address) {  	
       console.log("address obj: ", address);
 
-      // NEED TO RE-RENDER WITH UPDATED ADDRESS INFO (poss done in services)
       this.loadProfile();
     };
 
@@ -52,8 +50,8 @@ angular.module('userprofile', [])
 
     this.getOffering = function(){
       this.gamesOffered = [];
-  //    var tempObject = ProfileServices.getOfferingList();
-      for(var game in tempObject) {                       //   Unless it's an array 
+      var tempArray = ProfileServices.getOfferingList().offering;
+      for(var i = 0; i < tempArray.length; i++) {                       //   Unless it's an array 
         this.gamesOffered.push({
           title: game.title,
           platform: game.platform,
@@ -64,32 +62,31 @@ angular.module('userprofile', [])
 
     this.getSeeking = function(){
       this.gamesSeeking = [];
- //     var tempObject = ProfileServices.getSeekingList();
-      for(var game in tempObject) {                       //   Unless it's an array 
-        this.gamesOffered.push({
+      var tempArray = ProfileServices.getSeekingList().seeking;
+      for(var i = 0; i < tempArray.length; i++) {                       //   Unless it's an array 
+        this.gamesSeeking.push({
           title: game.title,
           platform: game.platform
         });
       };
     };
 
-
   	this.addOffer = function(game) {
-  		this.gamesOffered.push(
-  			{ title: game,
+      ProfileServices.addGameOffering({
+  			  title: game,
   			  platform: 'PS4' //  add DOM field for this	
-  			})
+  			});
 
-  		this.getOffering(); // need to call function to re-render offer and seek lists???
+  		this.loadProfile(); // need to call function to re-render offer and seek lists???
   	};
 
   	this.addSeek = function(game) {
-  		this.gamesSeeking.push(
-  			{ title: game,
+      ProfileServices.addGameSeeking({
+  			  title: game,
   			  platform: 'PS4'
-  			})
+  			});
 
-      this.getSeeking();    // re-render the seeking library
+      this.loadProfile();    // re-render the seeking library
   	};
 
   	this.signOut = function(){

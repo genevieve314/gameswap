@@ -25,7 +25,7 @@
 			</div>
 			<div>
 				Add a new title: <input type="text" ng-model='profile.gameToOffer' />
-    			<button ng-click='profile.addOffer(profile.gameToOffer)'>Add me</button>
+    			<button ng-click='profile.addOffer(profile.gameToOffer); profile.gameToOffer=""'>Add me</button>
     		</div>
 
 			<h3>games you are currently seeking: </h3>
