@@ -172,7 +172,7 @@ router.get('/getmessages', function(req, res, next){
 });
 router.post('/addmessage', auth.checkUser, function(req, res, next){
   var user = req.user.id;
-  var message = 
+  var message;
 });
 
 module.exports = router;
