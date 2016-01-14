@@ -3,7 +3,7 @@ var tables = require('./tables.js');
 
 
 connection = mysql.createConnection({
-  host: 'localhost',
+  host: '10.30.84.156:01:449'
   port: '3306',
   user: 'root',
   password: 'password',

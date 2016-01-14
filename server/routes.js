@@ -167,12 +167,29 @@ router.post('/searchseeking', auth.checkUser, function(req, res, next){
     res.sendStatus(500);
   }
 });
-router.get('/getmessages', function(req, res, next){
 
+router.get('/getmessagesfrom', function(req, res, next){
+  var userfrom = req.user.id;
+
+  db.allMessagesByUserFrom(userfrom, function(results){
+    res.json({results: results});
+  })
 });
+
+router.get('/getmessagesto', function(req, res, next){
+  var userto = req.user.id;
+
+  db.allMessagesByUserTo(userto, function(results){
+    res.json({results: results});
+  })
+})
+
 router.post('/addmessage', auth.checkUser, function(req, res, next){
-  var user = req.user.id;
-  var message;
+  var userfrom = req.user.id;
+  var userto = req.body.messages.to;
+  var message = req.body.messages.text;
+
+  db.addMessage(userfrom, userto, message);
 
 });
 
