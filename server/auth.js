@@ -17,7 +17,6 @@ module.exports.checkUser = function(req, res, next){
     console.log('Token doesn\'t match');
     res.sendStatus(500);
   }
-
 };
 
 module.exports.authenticateUser = function(id, email, res, req){
