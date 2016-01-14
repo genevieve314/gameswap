@@ -67,7 +67,6 @@ angular.module('userprofile', [])
   			  title: game.title,
   			  platform: game.platform,   
           condition: game.condition 	
-
   			}).then(function(resp){
           console.log('resp in this.addOffer promise: ', resp);
           console.log('calling this.loadProfile in this.addOffer promise: ', resp);
