@@ -45,9 +45,13 @@ module.exports = {
     });
   },
 
+<<<<<<< c27d5311f90772439e72f413351f09efbf29a60d
 
   addGame: function (title, platform, rating, description) {
 
+=======
+  addGame: function (title, platform, rating, description) {
+>>>>>>> [feature] adds search functions by userid
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
     var checkValues = [title, platform]
     var insert = 'INSERT IGNORE into Games (title, platform, rating, description) values(?, ?, ?, ?);';
@@ -62,6 +66,7 @@ module.exports = {
       }
     });
   },
+<<<<<<< c27d5311f90772439e72f413351f09efbf29a60d
   addOffering: function (userid, title, platform, condition){
     var check = 'SELECT id FROM Games WHERE title = ? AND platform = ?;';
     var checkValues = [title, platform];
@@ -72,6 +77,18 @@ module.exports = {
     connection.query(check, checkValues, function (err, data) {
       if (err) console.error('error 1 in db addOffering: ', err);
 
+=======
+
+  addOffering: function (userid, title, platform, condition){
+    var check = 'SELECT id FROM Games WHERE title = ? AND platform = ?;';
+    var checkValues = [title, platform];
+    var insert = 'INSERT into Offering (userid, game_condition, gameid) values( ?, ?, ?);';
+    var insertValues = [userid, condition];
+
+    connection.query(check, checkValues, function (err, data) {
+      if (err) console.error('error 1 in db addOffering: ', err);
+
+>>>>>>> [feature] adds search functions by userid
       console.log('game id in addOffering: ', data[0].id);
 
       insertValues.push(data[0].id);
@@ -89,9 +106,15 @@ module.exports = {
 
     connection.query(check, checkValues, function (err, data) {
       if (err) console.error('error 1 in db addSeeking: ', err);
+<<<<<<< c27d5311f90772439e72f413351f09efbf29a60d
 
       console.log('game id in addSeeking: ', data[0].id);
 
+=======
+
+      console.log('game id in addSeeking: ', data[0].id);
+
+>>>>>>> [feature] adds search functions by userid
       insertValues.push(data[0].id);
       connection.query(insert, insertValues, function(err, data){
         if (err) console.error('error 2 in db addSeeking: ', err);
