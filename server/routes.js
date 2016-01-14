@@ -109,13 +109,13 @@ router.put('/profile/update', auth.checkUser, function(req, res, next){
 router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var title = req.body.game.title
   var platform = req.body.game.platform
-  var condition = 1;
+  var condition = 'used';
   var description = 'default description';
 
   db.addGame(title, platform, rating, description);
 
   console.log('adding', title, 'on', platform, 'to offerings');
-  
+
   db.addOffering(req.user.id, title, platform, condition);
 
   res.sendStatus(201);
