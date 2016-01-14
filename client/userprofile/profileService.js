@@ -51,10 +51,12 @@ angular.module('profile.service', [])
 	var addGameOffering = function(game){
 		var token = $window.localStorage.getItem('com.gameswap');
 
+		console.log('game var passed in to addGameOffering service: ', game);
+
 		return $http({
 			method: 'POST',
 			url: '/addtoofferings',	
-			data: {game: game, token: token}      			//  Assuming we NEED TO ADD TOKEN AS WELL???
+			data: {game: game, token: token}      			
 		})
 		.then(function(resp){
 			return resp;
@@ -67,10 +69,12 @@ angular.module('profile.service', [])
 	var addGameSeeking = function(game){
 		var token = $window.localStorage.getItem('com.gameswap');
 
+		console.log('game var passed in to addGameSeeking service: ', game);
+
 		return $http({
 			method: 'POST',
 		    url: '/addtoseeking',
-			data: {game: game, token: token}      			//  Assuming we NEED TO ADD TOKEN AS WELL???
+			data: {game: game, token: token}      			
 		})
 		.then(function(resp){
 			return resp;
