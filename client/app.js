@@ -82,3 +82,4 @@ angular
       $location.path('/signin');
     }
   });
+});
