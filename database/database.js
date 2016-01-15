@@ -83,6 +83,8 @@ module.exports = {
           if (err) console.error('error 2 in db addGame: ', err);
           else callback(true);
         })
+      } else {
+        callback(false);
       }
     });
   },
