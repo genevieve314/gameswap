@@ -46,7 +46,7 @@ router.post('/signup',function(req, res, next){
       db.addUser(email, username, hash, city, function(user){
 
         id =  user[0].id;
-        req.session.email = email;
+       
         auth.authenticateUser(id, email, res);
       });
 

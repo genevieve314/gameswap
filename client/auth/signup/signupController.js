@@ -13,7 +13,12 @@ angular.module('auth.signup', [])
 	 	console.log(user);
 	 	AuthServices.submitNewUser({user: user})
 	 		.then(function(token){
-	 			$window.localStorage.setItem('com.gameswap', token); 
+	 			//$window.localStorage.setItem('com.gameswap', token); 
+
+	 			// using setTimeout till we get the async hammered out
+
+	 			//setTimeout($location.path('/userprofile'), 500);
+
         		$location.path('/userprofile');
 	 		})
 	 		.catch(function(error) {
