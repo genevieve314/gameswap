@@ -10,7 +10,7 @@ var Promise = require('bluebird')
 
 
 router.post('/signin',function(req, res, next){
-  console.log('at signin');
+
   email = req.body.user.email;
   password = req.body.user.password;
 
@@ -21,14 +21,13 @@ router.post('/signin',function(req, res, next){
       if(bcrypt.compareSync(password,foundUser.password)){
         foundUser.id;
         console.log('success logging in');
-        req.session.email = email;
         auth.authenticateUser(foundUser.id, email, res, req);
       }else {
-        console.log('failed logging in')
+        console.error('failed logging '+email+'in!');
         res.sendStatus(500);
       }
-    }else {//not found
-      console.log('user',email,'not found');
+    }else {
+      console.error('user',email,'not found');
       res.sendStatus(500);
     }
   });
@@ -40,30 +39,29 @@ router.post('/signup',function(req, res, next){
   var email = req.body.user.email;
   var password = req.body.user.password;
   var city = req.body.user.city;
-  // console.log('BODY>> ',req.body)
+
   db.findUser(email,function(data){
     if(!data.length){
       var hash = bcrypt.hashSync(password,10);
       db.addUser(email, username, hash, city, function(user){
-        // console.log('user', user.pop());
+
         id =  user[0].id;
         req.session.email = email;
         auth.authenticateUser(id, email, res);
       });
 
     }else {
-      console.log('user found!')
+      console.error('user already '+email+' exists!');
       res.sendStatus(500);
     }
   });
 });
 
 router.post('/profile', auth.checkUser, function(req, res, next){
-  //return json of user data
-  // var user = req.session.email;
+
   var userInfo = {};
   var offerings, seeking;
-  console.log('/profile')
+
   db.allOfferingByUser(req.user.id,function(data){
     offerings = data;
   });
@@ -86,8 +84,6 @@ router.post('/profile', auth.checkUser, function(req, res, next){
     userInfo.offerings = offerings;
     userInfo.seeking = seeking;
 
-    console.log('route: ', req.url);
-    console.log('userInfo',userInfo);
     res.json(userInfo);
   });
 
@@ -95,13 +91,14 @@ router.post('/profile', auth.checkUser, function(req, res, next){
 
 router.put('/profile/update', auth.checkUser, function(req, res, next){
   var userid = req.user.id,
-  phone = req.body.user.phone || null,
-  street = req.body.user.street  || null,
-  city = req.body.user.city || null,
-  state = req.body.user.state || null,
-  zip = req.body.user.zip  || null,
-  geoloc = req.body.user.geoloc || null,
-  profilepic = req.body.user.profilepic || null;
+    phone = req.body.user.phone || null,
+    street = req.body.user.street  || null,
+    city = req.body.user.city || null,
+    state = req.body.user.state || null,
+    zip = req.body.user.zip  || null,
+    geoloc = req.body.user.geoloc || null,
+    profilepic = req.body.user.profilepic || null;
+
   db.addUserProfile(
     userid,
     phone,
@@ -125,8 +122,9 @@ router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var rating = 5;
 
   db.addGame(title, platform, rating, description, function(success){
-    console.log('adding', title, 'on', platform, 'to offerings');
+
     db.addOffering(req.user.id, title, platform, condition);
+
     res.sendStatus(201);
   });
 
@@ -135,15 +133,9 @@ router.post('/addtoofferings', auth.checkUser, function(req, res, next){
 router.post('/searchofferings', function(req, res, next){
   var game = req.body.game;
 
-  db.searchOffering("Hello Kitty Combat Assault Unit", function(results){
-    console.log('results offerings game:',results);
-
-  });
-
-  console.log('searching offering for ',req.body.game);
   if(game){
     db.searchOffering(game, function(results){
-      console.log('results offerings :',results);
+
       res.json({results: results});
     });
   }else {
@@ -159,8 +151,9 @@ router.post('/addtoseeking', auth.checkUser, function(req, res, next){
   var rating = 5;
 
   db.addGame(title, platform, rating, description, function(success){
-    console.log('adding', title, 'on', platform, 'to seeking');
+
     db.addSeeking(req.user.id, title, platform);
+
     res.sendStatus(201);
   });
 
@@ -168,9 +161,10 @@ router.post('/addtoseeking', auth.checkUser, function(req, res, next){
 
 router.post('/searchseeking', auth.checkUser, function(req, res, next){
   var game = req.body.game;
-  console.log('searching seeking for ',req.body.game);
+
   if(game){
     db.searchSeeking(game, function(results){
+
       res.json({results: results});
     });
   }else {
