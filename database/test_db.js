@@ -11,7 +11,7 @@ app.listen(PORT,function(){
 });
 
 db.addUser('test@test.com', 'somedude', 'hashed', function (data){
-	console.log('add user: ', data);
+	// console.log('add user: ', data);
 	return data;
 });
 
@@ -56,9 +56,29 @@ db.addOffering(1, 'game1', 'xbox', 'great', function (data) {
 	return data;
 });
 
+db.addOffering(2, 'game2', 'ps3', 'great', function (data) {
+  //console.log('add offering: ', data);
+  return data;
+});
+
+db.addOffering(3, 'game3', 'wii', 'great', function (data) {
+  //console.log('add offering: ', data);
+  return data;
+});
+
 db.searchOffering('game1', function (data) {
-	//console.log('search offering: ', data);
+	console.log('search offering 1: ', data);
 	return data;
+});
+
+db.searchOffering('game2', function (data) {
+  console.log('search offering 2: ', data);
+  return data;
+});
+
+db.searchOffering('game3', function (data) {
+  console.log('search offering 3: ', data);
+  return data;
 });
 
 db.addSeeking(2, 'game2', 'ps3', 'fair', function (data) {

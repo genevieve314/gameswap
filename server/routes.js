@@ -160,7 +160,7 @@ router.post('/searchseeking', auth.checkUser, function(req, res, next){
   }
 });
 
-router.get('/getmessagesfrom', function(req, res, next){
+router.get('/getmessagesfrom', auth.checkUser, function(req, res, next){
   var userfrom = req.user.id;
 
   db.allMessagesByUserFrom(userfrom, function(results){
@@ -168,7 +168,7 @@ router.get('/getmessagesfrom', function(req, res, next){
   })
 });
 
-router.get('/getmessages', function(req, res, next){
+router.post('/getmessages', auth.checkUser, function(req, res, next){
   var userto = req.user.id;
 
   db.allMessagesByUserTo(userto, function(results){
@@ -177,9 +177,10 @@ router.get('/getmessages', function(req, res, next){
 })
 
 router.post('/addmessage', auth.checkUser, function(req, res, next){
+  console.log('req.body in server send message: ', req.body);
   var userfrom = req.user.id;
-  var userto = req.body.messages.to;
-  var message = req.body.messages.text;
+  var userto = req.body.message.to;
+  var message = req.body.message.text;
 
   db.addMessage(userfrom, userto, message);
 
