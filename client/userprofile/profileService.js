@@ -1,11 +1,11 @@
-angular.module('profile.service', [])  
+angular.module('profile.service', [])
 
 .factory('ProfileServices', function($http, $window){
 
 	var getProfileData = function(){
 		var token = $window.localStorage.getItem('com.gameswap');
 
-		console.log("token in getProfileData ", token);
+		// console.log("token in getProfileData ", token);
 
 
 		return $http({
@@ -14,7 +14,7 @@ angular.module('profile.service', [])
 			data: {token: token}
 		})
 		.then(function(resp){
-			console.log("resp in getProfileData ", resp);
+			// console.log("resp in getProfileData ", resp);
 			return resp.data;
 		}, function(error) {
   			console.error('ERROR in getProfileData: ', error);
@@ -28,8 +28,8 @@ angular.module('profile.service', [])
 
 		return $http({
 			method: 'POST',
-			url: '/addtoofferings',	
-			data: {game: game, token: token}      			
+			url: '/addtoofferings',
+			data: {game: game, token: token}
 		})
 		.then(function(resp){
 			return resp;
@@ -47,7 +47,7 @@ angular.module('profile.service', [])
 		return $http({
 			method: 'POST',
 		    url: '/addtoseeking',
-			data: {game: game, token: token}      			
+			data: {game: game, token: token}
 		})
 		.then(function(resp){
 			return resp;
@@ -73,8 +73,8 @@ angular.module('profile.service', [])
 		return $http({
 			method: 'PUT',
 		    url: '/profile/update',
-			data: {user: update, 
-				token: token}      			
+			data: {user: update,
+				token: token}
 		})
 		.then(function(resp){
 			return resp;
@@ -83,7 +83,7 @@ angular.module('profile.service', [])
 		})
 	}
 
-	/*       
+	/*
 	var getOfferingList = function($http){
 		var token = $window.localStorage.getItem('com.gameswap');
 		return $http({

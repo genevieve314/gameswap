@@ -44,9 +44,9 @@ module.exports = {
     });
   },
 
-  addUser: function (email, username, password, callback) {
-    var sql = 'INSERT into Users (email, username, password) values(?, ?, ?);';
-    var values = [email, username, password];
+  addUser: function (email, username, password, city, callback) {
+    var sql = 'INSERT into Users (email, username, password, city) values(?, ?, ?, ?);';
+    var values = [email, username, password, city];
 
 
     connection.query(sql, values, function(err){
