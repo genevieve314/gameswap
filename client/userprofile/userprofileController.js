@@ -13,7 +13,7 @@ angular.module('userprofile', [])
           userInfo.username = resp.username;
           userInfo.email = resp.email; 
           //userInfo.city = resp.city;  
-          userInfo.city = 'santa monica';
+          userInfo.city = resp.city || 'santa monica';
 
           if(resp.address) {
             userInfo.hasAddress = true;

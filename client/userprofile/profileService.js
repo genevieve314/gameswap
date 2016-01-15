@@ -7,6 +7,7 @@ angular.module('profile.service', [])
 
 		console.log("token in getProfileData ", token);
 
+
 		return $http({
 			method: 'POST',
 			url: '/profile',
