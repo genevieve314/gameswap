@@ -7,7 +7,7 @@ var bcrypt = require('bcrypt');
 
 var Promise = require('bluebird')
 
-Promise.promisifyAll(db);
+
 
 router.post('/signin',function(req, res, next){
   console.log('at signin');
@@ -95,10 +95,10 @@ router.put('/profile/update', auth.checkUser, function(req, res, next){
 
   var userid = req.session.userId;
 
-  db.addUserProfile(userid, phone, street, city, state, zip, geoloc, profilepic)
-  .then(function(){
-    res.sendStatus(201)
-  });
+  // addUserProfile(userid, phone, street, city, state, zip, geoloc, profilepic)
+  // .then(function(){
+  //   res.sendStatus(201)
+  // });
 
   var user = req.session.userId;
   res.sendStatus(201)
@@ -112,13 +112,11 @@ router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var description = 'default description';
   var rating = 5;
 
-  db.addGame(title, platform, rating, description)
-
-  console.log('adding', title, 'on', platform, 'to offerings');
-
-  db.addOffering(req.user.id, title, platform, condition);
-
-  res.sendStatus(201);
+  db.addGame(title, platform, rating, description, function(success){
+    console.log('adding', title, 'on', platform, 'to offerings');
+    db.addOffering(req.user.id, title, platform, condition);
+    res.sendStatus(201);
+  });
 
 });
 
@@ -128,7 +126,7 @@ router.post('/searchofferings', function(req, res, next){
   if(game){
     db.searchOffering(game, function(results){
       console.log('results offerings :',results);
-      // res.json({results: results});
+      res.json({results: results});
     });
   }else {
     res.sendStatus(500);
@@ -142,13 +140,11 @@ router.post('/addtoseeking', auth.checkUser, function(req, res, next){
   var description = 'default description';
   var rating = 5;
 
-  db.addGame(title, platform, rating, description);
-
-  console.log('adding', title, 'on', platform, 'to seeking');
-
-  db.addSeeking(req.user.id, title, platform);
-
-  res.sendStatus(201);
+  db.addGame(title, platform, rating, description, function(success){
+    console.log('adding', title, 'on', platform, 'to seeking');
+    db.addSeeking(req.user.id, title, platform);
+    res.sendStatus(201);
+  });
 
 });
 
