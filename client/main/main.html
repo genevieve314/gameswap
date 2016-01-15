@@ -1,49 +1,69 @@
 <section ng-controller='MainController as main'>
   <header class='jumbotron'>
     <h3 class='pull-left'>GameSwap</h3>
-    <a class='pull-right' ui-sref='signin'>Sign In</a> <br>
+    <a class='pull-right' ui-sref='signin'>Sign In</a>
+    <br>
     <a class='pull-right' ui-sref='userprofile'>List a Swap</a>
     <h2 class='text-center'>
       Get the game you want, for the game you have.
     </h1>
-    <div class='text-center' >
+    <div class='text-center'>
       <form name='searchForm' ng-submit='searchForm.$valid && main.searchOfferings(game)' novalidate>
         <input type='text' ng-model='game' placeholder='What game do you want?' required/>
       </div>
     </form>
   </header>
   <div class='container-fluid'>
-    <div ng-if='main.results.length | orderBy:"[game.platform, distance]"'>
-      <div class='text-center'>
-        There are {{main.results.length}} gamers near you who have {{main.results[0].title}}. The closest one is:
+    <div ng-if='!main.token && main.results.length | orderBy:"[game.platform]"'>
+      <div class='text-center' ng-show='main.hasPlaystation === true'>
+        There are
+        {{main.psGames.length}}
+        gamers who want to swap
+        {{main.psGames[0].title}}
+        ({{main.psGames[0].platform}}).
       </div>
       <div class='col-md-4 text-center' ng-show='main.hasPlaystation === true'>
-        Username: {{main.psGames[0].username}} <br>
-        Score: {{main.psGames[0].game.score}} <br>
-        Platform: {{main.psGames[0].platform}} <br>
-        Distance: {{main.psGames[0].distance}} Miles <br>
-        <img class='boxart' ng-src='{{main.psGames[0].game.image}}'> <br>
+        <img class='boxart' ng-src='{{main.psGames[0].thumbnail}}'>
+        <br>
         <button ng-click='main.displayPlaystation()'>PS4</button>
         <button ng-click='main.displayXbox()'>Xbox One</button>
-        <!-- <a onclick='main.addRecipient({{main.psGames[0].name}})' ui-sref='messages'>Send a Message to Swap Now</a> -->
-        <!-- TODO: instead of this link have a swap button that sends auto message to other user -->
+      </div>
+      <div class='text-center' ng-show='main.hasXbox === true'>
+        There are
+        {{main.xboxGames.length}}
+        gamers who want to swap
+        {{main.xboxGames[0].title}}
+        ({{main.xboxGames[0].platform}}).
       </div>
       <div class='col-md-4 text-center' ng-show='main.hasXbox === true'>
-        Username: {{main.xboxGames[0].username}} <br>
-        Score: {{main.xboxGames[0].game.score}} <br>
-        Platform: {{main.xboxGames[0].platform}} <br>
-        Distance: {{main.xboxGames[0].distance}} Miles <br>
-        <img class='boxart' ng-src='{{main.xboxGames[0].game.image}}'> <br>
+        <img class='boxart' ng-src='{{main.xboxGames[0].thumbnail}}'>
+        <br>
         <button ng-click='main.displayPlaystation()'>PS4</button>
         <button ng-click='main.displayXbox()'>Xbox One</button>
-        <!-- <a onclick='main.addRecipient({{main.xboxGames[0].name}})' ui-sref='messages'>Send a Message to Swap Now</a> -->
       </div>
-      <div class = 'col-md-8'>
-        <!-- TODO: Change to Google Maps API and use geolocation -->
-        <img class = 'center-block' ng-src='http://www.destination360.com/north-america/us/california/santa-monica/best-western-gateway-hotel-santa-monica-map.gif'>
+      <div class='col-md-4'>
+        <a class='text-center' ui-sref='signup'>Sign up</a>
+      </div>
+    </div>
+    <div ng-if='main.token && main.swaps.length'>
+      <div class='col-md-4 text-center'>
+        Username:
+        {{main.swaps[0].username}}
+        <br>
+        <img class='boxart' ng-src='{{main.swaps[0].thumbnail}}'>
+        <br>
+      </div>
+      <div class='col-md-4'>
+        <button class='text-center' onclick='main.addRecipient({{main.swaps[0].username}})' ui-sref='messages'>Swap!</button>
+      </div>
+      <div class='col-md-4 text-center' ng-show='main.hasXbox === true'>
+        Username:
+        {{main.swaps[1].username}}
+        <br>
+        <img class='boxart' ng-src='{{main.swaps[1].thumbnail}}'>
+        <br>
       </div>
     </div>
     <div class='text-center' ng-if='main.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
-    <a class='pull-right' ui-sref='signup' ng-show='main.results.length'>Sign up</a>
   </div>
 </section>
