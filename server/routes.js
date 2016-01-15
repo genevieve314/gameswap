@@ -72,6 +72,7 @@ router.post('/profile', auth.checkUser, function(req, res, next){
   db.findUser(req.user.email,function(info){
 
     info = info[0];
+    userInfo.id = info['id'];
     userInfo.firstname = info['firstname'];
     userInfo.lastname = info['lastname'];
     userInfo.username = info['username'];
@@ -122,6 +123,12 @@ router.post('/addtoofferings', auth.checkUser, function(req, res, next){
 
 router.post('/searchofferings', function(req, res, next){
   var game = req.body.game;
+
+  db.searchOffering("Hello Kitty Combat Assault Unit", function(results){
+    console.log('results offerings game:',arguments[0],results);
+
+  });
+
   console.log('searching offering for ',req.body.game);
   if(game){
     db.searchOffering(game, function(results){
