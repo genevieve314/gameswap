@@ -9,14 +9,11 @@ angular.module('auth.service', [])
 			url: '/signup',
 			data: userData
 		}).then(function(resp) {
-			//console.log('resp ', resp);
-
 			$window.localStorage.setItem('com.gameswap', resp.data.token); 
 
 			return resp.data.token;   
 		}, function(error) {
-  			console.error('Sign up ERROR!!! ', error);
-  
+  			console.error('Sign up ERROR!!! ', error); 
 		})
 	};
 
@@ -27,13 +24,11 @@ angular.module('auth.service', [])
 			url: '/signin',
 			data: {user: userData}
 		}).then(function(resp) {
-			//console.log('resp ', resp);
-
 			$window.localStorage.setItem('com.gameswap', resp.data.token); 
 			
 			return resp.data.token;  
 		}).catch(function(error) {
-  			console.error('ERROR!!! Redirecting to signin ', error);
+  			console.error('Sign in ERROR!!! Redirecting... ', error);
   			$location.path('/signin');
   								
 		})

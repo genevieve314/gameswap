@@ -26,9 +26,6 @@ angular.module('userprofile', [])
           userInfo.gamesOffered = resp.offerings;
           userInfo.gamesSeeking = resp.seeking;
 
-        //  this.getOffering();
-        //  this.getSeeking();
-
         });
     };
 
@@ -47,7 +44,7 @@ angular.module('userprofile', [])
         .then(function(resp){
           console.log("resp in submitUpdate: ", resp);
 
-          setTimeout(loadProfile, 1000);// re-render the profile
+          setTimeout(loadProfile, 1000);
 
         });
       this.toggleUpdate();
@@ -61,7 +58,7 @@ angular.module('userprofile', [])
   			}).then(function(resp){
           console.log('resp in this.addOffer promise: ', resp);
 
-          setTimeout(loadProfile, 1000);// re-render the library
+          setTimeout(loadProfile, 1000);
 
         });
   	};
@@ -73,7 +70,7 @@ angular.module('userprofile', [])
         }).then(function(resp){
           console.log('resp in this.addSeek promise: ', resp);
 
-          setTimeout(loadProfile, 1000); // re-render the library
+          setTimeout(loadProfile, 1000);
         });
   	};
 
@@ -92,7 +89,7 @@ angular.module('userprofile', [])
         this.gamesOffered.push({
           title: game.title,
           platform: game.platform,
-          condition: game.condition || 'terrible'   
+          condition: game.condition
         });
       };
     };
