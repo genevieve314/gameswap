@@ -71,7 +71,8 @@ angular.module('userprofile', [])
           console.log('resp in this.addOffer promise: ', resp);
           console.log('calling this.loadProfile in this.addOffer promise: ', resp);
 
-          loadProfile(); // re-render the library
+          setTimeout(loadProfile, 1000);// re-render the library
+          // didn't test this, but to call it only once, you have to have the () after loadProfile.
 
         });
   	};
@@ -84,7 +85,7 @@ angular.module('userprofile', [])
           console.log('resp in this.addSeek promise: ', resp);
           console.log('calling this.loadProfile in this.addSeek promise: ');
 
-          loadProfile(); // re-render the library
+          setTimeout(loadProfile, 1000); // re-render the library
         });
   	};
 
