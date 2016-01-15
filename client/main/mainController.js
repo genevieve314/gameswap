@@ -69,6 +69,7 @@ angular
     this.getUserInfo = function() {
       ProfileServices.getProfileData()
         .then(function(data) {
+          console.log('data',data);
           this.userInfo = data;
         }.bind(this), function(error) {
           throw error;
@@ -98,7 +99,7 @@ angular
         }
       }
     };
-    if (this.token) {
+    if (this.userInfo) {
       this.compareUserSeekingWithAllOfferings(this.userInfo);
     }
     this.compareUserOfferingWithEachMatch = function(userInfo) {
@@ -117,7 +118,7 @@ angular
         }
       }
     };
-    if (this.token) {
+    if (this.userInfo) {
       this.compareUserOfferingWithEachMatch(this.userInfo);
     }
   });
