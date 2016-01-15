@@ -9,6 +9,7 @@ angular.module('auth.signup', [])
 		user.username = signup.username;
 	 	user.password = signup.password;
 	 	user.email = signup.email;
+	 	user.city = signup.city;
 	 	console.log(user);
 	 	AuthServices.submitNewUser({user: user})
 	 		.then(function(token){

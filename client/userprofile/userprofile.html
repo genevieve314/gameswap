@@ -4,29 +4,26 @@
 		<div id='profile-info'>
 			<h3>username: {{ profile.username }}</h3>
 			<h3>email: {{ profile.email }}</h3>
+			<h3>city: {{ profile.city }}</h3>
 
-<!--  Uncomment when update profile functionality is added on backend
 
-			<div ng-show='profile.hasAddress === true'>
-				<h3>address:</h3> {{ profile.address }}
+			<div ng-show='profile.updateClicked === false'>
+				<h3>Click here to update your profile:</h3><button ng-click='profile.toggleUpdate()'>Update</button>
 			</div>
 
-			<div ng-show='profile.hasAddress === false'>
-				<h3>Add your address information:</h3> 
+			<div ng-show='profile.updateClicked === true'>
 				<input type='text' ng-model='profile.address.street' placeholder="Street"/><br>
-				<input type='text' ng-model='profile.address.apt' placeholder="Apartment #"/><br>
 				<input type='text' ng-model='profile.address.city' placeholder="City"/><br>
 				<input type='text' ng-model='profile.address.state' placeholder="State"/><br>
 				<input type='text' ng-model='profile.address.zip' placeholder="Zip Code"/><br>
-				<button ng-click='profile.submitAddress(profile.address)'>Update</button>
+				<button ng-click='profile.submitUpdate(profile.address)'>Submit edits</button>
 			</div>
 
--->
 
 			<h3>games you are currently offering: </h3>
 			<br>
 			<div ng-repeat='game in profile.gamesOffered'>
-				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   <!-- Condition: {{ game.condition }} --></div>
+				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   <!--Condition: {{ game.condition }}--></div>
 			</div>
 			<br>
 			<div>

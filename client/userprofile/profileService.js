@@ -4,7 +4,7 @@ angular.module('profile.service', [])
 
 	var getProfileData = function(){
 		var token = $window.localStorage.getItem('com.gameswap');
-		console.log("token in getProfileData ", token);
+		//console.log("token in getProfileData ", token);
 
 		return $http({
 			method: 'POST',
@@ -18,35 +18,6 @@ angular.module('profile.service', [])
   			console.error('ERROR in getProfileData: ', error);
 		})
 	};
-/*
-	var getOfferingList = function($http){
-		var token = $window.localStorage.getItem('com.gameswap');
-		return $http({
-			method: 'POST',
-			url: null   // ASK ERIC ABOUT DB ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
-			data: {token: token}
-		})
-		.then(function(resp){
-			return resp.data;
-		}, function(error) {
-  			console.error('ERROR in getOfferingList: ', error);
-		})
-	};*/
-/*
-	var getSeekingList = function($http){
-		var token = $window.localStorage.getItem('com.gameswap');
-
-		return $http({
-			method: 'POST',
-			// url: ''  // ASK ERIC ABOUT ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
-			data: {token: token}
-		})
-		.then(function(resp){
-			return resp.data;
-		}, function(error) {
-  			console.error('ERROR in getSeekingList: ', error);
-		})
-	};*/
 
 	var addGameOffering = function(game){
 		var token = $window.localStorage.getItem('com.gameswap');
@@ -83,12 +54,70 @@ angular.module('profile.service', [])
 		})
 	};
 
+	var updateProfile = function(data){
+		var update = {
+			phone: data.phone || "",
+			street: data.street || "",
+			city: data.city || "",
+			state: data.state || "",
+			zip: data.zip || "",
+			geoloc: data.geoloc || "",
+			profilepic: data.profilepic || ""
+		};
+		console.log("update object in updateProfile ", update);
+
+		var token = $window.localStorage.getItem('com.gameswap');
+
+		return $http({
+			method: 'PUT',
+		    url: '/profile/update',
+			data: {user: update, 
+				token: token}      			
+		})
+		.then(function(resp){
+			return resp;
+		}, function(error) {
+  			console.error('ERROR!!! ', error);
+		})
+	}
+
+	/*       
+	var getOfferingList = function($http){
+		var token = $window.localStorage.getItem('com.gameswap');
+		return $http({
+			method: 'POST',
+			url: null   // ASK ERIC ABOUT DB ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+			data: {token: token}
+		})
+		.then(function(resp){
+			return resp.data;
+		}, function(error) {
+  			console.error('ERROR in getOfferingList: ', error);
+		})
+	};*/
+/*
+	var getSeekingList = function($http){
+		var token = $window.localStorage.getItem('com.gameswap');
+
+		return $http({
+			method: 'POST',
+			// url: ''  // ASK ERIC ABOUT ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+			data: {token: token}
+		})
+		.then(function(resp){
+			return resp.data;
+		}, function(error) {
+  			console.error('ERROR in getSeekingList: ', error);
+		})
+	};*/
+
 	return {
 		getProfileData: getProfileData,
 		//getOfferingList: getOfferingList,
 		//getSeekingList: getSeekingList,
 		addGameOffering: addGameOffering,
-		addGameSeeking: addGameSeeking
+		addGameSeeking: addGameSeeking,
+		updateProfile: updateProfile
 	};
 
 
