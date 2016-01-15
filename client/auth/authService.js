@@ -10,6 +10,9 @@ angular.module('auth.service', [])
 			data: userData
 		}).then(function(resp) {
 			//console.log('resp ', resp);
+
+			$window.localStorage.setItem('com.gameswap', resp.data.token); 
+
 			return resp.data.token;   
 		}, function(error) {
   			console.error('Sign up ERROR!!! ', error);
@@ -25,6 +28,9 @@ angular.module('auth.service', [])
 			data: {user: userData}
 		}).then(function(resp) {
 			//console.log('resp ', resp);
+
+			$window.localStorage.setItem('com.gameswap', resp.data.token); 
+			
 			return resp.data.token;  
 		}).catch(function(error) {
   			console.error('ERROR!!! Redirecting to signin ', error);

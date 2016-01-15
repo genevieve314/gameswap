@@ -11,9 +11,13 @@ angular.module('auth.signin', [])
 	 	AuthServices.checkSignin(user)
 	 		.then(function(token){
 	 		  if(token){
-	 			console.log('successfully submited to DB');
 	 			console.log('the token is: ', token);
-	 			$window.localStorage.setItem('com.gameswap', token); 
+	 			//$window.localStorage.setItem('com.gameswap', token); 
+
+			// using setTimeout till we get the async hammered out
+
+        		//setTimeout($location.path('/userprofile'), 500);
+
         		$location.path('/userprofile');
         	  }	
 	 		})

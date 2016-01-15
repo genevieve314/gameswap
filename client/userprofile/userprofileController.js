@@ -11,16 +11,17 @@ angular.module('userprofile', [])
       ProfileServices.getProfileData()
         .then(function(resp) {
           userInfo.username = resp.username;
-          userInfo.email = resp.email; 
-          //userInfo.city = resp.city;  
+          userInfo.email = resp.email;   
           userInfo.city = resp.city || 'santa monica';
 
+/* commenting out since we're leaving out full address for the time being
           if(resp.address) {
             userInfo.hasAddress = true;
             userInfo.address = resp.address;
           } else {
             userInfo.hasAddress = false;
           }
+*/         
 
           userInfo.gamesOffered = resp.offerings;
           userInfo.gamesSeeking = resp.seeking;
@@ -32,7 +33,12 @@ angular.module('userprofile', [])
     };
 
     this.toggleUpdate = function(){
-      this.updateClicked = true;
+      if(!this.updateClicked) {
+        this.updateClicked = true;
+      } else {
+        this.updateClicked = false;
+      }
+
     }
 
     this.submitUpdate = function(update) {  	
@@ -43,7 +49,8 @@ angular.module('userprofile', [])
 
           setTimeout(loadProfile, 1000);// re-render the profile
 
-        })
+        });
+      this.toggleUpdate();
     };
 
   	this.addOffer = function(game) {

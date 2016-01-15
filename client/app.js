@@ -53,10 +53,6 @@ angular
 
 })
   .factory('AttachTokens', function ($window) {
-  // this is an $httpInterceptor
-  // its job is to stop all out going request
-  // then look in local storage and find the user's token
-  // then add it to the header so the server can validate the request
   var attach = {
     request: function (object) {
       var jwt = $window.localStorage.getItem('com.gameswap');
