@@ -62,7 +62,7 @@ router.post('/profile', auth.checkUser, function(req, res, next){
   // var user = req.session.email;
   var userInfo = {};
   var offerings, seeking;
-  console.log()
+  console.log('/profile')
   db.allOfferingByUser(req.user.id,function(data){
     offerings = data;
   });
