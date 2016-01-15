@@ -93,15 +93,25 @@ router.post('/profile', auth.checkUser, function(req, res, next){
 });
 
 router.put('/profile/update', auth.checkUser, function(req, res, next){
+  var userid = req.user.id,
+  phone = req.body.user.phone || null,
+  street = req.body.user.street  || null,
+  city = req.body.user.city || null,
+  state = req.body.user.state || null,
+  zip = req.body.user.zip  || null,
+  geoloc = req.body.user.geoloc || null,
+  profilepic = req.body.user.profilepic || null;
+  db.addUserProfile(
+    userid,
+    phone,
+    street,
+    city,
+    state,
+    zip,
+    geoloc,
+    profilepic
+  );
 
-  var userid = req.session.userId;
-
-  // addUserProfile(userid, phone, street, city, state, zip, geoloc, profilepic)
-  // .then(function(){
-  //   res.sendStatus(201)
-  // });
-
-  var user = req.session.userId;
   res.sendStatus(201)
 
 });
@@ -125,7 +135,7 @@ router.post('/searchofferings', function(req, res, next){
   var game = req.body.game;
 
   db.searchOffering("Hello Kitty Combat Assault Unit", function(results){
-    console.log('results offerings game:',arguments[0],results);
+    console.log('results offerings game:',results);
 
   });
 
