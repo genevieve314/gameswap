@@ -39,13 +39,14 @@ router.post('/signup',function(req, res, next){
   var username = req.body.user.username;
   var email = req.body.user.email;
   var password = req.body.user.password;
+  var city = req.body.user.city;
   // console.log('BODY>> ',req.body)
   db.findUser(email,function(data){
     if(!data.length){
       var hash = bcrypt.hashSync(password,10);
-      db.addUser(email, username, hash, function(user){
+      db.addUser(email, username, hash, city, function(user){
         // console.log('user', user.pop());
-        id =  user['LAST_INSERT_ID()'];
+        id =  user[0].id;
         req.session.email = email;
         auth.authenticateUser(id, email, res);
       });
