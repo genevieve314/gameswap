@@ -5,21 +5,8 @@ var db = require('../database/database');
 
 var bcrypt = require('bcrypt');
 
+var Promise = require('bluebird')
 
-router.post('/searchgames',function(req, res, next){
-  /*
-  search object:
-  {
-    geo: {lat, lng} || null,
-    country: someCountry,
-    state: state,
-    game: {title, platform};
-  }
-  */
-  var location = req.body.location;
-  console.log('route: ', req.url);
-  res.sendStatus(200);
-});
 
 
 router.post('/signin',function(req, res, next){
@@ -105,7 +92,14 @@ router.post('/profile', auth.checkUser, function(req, res, next){
 });
 
 router.put('/profile/update', auth.checkUser, function(req, res, next){
-  //TODO
+
+  var userid = req.session.userId;
+
+  // addUserProfile(userid, phone, street, city, state, zip, geoloc, profilepic)
+  // .then(function(){
+  //   res.sendStatus(201)
+  // });
+
   var user = req.session.userId;
   res.sendStatus(201)
 
@@ -114,17 +108,15 @@ router.put('/profile/update', auth.checkUser, function(req, res, next){
 router.post('/addtoofferings', auth.checkUser, function(req, res, next){
   var title = req.body.game.title
   var platform = req.body.game.platform
-  var condition = 'good';
+  var condition = 'default condition';
   var description = 'default description';
   var rating = 5;
 
-  db.addGame(title, platform, rating, description);
-
-  console.log('adding', title, 'on', platform, 'to offerings');
-
-  db.addOffering(req.user.id, title, platform, condition);
-
-  res.sendStatus(201);
+  db.addGame(title, platform, rating, description, function(success){
+    console.log('adding', title, 'on', platform, 'to offerings');
+    db.addOffering(req.user.id, title, platform, condition);
+    res.sendStatus(201);
+  });
 
 });
 
@@ -145,14 +137,14 @@ router.post('/searchofferings', function(req, res, next){
 router.post('/addtoseeking', auth.checkUser, function(req, res, next){
   var title = req.body.game.title
   var platform = req.body.game.platform;
+  var description = 'default description';
+  var rating = 5;
 
-  db.addGame(title, platform, rating, description);
-
-  console.log('adding', title, 'on', platform, 'to seeking');
-
-  db.addSeeking(req.user.id, title, platform);
-
-  res.sendStatus(201);
+  db.addGame(title, platform, rating, description, function(success){
+    console.log('adding', title, 'on', platform, 'to seeking');
+    db.addSeeking(req.user.id, title, platform);
+    res.sendStatus(201);
+  });
 
 });
 
@@ -192,5 +184,6 @@ router.post('/addmessage', auth.checkUser, function(req, res, next){
   db.addMessage(userfrom, userto, message);
 
 });
+
 
 module.exports = router;
