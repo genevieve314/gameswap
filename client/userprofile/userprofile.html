@@ -2,37 +2,37 @@
 	<h1>Your GameSwap user profile:</h1>
 	<div ng-controller='ProfileController as profile'>
 		<div id='profile-info'>
-			<h3>username: {{ profile.username }}</h3>
-			<h3>email: {{ profile.email }}</h3>
+			<h4>username: {{ profile.username }}</h4>
+			<h4>email: {{ profile.email }}</h4>
+			<h4 ng-show='profile.city'>city: {{ profile.city }}</h4>
+			<br>
 
-<!--  Uncomment when update profile functionality is added on backend
-
-			<div ng-show='profile.hasAddress === true'>
-				<h3>address:</h3> {{ profile.address }}
+			<div ng-show='profile.updateClicked === false'>
+				<button ng-click='profile.toggleUpdate()'>Edit</button>
 			</div>
 
-			<div ng-show='profile.hasAddress === false'>
-				<h3>Add your address information:</h3> 
-				<input type='text' ng-model='profile.address.street' placeholder="Street"/><br>
-				<input type='text' ng-model='profile.address.apt' placeholder="Apartment #"/><br>
-				<input type='text' ng-model='profile.address.city' placeholder="City"/><br>
+			<div ng-show='profile.updateClicked === true'>
+				<input type='text' ng-model='profile.address.street' placeholder="Street" /><br>
+				<input type='text' ng-model='profile.address.city' placeholder="City" /><br>
 				<input type='text' ng-model='profile.address.state' placeholder="State"/><br>
 				<input type='text' ng-model='profile.address.zip' placeholder="Zip Code"/><br>
-				<button ng-click='profile.submitAddress(profile.address)'>Update</button>
+				<input type='text' ng-model='profile.address.phone' placeholder="(123) 555-5555"/><br>
+				<br>
+
+				<button ng-click='profile.submitUpdate(profile.address)'>Submit edits</button>
 			</div>
 
--->
 
 			<h3>games you are currently offering: </h3>
 			<br>
 			<div ng-repeat='game in profile.gamesOffered'>
-				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   <!-- Condition: {{ game.condition }} --></div>
+				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   <!--Condition: {{ game.condition }}--></div>
 			</div>
 			<br>
 			<div>
-				Add a new title: <input type="text" ng-model='profile.gameToOffer.title' /> 
-				Platform: <select ng-model='profile.gameToOffer.platform' >
-      				<option value="">Please Choose</option>
+				Add a new title: <input type="text" ng-model='profile.gameToOffer.title' required/> 
+				<select ng-model='profile.gameToOffer.platform' >
+      				<option value="">Platform:</option>
       				<option value="Playstation 4">PlayStation 4</option>
       				<option value="Xbox One">Xbox One</option>
     			</select>
@@ -57,9 +57,9 @@
 			</div>
 			<br>
 			<div>
-				Add a new title: <input type="text" ng-model='profile.gameToSeek.title' />
-					Platform: <select ng-model='profile.gameToSeek.platform' >
-      				<option value="">Please Choose</option>
+				Add a new title: <input type="text" ng-model='profile.gameToSeek.title' required />
+					<select ng-model='profile.gameToSeek.platform' >
+      				<option value="">Platform:</option>
       				<option value="Playstation 4">PlayStation 4</option>
       				<option value="Xbox One">Xbox One</option>
     			</select>
