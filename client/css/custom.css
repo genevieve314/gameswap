@@ -1,9 +1,63 @@
+a {
+	color: white;
+}
+
+h2 {
+	color: white;
+}
+
 input {
   width: 50%;
   vertical-align: middle;
 }
 
+.jumbotron {
+  position: relative;
+  background: black url("http://www.walleo.co/wp-content/uploads/2016/01/black_video_game_wallpapers_hd_wg4.jpg") center center;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  overflow: hidden;
+}
+
 .boxart {
   max-width: 200px;
   max-height: 200px;
+}
+
+.head-space-xl {
+	padding-top: 300px;
+}
+
+.head-space-lg {
+	padding-top: 100px;
+}
+
+.head-space-md {
+	padding-top: 25px;
+}
+
+.no-head-space {
+	padding-top: 0px;
+}
+
+.foot-space-xl {
+	padding-bottom: 300px;
+}
+
+.foot-space-lg {
+	padding-bottom: 100px;
+}
+
+.foot-space-md {
+	padding-bottom: 25px;
+}
+
+.foot-space-sm {
+	padding-bottom: 10px;
+}
+
+.nav {
+	background-color: black;
+	color: white;
 }
