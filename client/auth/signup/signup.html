@@ -1,10 +1,10 @@
 <div id='container'>
 	<div ng-controller='SignupController as signup'>
 		<h1> This is the sign UP view</h1>
-    		Email: <input type='text' ng-model='signup.email' /><br><br>
-        Username: <input type='text' ng-model='signup.username' /><br><br>
-    		Password: <input type="password" ng-model='signup.password' /><br><br>  
-        City: <input type="text" ng-model='signup.city' /><br><br>    		
+    		Email: <input type='email' ng-model='signup.email' required /><br><br>
+        Username: <input type='text' ng-model='signup.username' required /><br><br>
+    		Password: <input type="password" ng-model='signup.password' required/><br><br>  
+        City: <input type="text" ng-model='signup.city' required/><br><br>    		
     		<button ng-click='signup.submit(signup)'>signup</button>
   		<p>Already have a GameSwap account? <a ui-sref="signin">Click here to sign in</a></p>
   		

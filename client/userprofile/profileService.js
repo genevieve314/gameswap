@@ -4,7 +4,8 @@ angular.module('profile.service', [])
 
 	var getProfileData = function(){
 		var token = $window.localStorage.getItem('com.gameswap');
-		//console.log("token in getProfileData ", token);
+
+		console.log("token in getProfileData ", token);
 
 		return $http({
 			method: 'POST',
