@@ -40,7 +40,7 @@ router.post('/signup',function(req, res, next){
   var email = req.body.user.email;
   var password = req.body.user.password;
   // console.log('BODY>> ',req.body)
-  db.findUser(email,function(data){
+  db.findUser(email, function(data){
     if(!data.length){
       var hash = bcrypt.hashSync(password,10);
       db.addUser(email, username, hash, function(user){

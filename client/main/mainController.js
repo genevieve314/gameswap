@@ -1,6 +1,6 @@
 angular
   .module('main.controller', [])
-  .controller('MainController', function(MainService) {
+  .controller('MainController', function(MainService, $window) {
     if ($window.localStorage.getItem('com.gameswap')) {
       this.token = $window.localStorage.getItem('com.gameswap');
     }
