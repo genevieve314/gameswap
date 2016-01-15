@@ -7,6 +7,14 @@ var db_config = {
   database: 'gameswap',
   multipleStatements: true
 };
+var db_test = {
+  host: 'localhost',
+  port: '3306',
+  user: 'root',
+  password: 'password',
+  database: 'gameswap',
+  multipleStatements: true
+}
 
 connection = mysql.createConnection(db_config);
 
@@ -75,6 +83,8 @@ module.exports = {
           if (err) console.error('error 2 in db addGame: ', err);
           else callback(true);
         })
+      } else {
+        callback(false);
       }
     });
   },
@@ -103,7 +113,7 @@ module.exports = {
 
     connection.query(check, checkValues, function (err, data) {
       if (err) console.error('error 1 in db addSeeking: ', err);
-      console.log('game id in addSeeking: ', data[0].id);
+      // console.log('game id in addSeeking: ', data[0].id);
       insertValues.push(data[0].id);
 
       connection.query(insert, insertValues, function(err, data){
@@ -115,7 +125,6 @@ module.exports = {
 
   searchOffering: function (title, callback) {
     var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Offering.game_condition, Offering.createdat, Users.username, Users.id, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Offering, Users WHERE Games.title = '" + title + "' AND Games.id = Offering.gameid AND Offering.userid = Users.id;";
-    var values = title;
 
     connection.query(sql, function (err, data) {
       if (err) console.error('error in db searchOffering: ', err);
@@ -165,7 +174,7 @@ module.exports = {
 
     connection.query(sql, userid, function (err, data) {
       if (err) console.error('error in db allMessagesByUserFrom: ', err);
-      console.log('data in allMessagesByUserFrom: ', data);
+      // console.log('data in allMessagesByUserFrom: ', data);
       callback(data);
     })
   },
@@ -175,7 +184,7 @@ module.exports = {
 
     connection.query(sql, userid, function (err, data) {
       if (err) console.error('error in db allMessagesByUserFrom: ', err);
-      console.log('data in allMessagesByUserTo: ', data);
+      // console.log('data in allMessagesByUserTo: ', data);
       callback(data);
     })
   }

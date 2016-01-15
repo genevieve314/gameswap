@@ -1,11 +1,10 @@
 angular
   .module('messages.service', [])
-  .service('MessagesService', function() {
+  .service('MessagesService', function($http, $window) {
     this.sendMessage = function(message) {
+      console.log('inside post client sendMessage');
       var token = $window.localStorage.getItem('com.gameswap');
-      return $http.post('/addmessage', message, {
-          token: token
-        })
+      return $http.post('/addmessage', {message: message, token: token})
         .then(function(resp) {
           return resp.data;
         }.bind(this), function(error) {
@@ -13,7 +12,8 @@ angular
         }.bind(this));
     };
     this.getMessages = function() {
-      return $http.get('/getmessages')
+      var token = $window.localStorage.getItem('com.gameswap');
+      return $http.post('/getmessages', {token: token})
         .then(function(resp) {
           return resp.data;
         }.bind(this), function(error) {

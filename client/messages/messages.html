@@ -1,23 +1,25 @@
 <section ng-controller='MessagesController as messages'>
-  <form name="MessagesForm" ng-submit='MessagesForm.$valid && Messages.sendMessage(messageText, {{messages.to}})' novalidate>
+  <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, 1)' novalidate>
     <h4>Send a Message</h4>
     <p>To:
       {{messages.to}}</p>
     <p>From:
-      {{messages.from}}</p>
+      {{messages.username}}</p>
     <fieldset class="form-group">
-      <textarea class="form-control" placeholder="Send a message..." title="Message" ng-model='messageText'></textarea>
+      <textarea class="form-control" placeholder="Send a message..." title="Message" ng-model='messageText'/required></textarea>
     </fieldset>
     <fieldset class="form-group">
-      <input type="submit" class="btn btn-primary pull-right" value="Send Message"/>
+      <input type="submit" class="btn btn-primary pull-right" value="Send Message" />
     </fieldset>
   </form>
-  <blockquote ng-repeat='message in messages.messageHistory'>
+  <blockquote ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory'>
     <p>
-      {{message.to}}
+      From:
+      {{message.username}}
     </p>
     <p>
-      {{message.messageText}}
+      Message:
+      {{message.message}}
     </p>
   </blockquote>
 </section>
