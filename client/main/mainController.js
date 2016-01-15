@@ -1,7 +1,7 @@
 angular
   .module('main.controller', [])
-  .controller('MainController', function(MainService) {
-    if ($window.localStorage.getItem('com.gameswap')) {
+  .controller('MainController', function($window, MainService, ProfileServices, AuthServices) {
+    if (AuthServices.isAuth()) {
       this.token = $window.localStorage.getItem('com.gameswap');
     }
     this.searchOfferings = function(game) {
