@@ -15,8 +15,8 @@
 	    		<input type="password" ng-model='signin.password' class='form-control' required />
 	    	</div>
 	    	<p ng-show="signin.isInvalid" class='text-danger'>Username and/or password incorrect.</p>
-	    	<button ng-click='signin.submit(signin);' class="btn btn-default">sign in</button>
-
+	    	<!-- <button ng-click='signin.submit(signin);' class="btn btn-default">sign in</button> -->
+	    	<button type="submit" class="btn btn-primary" ng-disabled="signinForm.$invalid">Submit</button>
 	    </form>
 	</div>
 	

@@ -51,7 +51,8 @@ angular.module('userprofile', [])
     };
 
   	this.addOffer = function(game) {
-      ProfileServices.addGameOffering({
+      if(game.platform){
+        ProfileServices.addGameOffering({
   			  title: game.title,
   			  platform: game.platform,
           condition: game.condition
@@ -59,12 +60,18 @@ angular.module('userprofile', [])
           console.log('resp in this.addOffer promise: ', resp);
 
           setTimeout(loadProfile, 1000);
-
         });
+      } else {
+        console.log('ERROR: no platform chosen');
+        this.noOffPlatform = true;  // add to html
+        // TODO in profile.html add "please choose a platform"
+        // something like <p ng-show="signin.noOffPlatform" class='text-danger'>Please choose a platform.</p>
+      }
   	};
 
   	this.addSeek = function(game) {
-      ProfileServices.addGameSeeking({
+      if(game.platform){
+        ProfileServices.addGameSeeking({
           title: game.title,
           platform: game.platform //
         }).then(function(resp){
@@ -72,6 +79,12 @@ angular.module('userprofile', [])
 
           setTimeout(loadProfile, 1000);
         });
+      } else {
+        console.log('ERROR: no platform chosen');
+        this.noSeekPlatform = true;  // add to html
+        // TODO in profile.html add "please choose a platform"
+        // something like <p ng-show="signin.noSeekPlatform" class='text-danger'>Please choose a platform.</p>
+      }
   	};
 
   	this.signOut = function(){
