@@ -64,11 +64,13 @@ angular.module('userprofile', [])
       } else {
         console.log('ERROR: no platform chosen');
         this.noOffPlatform = true;         
+
       }
   	};
 
   	this.addSeek = function(game) {
       console.log('game obj in this.addSeek');
+
       if(game.platform){
         ProfileServices.addGameSeeking({
           title: game.title,
