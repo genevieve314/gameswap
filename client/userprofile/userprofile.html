@@ -37,6 +37,8 @@
 			</tr>
 		</table>
 
+<!--		
+
 		<form class='foot-space-md'>
 			<div class='form-group'>
 			Add a new title: 
@@ -48,7 +50,7 @@
 
 					<div class='col-md-2 nopadding'>
 						<select class="selectpicker form-control btn btn-default" type='button' title="Platform" ng-model='profile.gameToOffer.platform'>
-	      				<option value="">Platform</option>
+	      				<option value="">Please choose</option>
 	      				<option value="Playstation 4">PlayStation 4</option>
 	      				<option value="Xbox One">Xbox One</option>
 	    			</select>
@@ -62,9 +64,34 @@
   		</div>
 		</form>
 
+-->		
+
+		<form class='foot-space-lg' name="offerForm" ng-submit="profile.addOffer(profile.gameToOffer); profile.gameToOffer.title = ''; profile.gameToOffer.platform = ''" novalidate>
+			<div class="form-group" ng-class="{ 'has-error' : offerForm.title.$invalid && !offerForm.title.$pristine }">
+			Add a new title:
+			<div class='row'>
+				<div class='col-md-6 nopadding'>
+					<input type="text" name="title" class="form-control" ng-model="profile.gameToOffer.title" required />
+				</div>
+
+				<div class='col-md-2 nopadding'>
+					<select class="selectpicker btn btn-default form-control" role='button' ng-model='profile.gameToOffer.platform'>
+	    				<option value="">Platform</option>
+	    				<option value="Playstation 4">PlayStation 4</option>
+	    				<option value="Xbox One">Xbox One</option>
+	  				</select>
+	  				<p ng-show="profile.noOffPlatform" class='text-danger'>Please choose a platform.</p>
+	  			</div>
+				<div class='col-md-2 nopadding'>
+	  			<button type="submit" class="btn btn-primary" ng-disabled="offerForm.$invalid">add</button>
+	  			</div>
+  			</div>
+  		</div>
+		</form>
+
 		<h3>games you are currently seeking: </h3>
 		
-		<div = class'head-space-md'>
+		<div class='head-space-md'>
 			<table class='table borderless' ng-repeat='game in profile.gamesSeeking'>
 				<tr>
 					<td class='col-md-1'><b>Title:</b></td> <td class='col-md-2'>{{ game.title }}</td>
@@ -74,7 +101,7 @@
 		</div>
 
 		<br>
-
+<!--
 		<form class='foot-space-lg'>
 			<div class='form-group'>
 			Add a new title:
@@ -93,6 +120,30 @@
 				<div class='col-md-2 nopadding'>
 	  			<button class='btn btn-default form-control' ng-click="profile.addSeek(profile.gameToSeek); profile.gameToSeek=''">add</button>
 	  		</div>
+  		</div>
+		</form>
+	-->
+
+		<form class='foot-space-lg' name="seekForm" ng-submit="profile.addSeek(profile.gameToSeek); profile.gameToSeek.title = ''; profile.gameToSeek.platform = ''" novalidate>
+			<div class="form-group" ng-class="{ 'has-error' : seekForm.title.$invalid && !seekForm.title.$pristine }">
+			Add a new title:
+			<div class='row'>
+				<div class='col-md-6 nopadding'>
+					<input type="text" name="title" class="form-control" ng-model="profile.gameToSeek.title" required />
+				</div>
+
+				<div class='col-md-2 nopadding'>
+					<select class="selectpicker btn btn-default form-control" role='button' ng-model='profile.gameToSeek.platform'>
+	    				<option value="">Platform</option>
+	    				<option value="Playstation 4">PlayStation 4</option>
+	    				<option value="Xbox One">Xbox One</option>
+	  				</select>
+	  				<p ng-show="profile.noSeekPlatform" class='text-danger'>Please choose a platform.</p>
+	  			</div>
+				<div class='col-md-2 nopadding'>
+	  			<button type="submit" class="btn btn-primary" ng-disabled="seekForm.$invalid">add</button>
+	  			</div>
+  			</div>
   		</div>
 		</form>
 
