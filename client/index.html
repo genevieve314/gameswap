@@ -26,24 +26,16 @@
   <title>Game Swap</title>
 </head>
 
-<div class='container-fluid row nav head-space-md foot-space-sm'>
-  <div class='col-md-1'></div>
-  <a class='col-md-2' ui-sref='main'>GameSwap</a>
-  <a class='col-md-offset-6 col-md-1' ui-sref='signin'>Sign In</a>
-  <a class='col-md-1' ui-sref='userprofile'>List a Swap</a>
-  <div class='col-md-1'></div>
-</div>
-
 <body>
   <div class='row nav head-space-md foot-space-sm' ng-controller='IndexController as index'>
     <div class='col-md-1'></div>
-    <div class='col-md-2'>GameSwap</div>
-    <a class='col-md-offset-6 col-md-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
-    <div class='col-md-1'></div>
-    <a class='pull-right' ng-show='index.isAuth' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
-    <br>
-    <a class='pull-right' ng-show='index.isAuth' ui-sref='userprofile'>Profile</a>
+    <a ui-sref='main' class='col-md-2'>GameSwap</a>
+    <div class='col-md-6'></div>
+    <a class='col-md-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
+    <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
+    <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
   </div>
+
   <div ui-view></div>
 <footer>
   <!-- TODO: How It Works, Terms, Team/Contact Us-->
