@@ -66,6 +66,7 @@ angular.module('userprofile', [])
         this.noOffPlatform = true;  // add to html
         // TODO in profile.html add "please choose a platform"
         // something like <p ng-show="signin.noOffPlatform" class='text-danger'>Please choose a platform.</p>
+        
       }
   	};
 
@@ -84,6 +85,25 @@ angular.module('userprofile', [])
         this.noSeekPlatform = true;  // add to html
         // TODO in profile.html add "please choose a platform"
         // something like <p ng-show="signin.noSeekPlatform" class='text-danger'>Please choose a platform.</p>
+/* Also TODO:
+    <form name="seekForm" submit="profile.addSeek(profile.gameToSeek)" >
+      <div class="form-group" ng-class="{ 'has-error' : seekForm.title.$invalid && !seekForm.title.$pristine }">
+        <label>Title:</label>
+        <input type="text" name="title" class="form-control" ng-model="profile.gameToSeek.title" >
+        <p ng-show="seekForm.title.$error" class="text-danger">Please enter a game title.</p>
+      </div>
+    </form>
+
+    <form name="offerForm" submit="profile.addOffer(profile.gameToOffer)" >
+      <div class="form-group" ng-class="{ 'has-error' : offerkForm.title.$invalid && !offerForm.title.$pristine }">
+        <label>Title:</label>
+        <input type="text" name="title" class="form-control" ng-model="profile.gameToOffer.title" >
+        <p ng-show="offerForm.title.$error" class="text-danger">Please enter a game title.</p>
+      </div>
+    </form>
+
+      */
+
       }
   	};
 
