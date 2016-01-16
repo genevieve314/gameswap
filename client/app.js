@@ -2,8 +2,6 @@ angular
   .module('app', [
   	'main.controller',
   	'main.service',
-  	'results.controller',
-  	'results.service',
   	'userprofile',
   	'profile.service',
   	'auth.signin',

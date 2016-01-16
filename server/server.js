@@ -4,7 +4,7 @@ var routes = require('./routes');
 
 var app = express();
 var db = require('../database/database.js');
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
