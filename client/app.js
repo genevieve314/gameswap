@@ -32,10 +32,12 @@ angular
 		.state('userprofile', {
 			url: '/userprofile',
 			templateUrl: './userprofile/userprofile.html',
+      authenticate: true
 		})
     .state('messages', {
       url: '/messages',
       templateUrl: './messages/messages.html',
+      authenticate: true
     });
 
 	$httpProvider.interceptors.push('AttachTokens');
@@ -55,9 +57,13 @@ angular
   return attach;
 })
 .run(function ($rootScope, $location, AuthServices) {
-  $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !AuthServices.isAuth()) {
+  $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+    console.log("!AuthServices.isAuth() returns", !AuthServices.isAuth())
+    console.log("toState: ",toState, "toParams: ",toParams);
+    if (toState.authenticate && !AuthServices.isAuth()) {
+      e.preventDefault();
       $location.path('/signin');
+      
     }
   });
 });
