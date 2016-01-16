@@ -1,11 +1,11 @@
-angular.module('profile.service', [])  
+angular.module('profile.service', [])
 
 .factory('ProfileServices', function($http, $window){
 
 	var getProfileData = function(){
 		var token = $window.localStorage.getItem('com.gameswap');
 
-		console.log("token in getProfileData ", token);
+		// console.log("token in getProfileData ", token);
 
 		return $http({
 			method: 'POST',
@@ -13,10 +13,10 @@ angular.module('profile.service', [])
 			data: {token: token}
 		})
 		.then(function(resp){
-			console.log("resp in getProfileData ", resp);
+			// console.log("resp in getProfileData ", resp);
 			return resp.data;
 		}, function(error) {
-  			console.error('ERROR in getProfileData: ', error);
+			console.error('ERROR in getProfileData: ', error);
 		})
 	};
 
@@ -27,13 +27,13 @@ angular.module('profile.service', [])
 
 		return $http({
 			method: 'POST',
-			url: '/addtoofferings',	
-			data: {game: game, token: token}      			
+			url: '/addtoofferings',
+			data: {game: game, token: token}
 		})
 		.then(function(resp){
 			return resp;
 		}, function(error) {
-  			console.error('ERROR!!! ', error);
+			console.error('ERROR!!! ', error);
 		})
 
 	};
@@ -45,13 +45,13 @@ angular.module('profile.service', [])
 
 		return $http({
 			method: 'POST',
-		    url: '/addtoseeking',
-			data: {game: game, token: token}      			
+			url: '/addtoseeking',
+			data: {game: game, token: token}
 		})
 		.then(function(resp){
 			return resp;
 		}, function(error) {
-  			console.error('ERROR!!! ', error);
+			console.error('ERROR!!! ', error);
 		})
 	};
 
@@ -71,21 +71,53 @@ angular.module('profile.service', [])
 
 		return $http({
 			method: 'PUT',
-		    url: '/profile/update',
-			data: {user: update, 
-				token: token}      			
-		})
-		.then(function(resp){
-			return resp;
-		}, function(error) {
-  			console.error('ERROR!!! ', error);
-		})
-	};
+			url: '/profile/update',
+			data: {user: update,
+				token: token}
+			})
+			.then(function(resp){
+				return resp;
+			}, function(error) {
+				console.error('ERROR!!! ', error);
+			});
+		};
 
-	return {
-		getProfileData: getProfileData,
-		addGameOffering: addGameOffering,
-		addGameSeeking: addGameSeeking,
-		updateProfile: updateProfile
-	};
+
+		/*
+		var getOfferingList = function($http){
+		var token = $window.localStorage.getItem('com.gameswap');
+		return $http({
+		method: 'POST',
+		url: null   // ASK ERIC ABOUT DB ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+		data: {token: token}
+	})
+	.then(function(resp){
+	return resp.data;
+}, function(error) {
+console.error('ERROR in getOfferingList: ', error);
 })
+};*/
+/*
+var getSeekingList = function($http){
+var token = $window.localStorage.getItem('com.gameswap');
+
+return $http({
+method: 'POST',
+// url: ''  // ASK ERIC ABOUT ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
+data: {token: token}
+})
+.then(function(resp){
+return resp.data;
+}, function(error) {
+console.error('ERROR in getSeekingList: ', error);
+})
+};*/
+
+return {
+	getProfileData: getProfileData,
+	addGameOffering: addGameOffering,
+	addGameSeeking: addGameSeeking,
+	updateProfile: updateProfile
+};
+
+});
