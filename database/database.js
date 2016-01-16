@@ -15,21 +15,20 @@ var db_test = {
   database: 'gameswap',
   multipleStatements: true
 }
+function createConnection() {
+    connection = mysql.createConnection(db_config);
 
-connection = mysql.createConnection(db_config);
+    connection.connect(function (err) {
+        if (err) console.error('error connecting: ' + err.stack);
+        console.log('connected as id ' + connection.threadId);
+    })
+    connection.on('error',function(err){
+        console.log('error: ', err.code);
+        createConnection();
+    });
+}
 
-connection.connect(function (err) {
-    if (err) console.error('error connecting: ' + err.stack);
-    console.log('connected as id ' + connection.threadId);
-})
-
-var keepAlive = function () {
-   connection.query('SELECT 1');
-   console.log("Fired Keep-Alive");
-   return;
-};
-
-setInterval(keepAlive, 60000);
+createConnection();
 
 tables.create()
 
