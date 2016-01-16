@@ -28,8 +28,8 @@ angular.module('auth.service', [])
 			
 			return resp.data.token;  
 		}).catch(function(error) {
-  			console.error('Sign in ERROR!!! Redirecting... ', error);
-  			$location.path('/signin');
+  			console.error('Sign in ERROR!!!', error);
+  			//$location.path('/signin');
   								
 		})
 	};
