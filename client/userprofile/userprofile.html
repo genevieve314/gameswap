@@ -1,75 +1,100 @@
-<div class='container-fluid col-md-offset-3 col-md-6'>
+<div class='container-fluid col-md-offset-3 col-md-6' ng-controller='ProfileController as profile'>
 	<h3 class='head-space-md'>Your Profile</h3>
 	
-	<div ng-controller='ProfileController as profile'>
-		<table class='table borderless table-condensed'>
+	<table class='table borderless table-condensed'>
+		<tr>
+			<td><b>username:</b></td>
+			<td>{{ profile.username }}</td>
+		</tr>
+		<tr>
+			<td><b>email:</b></td>
+			<td>{{ profile.email }}</td>
+		</tr>
+		<tr>
+			<td><b>city:</b></td>
+			<td ng-show='profile.city'> {{ profile.city }} </td>
+		</tr>
+	</table>
+
+	<div class='foot-space-sm'>
+		<div ng-show='profile.updateClicked === false'>
+			<button ng-click='profile.toggleUpdate()' class='btn btn-default'>edit city</button>
+		</div>
+
+		<form ng-show='profile.updateClicked === true'>
+			<input class='form-control' type='text' ng-model='profile.address.city' placeholder="City" />
+			<br>
+			<button class='btn btn-default' ng-click='profile.submitUpdate(profile.address)'>submit edits</button>
+		</form>
+	</div>
+
+	<h3 class='head-space-md line-break'>games you are currently offering: </h3>
+
+		<table class='table borderless' ng-repeat='game in profile.gamesOffered'>
 			<tr>
-				<td><b>username:</b></td>
-				<td>{{ profile.username }}</td>
-			</tr>
-			<tr>
-				<td><b>email:</b></td>
-				<td>{{ profile.email }}</td>
-			</tr>
-			<tr>
-				<td><b>city:</b></td>
-				<td ng-show='profile.city'> {{ profile.city }} </td>
+				<td class='col-md-1'><b>Title:</b></td> <td class='col-md-2'>{{ game.title }}</td>
+				<td class='col-md-1'><b>Platform:</b></td> <td class='col-md-2'>{{ game.platform }}</td>
 			</tr>
 		</table>
 
-		<div class='foot-space-sm'>
-			<div ng-show='profile.updateClicked === false'>
-				<button ng-click='profile.toggleUpdate()' class='btn btn-default'>edit city</button>
-			</div>
+		<form class='foot-space-md'>
+			<div class='form-group'>
+			Add a new title: 
+				<div class='row'>
+					
+					<div class='col-md-6 nopadding'>
+						<input class='form-control' type="text" ng-model='profile.gameToOffer.title' required />
+					</div>
 
-			<form ng-show='profile.updateClicked === true'>
-				<input class='form-control' type='text' ng-model='profile.address.city' placeholder="City" />
-				<br>
-				<button class='btn btn-default' ng-click='profile.submitUpdate(profile.address)'>submit edits</button>
-			</form>
+					<div class='col-md-2 nopadding'>
+						<select class="selectpicker form-control btn btn-default" type='button' title="Platform" ng-model='profile.gameToOffer.platform'>
+	      				<option value="">Platform</option>
+	      				<option value="Playstation 4">PlayStation 4</option>
+	      				<option value="Xbox One">Xbox One</option>
+	    			</select>
+	    		</div>
+
+	    		<div class='col-md-2 nopadding'>
+	    			<button class='btn btn-default form-control' ng-click="profile.addOffer(profile.gameToOffer); profile.gameOffer=''">add</button>
+	    		</div>
+
+    		</div>
+  		</div>
+		</form>
+
+		<h3>games you are currently seeking: </h3>
+		
+		<div = class'head-space-md'>
+			<table class='table borderless' ng-repeat='game in profile.gamesSeeking'>
+				<tr>
+					<td class='col-md-1'><b>Title:</b></td> <td class='col-md-2'>{{ game.title }}</td>
+					<td class='col-md-1'><b>Platform:</b></td> <td class='col-md-2'>{{ game.platform }}</td>
+				</tr>
+			</table>
 		</div>
 
-		<h4 class='head-space-md line-break'>games you are currently offering: </h4>
+		<br>
 
-		<table class='table borderless table-condensed head-space-md' ng-repeat='game in profile.gamesOffered'>
-			<tr>
-				<td><b>Title:</b> {{ game.title }}</td>
-				<td><b>Platform:</b> {{ game.platform }}</td>
-			</tr>
-		</table>
+		<form class='foot-space-lg'>
+			<div class='form-group'>
+			Add a new title:
+			<div class='row'>
+				<div class='col-md-6 nopadding'>
+					<input class='form-control' type="text" ng-model='profile.gameToSeek.title' required />
+				</div>
 
-<!-- <div ng-controller="SubjectDropDownController">
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            {{selectedItem}}
-            <span class="caret">span>
-        button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li ng-repeat="a in subjects"><a ng-click="dropboxitemselected(a)">{{a}}a>li>
-        ul>
-    div>
-div> -->
-
-			<h3>games you are currently seeking: </h3>
-			<br>
-			<div ng-repeat='game in profile.gamesSeeking'>
-				<div>Title: {{ game.title }}  Platform: {{ game.platform }}</div>
-			</div>
-			<br>
-			<div>
-				Add a new title: <input type="text" ng-model='profile.gameToSeek.title' required />
-					<select ng-model='profile.gameToSeek.platform' >
-      				<option value="">Platform:</option>
-      				<option value="Playstation 4">PlayStation 4</option>
-      				<option value="Xbox One">Xbox One</option>
-    			</select>
-    			<button ng-click="profile.addSeek(profile.gameToSeek); profile.gameToSeek=''">Add me</button>
-    		</div>
-    		<br>
-    		<div>
-    			<button ng-click="profile.signOut()">Sign Out</button>
-    		</div>
-		</div>
+				<div class='col-md-2 nopadding'>
+					<select class="selectpicker btn btn-default form-control" role='button' ng-model='profile.gameToSeek.platform'>
+	    				<option value="">Platform</option>
+	    				<option value="Playstation 4">PlayStation 4</option>
+	    				<option value="Xbox One">Xbox One</option>
+	  			</select>
+	  		</div>
+				<div class='col-md-2 nopadding'>
+	  			<button class='btn btn-default form-control' ng-click="profile.addSeek(profile.gameToSeek); profile.gameToSeek=''">add</button>
+	  		</div>
+  		</div>
+		</form>
 
 	</div>
 </div>
