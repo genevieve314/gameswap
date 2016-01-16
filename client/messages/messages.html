@@ -1,25 +1,48 @@
 <section ng-controller='MessagesController as messages'>
-  <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, messages.toId)' novalidate>
-    <h4>Send a Message</h4>
-    <p>To:
-      {{messages.toName}}</p>
-    <p>From:
-      {{messages.username}}</p>
-    <fieldset class="form-group">
-      <textarea class="form-control" placeholder="Send a message..." title="Message" ng-model='messageText'/required></textarea>
-    </fieldset>
-    <fieldset class="form-group">
-      <input type="submit" class="btn btn-primary pull-right" value="Send Message" />
-    </fieldset>
-  </form>
-  <blockquote ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory | orderBy: "username, -createdat"'>
-    <p>
-      From:
-      {{message.username}}
-    </p>
-    <p>
-      Message:
-      {{message.message}}
-    </p>
-  </blockquote>
+  <div class='container-fluid col-md-offset-3 col-md-6'>
+
+    <h3 class='head-space-md'>Send a Message</h3>
+
+      <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, messages.toId)' novalidate>
+
+      <table class='table message-border table-condensed'>
+        <tr>
+          <td class='table-tag'>To:</td>
+          <td>{{messages.toName}}</td>
+        </tr>
+        
+        <tr>
+        <td class='table-tag'>From:</td>
+        <td>{{messages.username}}</td>
+      </table>
+      
+      <fieldset class="form-group">
+        <textarea class="form-control" placeholder="Send a message..." title="Message" ng-model='messageText'/required></textarea>
+      </fieldset>
+      
+      <fieldset class="form-group">
+        <input type="submit" class="btn btn-primary form-control" value="Send Message" />
+      </fieldset>
+    
+    </form>
+
+    <h3 class='head-space-md'>Received messages:</h3>
+    
+    <div ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory | orderBy: "-createdat"'>
+      <table class='table message-border table-condensed nomargin-bottom margin-top whitesmoke'>
+        <tr>
+          <td class='table-tag'>From:</td>
+          <td>{{message.username}}</td>
+        </tr>
+        
+        <tr>
+          <td class='table-tag'>Message:</td>
+          <td>{{message.message}}</td>
+        </tr>
+      </table>
+
+      <button class='btn btn-default btn-block'>reply</button>
+    
+    </div>
+  </div>
 </section>
