@@ -46,7 +46,7 @@ router.post('/signup',function(req, res, next){
       db.addUser(email, username, hash, city, function(user){
 
         id =  user[0].id;
-       
+
         auth.authenticateUser(id, email, res);
       });
 
@@ -174,8 +174,9 @@ router.post('/searchseeking', auth.checkUser, function(req, res, next){
 
 router.get('/getmessagesfrom', auth.checkUser, function(req, res, next){
   var userfrom = req.user.id;
-
+  console.log('user in get messages from, ',req.user);
   db.allMessagesByUserFrom(userfrom, function(results){
+    console.log('messagesfrom results', results);
     res.json({results: results});
   })
 });
@@ -193,6 +194,7 @@ router.post('/addmessage', auth.checkUser, function(req, res, next){
   var userfrom = req.user.id;
   var userto = req.body.message.to;
   var message = req.body.message.text;
+  console.log('userfrom', userfrom);
 
   db.addMessage(userfrom, userto, message);
 
