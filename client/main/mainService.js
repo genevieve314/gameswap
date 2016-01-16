@@ -19,10 +19,15 @@ angular
           throw error;
         }.bind(this));
     };
-    this.addRecipient = function(recipient) {
-      this.recipient = recipient;
+    this.addRecipient = function(recipientId, recipientName) {
+      this.recipientId = recipientId;
+      this.recipientName = recipientName;
     };
-    this.getRecipient = function() {
-      return this.recipient;
+    this.getRecipientId = function() {
+      return this.recipientId;
+
+    };
+    this.getRecipientName = function() {
+      return this.recipientName;
     };
   });

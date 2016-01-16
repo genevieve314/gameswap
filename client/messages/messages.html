@@ -1,8 +1,8 @@
 <section ng-controller='MessagesController as messages'>
-  <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, 1)' novalidate>
+  <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, messages.toId)' novalidate>
     <h4>Send a Message</h4>
     <p>To:
-      {{messages.to}}</p>
+      {{messages.toName}}</p>
     <p>From:
       {{messages.username}}</p>
     <fieldset class="form-group">
@@ -12,7 +12,7 @@
       <input type="submit" class="btn btn-primary pull-right" value="Send Message" />
     </fieldset>
   </form>
-  <blockquote ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory'>
+  <blockquote ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory | orderBy: "username, -createdat"'>
     <p>
       From:
       {{message.username}}

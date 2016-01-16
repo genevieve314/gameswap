@@ -13,8 +13,9 @@ angular
     };
     this.getMessages = function() {
       var token = $window.localStorage.getItem('com.gameswap');
-      return $http.post('/getmessages', {token: token})
+      return $http.get('/getmessagesfrom', {token: token})
         .then(function(resp) {
+          console.log('resp',resp);
           return resp.data;
         }.bind(this), function(error) {
           throw error;

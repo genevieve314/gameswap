@@ -10,6 +10,8 @@ angular
   this.signOut = function(){
     AuthServices.signOut();
   };
+  this.psGames = [];
+  this.xboxGames = [];
   this.searchOfferings = function(game) {
     return MainService.searchOfferings({
       game: game
@@ -69,8 +71,8 @@ angular
     this.hasXbox = true;
     this.hasPlaystation = false;
   };
-  this.addRecipient = function(recipient) {
-    MainService.addRecipient(recipient);
+  this.addRecipient = function(recipientId, recipientName) {
+    MainService.addRecipient(recipientId, recipientName);
   };
   // this.getUserInfo = function() {
   //   ProfileServices.getProfileData()

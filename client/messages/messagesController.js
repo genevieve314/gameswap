@@ -1,9 +1,11 @@
 angular
   .module('messages.controller', [])
   .controller('MessagesController', function (MainService, MessagesService, ProfileServices) {
-    this.to = MainService.getRecipient();
+    this.toId = MainService.getRecipientId();
+    this.toName = MainService.getRecipientName();
+    console.log('this.to',this.to);
     this.sendMessage = function (messageText, to) {
-      console.log('inside client send message');
+      console.log('to', to);
       MessagesService.sendMessage({
             text: messageText,
             to: to
@@ -17,7 +19,7 @@ angular
     this.getMessages = function () {
       MessagesService.getMessages()
       .then(function(data){
-        console.log('data in MessagesController: ', data.results);
+        console.log('data in MessagesController: ', data);
         this.messageHistory = data.results;
         console.log('history in MessagesController: ', this.messageHistory);
       }.bind(this));
