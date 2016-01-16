@@ -38,26 +38,6 @@
 			</tr>
 		</table>
 
-		<br>
-		
-		<form class='inline-form'>
-			<div class='form-group'>
-				Add a new title: <input type="text" ng-model='profile.gameToOffer.title' class='form-control' required/> 
-
-				<button ng-model='profile.gameToOffer.platform' type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					Platform <span class="caret"></span>
-
-				<ul class='dropdown-menu'>
-	  				<li value="Playstation 4">PlayStation 4</li>
-	  				<li value="Xbox One">Xbox One</li>
-				</ul>
-
-				</button>
-
-    		<button class='btn btn-default' ng-click='profile.addOffer(profile.gameToOffer); profile.gameToOffer=""'>Add me</button>
-    	</div>
-    </form>	
-
 <!-- <div ng-controller="SubjectDropDownController">
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
