@@ -1,51 +1,68 @@
-<div id='container'>
-	<h1>Your GameSwap user profile:</h1>
+<div class='container-fluid col-md-offset-3 col-md-6'>
+	<h3 class='head-space-md'>Your Profile</h3>
+	
 	<div ng-controller='ProfileController as profile'>
-		<div id='profile-info'>
-			<h4>username: {{ profile.username }}</h4>
-			<h4>email: {{ profile.email }}</h4>
-			<h4 ng-show='profile.city'>city: {{ profile.city }}</h4>
-			<br>
 
+		<table class='table borderless table-condensed'>
+			<tr>
+				<td><b>username:</b></td>
+				<td>{{ profile.username }}</td>
+			</tr>
+			<tr>
+				<td><b>email:</b></td>
+				<td>{{ profile.email }}</td>
+			</tr>
+			<tr>
+				<td><b>city:</b></td>
+				<td ng-show='profile.city'> {{ profile.city }} </td>
+			</tr>
+		</table>
+
+		<div class='foot-space-sm'>
 			<div ng-show='profile.updateClicked === false'>
-				<button ng-click='profile.toggleUpdate()'>Edit city</button>
+				<button ng-click='profile.toggleUpdate()' class='btn btn-default'>edit city</button>
 			</div>
 
-			<div ng-show='profile.updateClicked === true'>
-				<!-- <input type='text' ng-model='profile.address.street' placeholder="Street" /><br> -->
-				<input type='text' ng-model='profile.address.city' placeholder="City" /><br>
-				<!-- <input type='text' ng-model='profile.address.state' placeholder="State"/><br> -->
-				<!-- <input type='text' ng-model='profile.address.zip' placeholder="Zip Code"/><br> -->
-				<!-- <input type='text' ng-model='profile.address.phone' placeholder="(123) 555-5555"/><br> -->
+			<form ng-show='profile.updateClicked === true'>
+				<input class='form-control' type='text' ng-model='profile.address.city' placeholder="City" />
 				<br>
+				<button class='btn btn-default' ng-click='profile.submitUpdate(profile.address)'>submit edits</button>
+			</form>
+		</div>
 
-				<button ng-click='profile.submitUpdate(profile.address)'>Submit edits</button>
-			</div>
+<!-- 		<div class="btn-group" ng-click='profile.toggleUpdate()' >
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    Action <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu">
+		    <li><a href="#">Action</a></li>
+		    <li><a href="#">Another action</a></li>
+		    <li><a href="#">Something else here</a></li>
+		    <li role="separator" class="divider"></li>
+		    <li><a href="#">Separated link</a></li>
+		  </ul> -->
+<!-- 		</div> -->
 
 
-			<h3>games you are currently offering: </h3>
-			<br>
-			<div ng-repeat='game in profile.gamesOffered'>
-				<div>Title: {{ game.title }}  Platform: {{ game.platform }}   <!--Condition: {{ game.condition }}--></div>
-			</div>
-			<br>
-			<div>
-				Add a new title: <input type="text" ng-model='profile.gameToOffer.title' required/> 
-				<select ng-model='profile.gameToOffer.platform' >
-      				<option value="">Platform:</option>
-      				<option value="Playstation 4">PlayStation 4</option>
-      				<option value="Xbox One">Xbox One</option>
-    			</select>
+		<h4 class='head-space-md line-break'>games you are currently offering: </h4>
 
-<!-- commenting out 'condition' for the time being till it's added on backend
+		<table class='table borderless table-condensed head-space-md' ng-repeat='game in profile.gamesOffered'>
+			<tr>
+				<td><b>Title:</b> {{ game.title }}</td>
+				<td><b>Platform:</b> {{ game.platform }}</td>
+			</tr>
+		</table>
 
-    			Condition: <select ng-model='profile.gameToOffer.condition'>
-      				<option value="">Please Choose</option>
-      				<option value="Excellent">Excellent</option>
-      				<option value="Good">Good</option>
-      				<option value="Poor">Poor</option>
-    			</select>
--->
+		<br>
+		
+		<form class='inline-form'>
+			Add a new title: <input type="text" ng-model='profile.gameToOffer.title' required/> 
+			<select ng-model='profile.gameToOffer.platform' >
+    				<option value="">Platform:</option>
+    				<option value="Playstation 4">PlayStation 4</option>
+    				<option value="Xbox One">Xbox One</option>
+  			</select>
+
 
     			<button ng-click='profile.addOffer(profile.gameToOffer); profile.gameToOffer=""'>Add me</button>
     		</div>	
