@@ -38,17 +38,56 @@ input {
   max-height: 200px;
 }
 
-table.borderless td, table.borderless tr {
-  border: none !important;
+.text-box {
+	background-color: whitesmoke;
 }
 
-.form-inline .form-group input {
-    width:140px;
+
+table.borderless td, table.borderless tr {
+  border-bottm: solid;
+  border-top: solid;
+  border-left: none !important;
+  border-right: none !important;
+  border-color: white;
+  background-color: 
+}
+
+table.message-border td, table.message-border tr {
+	border: none !important;
+}
+
+table.whitesmoke td, table.whitesmoke tr {
+	background-color: whitesmoke;
+}
+
+.table-tag {
+	width: 100px;
+	font-weight: bold;
 }
 
 .nopadding {
 	padding-right: 0px;
 	padding-left: 0px;
+}
+
+.nopadding-right {
+	padding-right: 0px;
+}
+
+.nopadding-left {
+	padding-left: 0px;
+}
+
+.nopadding-top {
+	padding-top: 0px;
+}
+
+table.nomargin-bottom {
+	margin-bottom: 0px !important;
+}
+
+table.margin-top {
+	margin-top: 20px;
 }
 
 .line-break {
