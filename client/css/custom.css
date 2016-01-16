@@ -42,6 +42,15 @@ table.borderless td, table.borderless tr {
   border: none !important;
 }
 
+.form-inline .form-group input {
+    width:140px;
+}
+
+.nopadding {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
 .line-break {
 	border-top: solid;
 	border-color: grey;
