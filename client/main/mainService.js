@@ -4,7 +4,7 @@ angular
     this.searchOfferings = function(game) {
       return $http.post('/searchofferings', game)
         .then(function(resp) {
-          // console.log('response', resp);
+          console.log('responseFromOfferings', resp);
           return resp.data;
         }.bind(this), function(error) {
           throw error;
@@ -13,7 +13,7 @@ angular
     this.searchSeeking = function(game) {
       return $http.post('/searchseeking', game)
         .then(function(resp) {
-          console.log('response', resp);
+          console.log('responseFromSeeking', resp);
           return resp.data;
         }.bind(this), function(error) {
           throw error;

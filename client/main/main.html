@@ -7,7 +7,7 @@
 
     <form name='searchForm' class='foot-space-lg col-md-offset-3 col-md-6' ng-submit='searchForm.$valid && main.searchOfferings(game)' novalidate>
       <div class='form-group'>
-          <input class='form-control' type='text' ng-model='game' placeholder='What game do you want?' required/>
+        <input class='form-control' type='text' ng-model='game' placeholder='What game do you want?' required/>
       </div>
     </form>
 
@@ -68,15 +68,15 @@
     <div ng-if='main.isAuth && main.swaps.length'>
       <div class='col-md-4 text-center'>
         Username:
-        {{main.swaps[0].username}}
+        {{main.swaps[main.first].username}}
         <br>
         Game:
-        {{main.swaps[0].title}}
+        {{main.swaps[main.first].title}}
         <br>
         Platform:
-        {{main.swaps[0].platform}}
+        {{main.swaps[main.first].platform}}
         <br>
-        <img class='boxart' ng-src='{{main.swaps[0].thumbnail}}'>
+        <img class='boxart' ng-src='{{main.swaps[main.first].thumbnail}}'>
         <br>
       </div>
       <div class='col-md-4'>
@@ -87,14 +87,18 @@
         {{main.userInfo.username}}
         <br>
         Game:
-        {{main.swaps[1].title}}
+        {{main.swaps[main.second].title}}
         <br>
         Platform:
-        {{main.swaps[1].platform}}
+        {{main.swaps[main.second].platform}}
         <br>
-        <img class='boxart' ng-src='{{main.swaps[1].thumbnail}}'>
+        <img class='boxart' ng-src='{{main.swaps[main.second].thumbnail}}'>
         <br>
       </div>
+
+      <button class='center-block' ng-click='main.previous()'>Prev</button>
+      <button class='center-block' ng-click='main.next()'>Next</button>
+
     </div>
   </div>
 </section>
