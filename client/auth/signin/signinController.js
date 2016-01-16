@@ -12,19 +12,18 @@ angular.module('auth.signin', [])
 	 		.then(function(token){
 	 		  if(token){
 	 			console.log('the token is: ', token);
-	 			//$window.localStorage.setItem('com.gameswap', token); 
-
-			// using setTimeout till we get the async hammered out
-
-        		//setTimeout($location.path('/userprofile'), 500);
 
         		$location.path('/userprofile');
-        	  }	
+        	  }	else {
+        	  	console.log('Error authenticating user');
+        	  	signin.email = '';
+        	  	signin.password = ''; // clear the fields
+        	  	signin.isInvalid = true;
+        	  }
 	 		})
 	 		.catch(function(error) {
 	 			console.log("this is the error message from the signin Controller: ");
-        		console.error(error);
-        									// add red error messages to DOM, clear fields
+        		console.error(error);								
       		}); 
 	}
 })
