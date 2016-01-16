@@ -51,7 +51,8 @@ angular.module('userprofile', [])
     };
 
   	this.addOffer = function(game) {
-      ProfileServices.addGameOffering({
+      if(game.platform){
+        ProfileServices.addGameOffering({
   			  title: game.title,
   			  platform: game.platform,
           condition: game.condition
@@ -59,19 +60,30 @@ angular.module('userprofile', [])
           console.log('resp in this.addOffer promise: ', resp);
 
           setTimeout(loadProfile, 1000);
-
         });
+      } else {
+        console.log('ERROR: no platform chosen');
+        this.noOffPlatform = true;         
+
+      }
   	};
 
   	this.addSeek = function(game) {
-      ProfileServices.addGameSeeking({
+      console.log('game obj in this.addSeek');
+
+      if(game.platform){
+        ProfileServices.addGameSeeking({
           title: game.title,
-          platform: game.platform //
+          platform: game.platform 
         }).then(function(resp){
           console.log('resp in this.addSeek promise: ', resp);
 
           setTimeout(loadProfile, 1000);
         });
+      } else {
+        console.log('ERROR: no platform chosen');
+        this.noSeekPlatform = true;  
+      }
   	};
 
   	this.signOut = function(){
