@@ -27,6 +27,15 @@
   <title>Game Swap</title>
 </head>
 <body>
+  <div class='row nav head-space-md foot-space-sm' ng-controller='IndexController as index'>
+    <div class='col-md-1'></div>
+    <div class='col-md-2'>GameSwap</div>
+    <a class='col-md-offset-6 col-md-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
+    <div class='col-md-1'></div>
+    <a class='pull-right' ng-show='index.isAuth' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
+    <br>
+    <a class='pull-right' ng-show='index.isAuth' ui-sref='userprofile'>Profile</a>
+  </div>
   <div ui-view></div>
 <footer>
   <!-- TODO: How It Works, Terms, Team/Contact Us-->

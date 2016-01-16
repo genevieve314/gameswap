@@ -11,7 +11,8 @@ angular
   	'auth.service',
   	'ui.router',
     'messages.controller',
-    'messages.service'])
+    'messages.service',
+    'index.controller'])
 
   .config(function($stateProvider, $urlRouterProvider, $httpProvider){
 

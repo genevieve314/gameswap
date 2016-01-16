@@ -1,14 +1,6 @@
 <section ng-controller='MainController as main'>
   <header class='jumbotron no-head-space'>
-    <div class='row nav head-space-md foot-space-sm'>
-      <div class='col-md-1'></div>
-      <div class='col-md-2'>GameSwap</div>
-      <a class='col-md-offset-6 col-md-1' ng-show='!main.isAuth' ui-sref='signin'>  Sign In  </a>
-      <div class='col-md-1'></div>
-      <a class='pull-right' ng-show='main.isAuth' ng-click="main.signOut()" ui-sref='signin'>Sign Out</a>
-      <br>
-      <a class='pull-right' ng-show='main.isAuth' ui-sref='userprofile'>Profile</a>
-    </div>
+    
 
     <h2 class='col-md-offset-2 col-md-8 head-space-xl foot-space-sm text-center'>
       Get the game you want, for the game you have.
