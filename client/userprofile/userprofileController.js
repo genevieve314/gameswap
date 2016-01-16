@@ -1,17 +1,17 @@
 angular.module('userprofile', [])
   .controller('ProfileController', function(AuthServices, ProfileServices){
-  	
+
     var userInfo = this;
 
     this.gamesOffered = [];
     this.gamesSeeking = [];
     this.updateClicked = false;
 
-    var loadProfile = function() {    
+    var loadProfile = function() {
       ProfileServices.getProfileData()
         .then(function(resp) {
           userInfo.username = resp.username;
-          userInfo.email = resp.email;   
+          userInfo.email = resp.email;
           userInfo.city = resp.city || 'santa monica';
 
 /* commenting out since we're leaving out full address for the time being
@@ -21,7 +21,7 @@ angular.module('userprofile', [])
           } else {
             userInfo.hasAddress = false;
           }
-*/         
+*/
 
           userInfo.gamesOffered = resp.offerings;
           userInfo.gamesSeeking = resp.seeking;
@@ -38,7 +38,7 @@ angular.module('userprofile', [])
 
     }
 
-    this.submitUpdate = function(update) {  	
+    this.submitUpdate = function(update) {
       console.log("update obj: ", update);
       ProfileServices.updateProfile(update)
         .then(function(resp){
@@ -53,8 +53,8 @@ angular.module('userprofile', [])
   	this.addOffer = function(game) {
       ProfileServices.addGameOffering({
   			  title: game.title,
-  			  platform: game.platform,   
-          condition: game.condition 	
+  			  platform: game.platform,
+          condition: game.condition
   			}).then(function(resp){
           console.log('resp in this.addOffer promise: ', resp);
 
@@ -66,7 +66,7 @@ angular.module('userprofile', [])
   	this.addSeek = function(game) {
       ProfileServices.addGameSeeking({
           title: game.title,
-          platform: game.platform //  
+          platform: game.platform //
         }).then(function(resp){
           console.log('resp in this.addSeek promise: ', resp);
 
@@ -79,13 +79,14 @@ angular.module('userprofile', [])
   	}
 
     loadProfile();
+    console.log('LOADING PROFILE CONTROLLER');
 
-    /* getOffering and getSeeking are handled by loadProfile for now...    
+    /* getOffering and getSeeking are handled by loadProfile for now...
 
     this.getOffering = function(){
       this.gamesOffered = [];
       var tempArray = ProfileServices.getProfileData().offerings; // might need to promisify
-      for(var i = 0; i < tempArray.length; i++) {                    
+      for(var i = 0; i < tempArray.length; i++) {
         this.gamesOffered.push({
           title: game.title,
           platform: game.platform,
@@ -97,7 +98,7 @@ angular.module('userprofile', [])
     this.getSeeking = function(){
       this.gamesSeeking = [];
       var tempArray = ProfileServices.getProfileData().seeking;   // might need to promisify
-      for(var i = 0; i < tempArray.length; i++) {                    
+      for(var i = 0; i < tempArray.length; i++) {
         this.gamesSeeking.push({
           title: game.title,
           platform: game.platform
