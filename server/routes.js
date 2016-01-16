@@ -38,9 +38,14 @@ router.post('/signup',function(req, res, next){
   var username = req.body.user.username;
   var email = req.body.user.email;
   var password = req.body.user.password;
+<<<<<<< a01b3bd4ad8afa359be6d149c2f14adf83800937
   var city = req.body.user.city;
 
   db.findUser(email,function(data){
+=======
+  // console.log('BODY>> ',req.body)
+  db.findUser(email, function(data){
+>>>>>>> [feature] adds main page styling
     if(!data.length){
       var hash = bcrypt.hashSync(password,10);
       db.addUser(email, username, hash, city, function(user){
