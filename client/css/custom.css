@@ -2,6 +2,19 @@ a {
 	color: white;
 }
 
+a:hover {
+	text-decoration: underline;	
+}
+
+a:active {
+	text-decoration: underline;
+}
+
+a:visited {
+	text-decoration: none;
+	color: white;
+}
+
 h2 {
 	color: white;
 }
@@ -23,6 +36,16 @@ input {
 .boxart {
   max-width: 200px;
   max-height: 200px;
+}
+
+table.borderless td, table.borderless tr {
+  border: none !important;
+}
+
+.line-break {
+	border-top: solid;
+	border-color: grey;
+	border-width: 1px;
 }
 
 .head-space-xl {
