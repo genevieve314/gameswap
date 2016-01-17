@@ -3,7 +3,7 @@
 
     <h3 class='head-space-md'>Send a Message</h3>
 
-      <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, messages.toId); messageText = null' novalidate>
+      <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, messages.toId); messageText = ""' novalidate>
 
       <table class='table message-border table-condensed'>
         <tr>
