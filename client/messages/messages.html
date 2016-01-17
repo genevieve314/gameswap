@@ -12,7 +12,7 @@
       <input type="submit" class="btn btn-primary pull-right" value="Send Message" />
     </fieldset>
   </form>
-  <blockquote ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory | orderBy: "username, -createdat"'>
+  <blockquote ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory | orderBy: "-createdat"'>
     <p>
       From:
       {{message.username}}

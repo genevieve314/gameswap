@@ -223,6 +223,7 @@ angular
     .then(function(data) {
       this.compareUserSeekingWithAllOfferings(data);
       this.userInfo = data;
+      console.log('userinfo', data);
       return data;
     }.bind(this))
     .then(function(data){
