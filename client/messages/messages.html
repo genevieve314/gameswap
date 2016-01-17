@@ -3,7 +3,7 @@
 
     <h3 class='head-space-md'>Send a Message</h3>
 
-      <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, messages.toId)' novalidate>
+      <form name="MessagesForm" ng-submit='MessagesForm.$valid && messages.sendMessage(messageText, messages.toId); messageText = null' novalidate>
 
       <table class='table message-border table-condensed'>
         <tr>
@@ -26,10 +26,13 @@
 
     </form>
 
-    <h3 class='head-space-md'>Received messages:</h3>
+    <h3 class='head-space-md'>Messages:</h3>
 
-    <div ng-show='messages.messageHistory.length'  ng-repeat='message in messages.messageHistory | orderBy: "-createdat"'>
+    <div ng-show='messages.messageHistory'  ng-repeat='message in messages.messageHistory | orderBy: "-createdat"'>
       <table class='table message-border table-condensed nomargin-bottom margin-top whitesmoke'>
+        <tr>
+          <td class='table-tag'>Date:</td>
+          <td>{{message.createdat | date:'medium'}}
         <tr>
           <td class='table-tag'>From:</td>
           <td>{{message.username}}</td>
@@ -41,7 +44,8 @@
         </tr>
       </table>
 
-      <button class='btn btn-default btn-block'>Reply</button>
+      <button class='btn btn-default btn-block' ng-click='messages.reply(message.id, message.username)'>reply</button>
+
 
     </div>
   </div>
