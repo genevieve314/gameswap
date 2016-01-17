@@ -29,6 +29,7 @@ angular
       ProfileServices.getProfileData()
         .then(function (resp) {
           this.username = resp.username;
+          this.toId = resp.id;
           console.log('user in message controller: ', this.username);
           console.log('this in message controller: ', this);
         }.bind(this));
