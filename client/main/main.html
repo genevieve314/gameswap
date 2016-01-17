@@ -1,5 +1,14 @@
-<section ng-controller='MainController as main'>
-  <header class='jumbotron no-head-space' ng-if='!main.isAuth'>
+<div class='row nav head-space-md foot-space-sm' ng-controller='IndexController as index'>
+    <div class='col-md-1'></div>
+    <a ui-sref='main' class='col-md-2'>GameSwap</a>
+    <div class='col-md-6'></div>
+    <a class='col-md-1 col-md-offset-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
+    <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
+    <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
+  </div>
+
+<div ng-controller='MainController as main'>
+  <header class='jumbotron no-head-space' ng-if='!main.isAuth'  ><!-- ng-if='!main.isAuth' --> 
 
     <h2 class='col-md-offset-2 col-md-8 head-space-xl foot-space-sm text-center'>
       Get the game you want, for the game you have.
@@ -65,8 +74,9 @@
     </div>
     <div class='text-center' ng-if='main.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
   </div>
+
   <div class='container-fluid'>
-    <div class='row' ng-if='main.isAuth && main.swaps.length'>
+    <div class='row' ng-if='main.isAuth && main.swaps.length'>  <!-- NOTHING SHOWS IF USER IS AUTHORIZED BUT HASN'T GOT ANY SWAPS -->
       <div class='col-md-4 col-md-offset-1 text-center h1'>
         You Have
       </div>
@@ -89,4 +99,4 @@
       <a class='btn btn-primary btn-lg btn-block active center-block signin-btn' role='button' ui-sref='signup'>Sign in to start swapping!</a>
     </div>
   </div>
-</section>
+</div>

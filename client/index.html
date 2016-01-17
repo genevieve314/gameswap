@@ -23,19 +23,11 @@
   <script type='text/javascript' src='messages/messagesController.js'></script>
   <script type='text/javascript' src='messages/messagesService.js'></script>
   <script type='text/javascript' src='indexController.js'></script>
+  <script type='text/javascript' src='indexServices.js'></script>
   <title>Game Swap</title>
 </head>
 
 <body>
-  <div class='row nav head-space-md foot-space-sm' ng-controller='IndexController as index'>
-    <div class='col-md-1'></div>
-    <a ui-sref='main' class='col-md-2'>GameSwap</a>
-    <div class='col-md-6'></div>
-    <a class='col-md-1 col-md-offset-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
-    <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
-    <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
-  </div>
-
   <div ui-view></div>
 <footer>
   <!-- TODO: Team with copyright -->

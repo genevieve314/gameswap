@@ -40,7 +40,7 @@ angular.module('auth.service', [])
 
   	var signOut = function () {
     	$window.localStorage.removeItem('com.gameswap');
-    	$location.path('/signin');
+    	$location.path('/main');
   	};
 
 	return {
