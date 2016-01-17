@@ -32,7 +32,7 @@ angular
 		})
 		.state('userprofile', {
 			url: '/userprofile',
-			templateUrl: './userprofile/userprofile.html',
+		  templateUrl: './userprofile/userprofile.html',
       authenticate: true
 		})
     .state('messages', {
