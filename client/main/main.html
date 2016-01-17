@@ -14,7 +14,7 @@
       Get the game you want, for the game you have.
     </h2>
 
-    <form name='searchForm' class='foot-space-sm col-md-offset-3 col-md-6' ng-submit='searchForm.$valid && main.searchOfferings(game); game=null' novalidate>
+    <form name='searchForm' class='foot-space-sm col-md-offset-3 col-md-6' ng-submit='searchForm.$valid && main.searchOfferings(game); game=""' novalidate>
       <div class='form-group'>
         <input class='form-control' type='text' ng-model='game' placeholder='What game do you want?' required/>
       </div>
@@ -116,20 +116,24 @@
       </div>
 
       <div class='col-md-2 vcenterparent'>
-
-        <button class='btn btn-primary btn-block vcenter center-block swapbtn' ng-click='main.addRecipient(main.swaps[main.first].id, main.swaps[main.first].username)' ui-sref='messages'>Swap!</button>
-
-        <div class='col-md-6 vcenterparent'>
-
-          <button class='btn btn-default inline active prev-button' ng-click='main.previous()'>Prev</button>
-
+        <div class="row vcenterparent">
+          <button class='vcenter col-md-12 btn btn-primary btn-block center-block swapbtn' ng-click='main.addRecipient(main.swaps[main.first].id, main.swaps[main.first].username)' ui-sref='messages'>Swap!</button>
         </div>
 
-        <div class='col-md-6 vcenterparent'>
+        <div class="row">
+          <div class='col-md-6 '>
 
-          <button class='btn btn-default inline active next-button' ng-click='main.next()'>Next</button>
+            <button class='btn btn-default inline active prev-button' ng-click='main.previous()'>Prev</button>
 
+          </div>
+
+          <div class='col-md-6 '>
+
+            <button class='btn btn-default inline active next-button' ng-click='main.next()'>Next</button>
+
+          </div>
         </div>
+
 
       </div>
 
