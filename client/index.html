@@ -23,6 +23,7 @@
   <script type='text/javascript' src='messages/messagesController.js'></script>
   <script type='text/javascript' src='messages/messagesService.js'></script>
   <script type='text/javascript' src='indexController.js'></script>
+  <script type='text/javascript' src='indexServices.js'></script>
   <title>Game Swap</title>
 </head>
 
@@ -35,6 +36,13 @@
     <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
     <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
   </div>
+  <!--
+    <a class='col-md-1' ng-show='!index.isAuth' ng-click="index.toggleState()" ui-sref='signin'>  Sign In  </a>
+    <a ng-show='index.isAuth' class='col-md-1' ng-click="index.toggleState()" ui-sref='signin'>Sign Out</a>
+    <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
+-->
+
+  
 
   <div ui-view></div>
 <footer>
