@@ -31,9 +31,9 @@
     <div class='col-md-1'></div>
     <a ui-sref='main' class='col-md-2'>GameSwap</a>
     <div class='col-md-6'></div>
-    <a class='col-md-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
-    <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
+    <a class='col-md-1 col-md-offset-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
     <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
+    <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
   </div>
 
   <div ui-view></div>
