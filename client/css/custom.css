@@ -19,14 +19,14 @@ h2 {
 	color: white;
 }
 
-input {
-	width: 50%;
-	vertical-align: middle;
+img {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .jumbotron {
 	position: relative;
-	background: black url("http://www.walleo.co/wp-content/uploads/2016/01/black_video_game_wallpapers_hd_wg4.jpg") center center;
+	background: black url("../assets/images/jumbotron.jpg") center center;
 	width: 100%;
 	height: 100%;
 	background-size: cover;
@@ -34,9 +34,8 @@ input {
 }
 
 .boxart {
-	max-width: 400px;
-	max-height: 400px;
-	/*padding: 0px 25px 50px 25px;*/
+	max-width: 350px;
+	max-height: 350px;
 }
 
 .vcenterparent {
@@ -58,38 +57,18 @@ input {
 .signin-btn {
 	margin-top: 20px;
 	margin-bottom: 20px;
-<<<<<<< HEAD
-=======
 }
 
 .prev-button {
 	position: absolute;
 	bottom: 0;
-	margin-left:40px;
+	right: 0;
 	margin-bottom: 100px;
 }
 
 .next-button {
 	position: absolute;
 	bottom: 0;
-	right: 0;
-	margin-right:40px;
-	margin-bottom: 100px;
->>>>>>> d03977192317a003a196b540902daec3505ceed7
-}
-
-.prev-button {
-	position: absolute;
-	bottom: 0;
-	margin-left:40px;
-	margin-bottom: 100px;
-}
-
-.next-button {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	margin-right:40px;
 	margin-bottom: 100px;
 }
 
@@ -104,7 +83,6 @@ table.borderless td, table.borderless tr {
   border-left: none !important;
   border-right: none !important;
   border-color: white;
-  background-color:
 }
 
 table.message-border td, table.message-border tr {
@@ -139,6 +117,10 @@ table.whitesmoke td, table.whitesmoke tr {
 
 table.nomargin-bottom {
 	margin-bottom: 0px !important;
+}
+
+table.margin-bottom-ten {
+	margin-bottom: 10px !important;
 }
 
 table.margin-top {

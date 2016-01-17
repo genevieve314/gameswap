@@ -9,25 +9,25 @@
 
 <div class='container-fluid col-md-offset-3 col-md-6' ng-controller='ProfileController as profile'>
 	<h3 class='head-space-md'>Your Profile</h3>
-	
+
 		<table class='table message-border table-condensed'>
 			<tr>
-				<td class='table-tag'>username:</td>
+				<td class='table-tag'>Username:</td>
 				<td>{{ profile.username }}</td>
 			</tr>
 			<tr>
-				<td class='table-tag'>email:</td>
+				<td class='table-tag'>Email:</td>
 				<td>{{ profile.email }}</td>
 			</tr>
 			<tr>
-				<td class='table-tag'>city:</td>
+				<td class='table-tag'>City:</td>
 				<td ng-show='profile.city'> {{ profile.city }} </td>
 			</tr>
 		</table>
 
 		<div class='foot-space-sm'>
 			<div ng-show='profile.updateClicked === false'>
-				<button ng-click='profile.toggleUpdate()' class='btn btn-default'>edit city</button>
+				<button ng-click='profile.toggleUpdate()' class='btn btn-default'>Edit city</button>
 			</div>
 
 			<form ng-show='profile.updateClicked === true'>
@@ -40,14 +40,14 @@
 	<div>
 	<h3 class='head-space-md line-break'>Games you are currently offering: </h3>
 
-	<table class='table borderless whitesmoke' ng-repeat='game in profile.gamesOffered'>
+	<table class='table borderless whitesmoke margin-bottom-ten' ng-repeat='game in profile.gamesOffered'>
 		<tr>
 			<td class='col-md-1'><b>Title:</b></td> <td class='col-md-2'>{{ game.title }}</td>
 			<td class='col-md-1'><b>Platform:</b></td> <td class='col-md-2'>{{ game.platform }}</td>
 		</tr>
 	</table>
 
-		
+
 		<form class='foot-space-sm' name="offerForm" ng-submit="profile.addOffer(profile.gameToOffer); profile.gameToOffer.title = ''; profile.gameToOffer.platform = ''" novalidate>
 			<div class="form-group" ng-class="{ 'has-error' : offerForm.title.$invalid && !offerForm.title.$pristine }">
 			Add a new title:
@@ -56,7 +56,7 @@
 					<input type="text" name="title" class="form-control" ng-model="profile.gameToOffer.title" required />
 				</div>
 
-				<div class='col-md-2 nopadding'>
+				<div class='col-md-3 nopadding'>
 					<select class="selectpicker btn btn-default form-control" role='button' ng-model='profile.gameToOffer.platform'>
 	    				<option value="">Platform</option>
 	    				<option value="Playstation 4">PlayStation 4</option>
@@ -64,17 +64,17 @@
 	  				</select>
 	  				<p ng-show="profile.noOffPlatform" class='text-danger'>Please choose a platform.</p>
 	  			</div>
-				<div class='col-md-2 nopadding-left'>
-	  			<button type="submit" class="btn btn-primary" ng-disabled="offerForm.$invalid">add</button>
+				<div class='col-md-1 nopadding-left'>
+	  			<button type="submit" class="btn btn-primary" ng-disabled="offerForm.$invalid">Add</button>
 	  			</div>
   			</div>
   		</div>
 		</form>
 
 		<h3 class='head-space-md'>Games you are currently seeking: </h3>
-		
+
 		<div class='head-space-sm'>
-			<table class='table borderless whitesmoke' ng-repeat='game in profile.gamesSeeking'>
+			<table class='table borderless whitesmoke margin-bottom-ten' ng-repeat='game in profile.gamesSeeking'>
 				<tr>
 					<td class='col-md-1'><b>Title:</b></td> <td class='col-md-2'>{{ game.title }}</td>
 					<td class='col-md-1'><b>Platform:</b></td> <td class='col-md-2'>{{ game.platform }}</td>
@@ -90,7 +90,7 @@
 					<input type="text" name="title" class="form-control" ng-model="profile.gameToSeek.title" required />
 				</div>
 
-				<div class='col-md-2 nopadding'>
+				<div class='col-md-3 nopadding'>
 					<select class="selectpicker btn btn-default form-control" role='button' ng-model='profile.gameToSeek.platform'>
 	    				<option value="">Platform</option>
 	    				<option value="Playstation 4">PlayStation 4</option>
@@ -98,8 +98,8 @@
 	  				</select>
 	  				<p ng-show="profile.noSeekPlatform" class='text-danger'>Please choose a platform.</p>
 	  			</div>
-				<div class='col-md-2 nopadding-left'>
-	  			<button type="submit" class="btn btn-primary" ng-disabled="seekForm.$invalid">add</button>
+				<div class='col-md-1 nopadding-left'>
+	  			<button type="submit" class="btn btn-primary" ng-disabled="seekForm.$invalid">Add</button>
 	  			</div>
   			</div>
   		</div>
