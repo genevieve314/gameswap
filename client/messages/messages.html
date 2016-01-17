@@ -36,9 +36,9 @@
 
     </form>
 
-    <h3 class='head-space-md'>Messages Received:</h3>
+    <h3 class='head-space-md'>Messages:</h3>
 
-    <div ng-show='messages.messageHistory'  ng-repeat='message in messages.messageHistory | orderBy: ["username", "-createdat"]'>
+    <div ng-show='messages.messageHistory'  ng-repeat='message in messages.messageHistory | orderBy: "-createdat"'>
       <table class='table message-border table-condensed nomargin-bottom margin-top whitesmoke'>
         <tr>
           <td class='table-tag'>Date:</td>
@@ -54,8 +54,7 @@
         </tr>
       </table>
 
-      <button class='btn btn-default btn-block' ng-click='messages.reply(message.id, message.username)'>Reply</button>
-
+      <button class='btn btn-default btn-block' ng-click='messages.reply(message.id, message.username)'>reply</button>
 
     </div>
   </div>

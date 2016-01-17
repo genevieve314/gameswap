@@ -179,6 +179,17 @@ module.exports = {
     });
   },
 
+
+  allMessagesByUserFrom: function (userid, callback) {
+    var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Messages, Users WHERE Messages.userfrom = ? AND Users.id = Messages.userto;";
+
+    connection.query(sql, userid, function (err, data) {
+      if (err) console.error('error in db allMessagesByUserFrom: ', err);
+      // console.log('data in allMessagesByUserFrom: ', data);
+      callback(data);
+    })
+  },
+
   allMessages: function (userid, callback) {
     var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Users, Messages WHERE Messages.userto = ? AND Messages.userfrom = Users.id;";
 
