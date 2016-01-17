@@ -3,7 +3,7 @@ a {
 }
 
 a:hover {
-	text-decoration: underline;	
+	text-decoration: underline;
 }
 
 a:active {
@@ -20,22 +20,77 @@ h2 {
 }
 
 input {
-  width: 50%;
-  vertical-align: middle;
+	width: 50%;
+	vertical-align: middle;
 }
 
 .jumbotron {
-  position: relative;
-  background: black url("http://www.walleo.co/wp-content/uploads/2016/01/black_video_game_wallpapers_hd_wg4.jpg") center center;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  overflow: hidden;
+	position: relative;
+	background: black url("http://www.walleo.co/wp-content/uploads/2016/01/black_video_game_wallpapers_hd_wg4.jpg") center center;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	overflow: hidden;
 }
 
 .boxart {
-  max-width: 200px;
-  max-height: 200px;
+	max-width: 400px;
+	max-height: 400px;
+	/*padding: 0px 25px 50px 25px;*/
+}
+
+.vcenterparent {
+	position: relative;
+	height: 350px;
+}
+
+.vcenter {
+	position: absolute;
+	top: 50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+
+.swapbtn {
+	margin-left: 10px;
+}
+
+.signin-btn {
+	margin-top: 20px;
+	margin-bottom: 20px;
+<<<<<<< HEAD
+=======
+}
+
+.prev-button {
+	position: absolute;
+	bottom: 0;
+	margin-left:40px;
+	margin-bottom: 100px;
+}
+
+.next-button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-right:40px;
+	margin-bottom: 100px;
+>>>>>>> d03977192317a003a196b540902daec3505ceed7
+}
+
+.prev-button {
+	position: absolute;
+	bottom: 0;
+	margin-left:40px;
+	margin-bottom: 100px;
+}
+
+.next-button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-right:40px;
+	margin-bottom: 100px;
 }
 
 .text-box {
@@ -49,7 +104,7 @@ table.borderless td, table.borderless tr {
   border-left: none !important;
   border-right: none !important;
   border-color: white;
-  background-color: 
+  background-color:
 }
 
 table.message-border td, table.message-border tr {
@@ -105,11 +160,11 @@ table.margin-top {
 }
 
 .head-space-md {
-	padding-top: 50px;
+	padding-top: 20px;
 }
 
 .head-space-sm {
-	padding-top: 20px;
+	padding-top: 10px;
 }
 
 .no-head-space {
