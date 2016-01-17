@@ -7,14 +7,15 @@ var db_config = {
   database: 'gameswap',
   multipleStatements: true
 };
-var db_test = {
-  host: 'localhost',
-  port: '3306',
-  user: 'root',
-  password: 'password',
-  database: 'gameswap',
-  multipleStatements: true
-}
+// var db_test = {
+//   host: 'localhost',
+//   port: '3306',
+//   user: 'root',
+//   password: 'password',
+//   database: 'gameswap',
+//   multipleStatements: true
+// };
+
 function createConnection() {
     connection = mysql.createConnection(db_config);
 
@@ -168,22 +169,22 @@ module.exports = {
   },
 
 
-  allMessagesByUserFrom: function (userid, callback) {
-    var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Messages, Users WHERE Messages.userfrom = ? AND Users.id = Messages.userto;";
+  // allMessagesByUserFrom: function (userid, callback) {
+  //   var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Messages, Users WHERE Messages.userfrom = ? AND Users.id = Messages.userto;";
+
+  //   connection.query(sql, userid, function (err, data) {
+  //     if (err) console.error('error in db allMessagesByUserFrom: ', err);
+  //     // console.log('data in allMessagesByUserFrom: ', data);
+  //     callback(data);
+  //   })
+  // },
+
+  allMessages: function (userid, callback) {
+    var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Users, Messages WHERE Messages.userto = ? AND Messages.userfrom = Users.id;";
 
     connection.query(sql, userid, function (err, data) {
-      if (err) console.error('error in db allMessagesByUserFrom: ', err);
-      // console.log('data in allMessagesByUserFrom: ', data);
-      callback(data);
-    })
-  },
-
-  allMessagesByUserTo: function (userid, callback) {
-    var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Messages, Users WHERE Messages.userto = ? AND Users.id = Messages.userfrom;";
-
-    connection.query(sql, userid, function (err, data) {
-      if (err) console.error('error in db allMessagesByUserFrom: ', err);
-      // console.log('data in allMessagesByUserTo: ', data);
+      if (err) console.error('error in db allMessages: ', err);
+      console.log('db data in allMessages: ', data);
       callback(data);
     })
   }
