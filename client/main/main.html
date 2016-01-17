@@ -8,13 +8,13 @@
   </div>
 
 <div ng-controller='MainController as main'>
-  <header class='jumbotron no-head-space' ng-if='!main.isAuth'  ><!-- ng-if='!main.isAuth' --> 
+  <header class='jumbotron no-head-space foot-space-lg' ng-if='!main.isAuth'  >
 
     <h2 class='col-md-offset-2 col-md-8 head-space-xl foot-space-sm text-center'>
       Get the game you want, for the game you have.
     </h2>
 
-    <form name='searchForm' class='foot-space-sm col-md-offset-3 col-md-6' ng-submit='searchForm.$valid && main.searchOfferings(game)' novalidate>
+    <form name='searchForm' class='foot-space-sm col-md-offset-3 col-md-6' ng-submit='searchForm.$valid && main.searchOfferings(game); game=null' novalidate>
       <div class='form-group'>
         <input class='form-control' type='text' ng-model='game' placeholder='What game do you want?' required/>
       </div>
@@ -25,78 +25,130 @@
   <div class='container-fluid'>
     <div ng-if='!main.isAuth && main.psGames.length || main.xboxGames.length | orderBy:"[game.platform]"'>
 
-      <div class='col-md-12 text-center' ng-if='!main.isAuth && main.psGames.length === 1' class='text-center' ng-show='main.hasPlaystation === true'>
+      <div class='col-md-12 text-center h4' ng-if='!main.isAuth && main.psGames.length === 1' ng-show='main.hasPlaystation === true'>
         There is
         {{main.psGames.length}}
         gamer who wants to swap
-        {{main.psGames[0].title}}
-        ({{main.psGames[0].platform}}).
+        {{main.results[0].title}}
+        ({{main.results[0].platform}}).
       </div>
-      <div class='col-md-12 text-center' ng-if='!main.isAuth && main.psGames.length > 1' class='text-center' ng-show='main.hasPlaystation === true'>
+
+      <div class='col-md-12 text-center h4' ng-if='!main.isAuth && main.psGames.length > 1' ng-show='main.hasPlaystation === true'>
         There are
         {{main.psGames.length}}
-        gamers who wants to swap
-        {{main.psGames[0].title}}
-        ({{main.psGames[0].platform}}).
+        gamers who want to swap
+        {{main.results[0].title}}
+        ({{main.results[0].platform}}).
       </div>
+
       <div class='col-md-12' ng-if='!main.isAuth && main.psGames.length' ng-show='main.hasPlaystation === true'>
         <img class='boxart center-block' ng-src='{{main.psGames[0].thumbnail}}'>
-        <br>
-        <button ng-click='main.displayPlaystation()'>PS4</button>
-        <button ng-click='main.displayXbox()'>Xbox One</button>
       </div>
-      <div class='col-md-12' ng-if='!main.isAuth && main.psGames.length'>
-        <a class='text-center' ui-sref='signup'>Sign up</a>
+
+      <div class='col-md-12 text-center' ng-if='!main.isAuth && main.psGames.length' ng-show='main.hasPlaystation === true'>
+        <button class='btn btn-default inline active' ng-click='main.displayPlaystation()'>PS4</button>
+        <button class='btn btn-default inline active' ng-click='main.displayXbox()'>Xbox One</button>
+
       </div>
-      <div class='text-center' ng-if='main.submitted === true && main.hasPlaystation === true && !main.psGames.length'>Sorry, please try a different Playstation 4 game.</div>
-      <div class='col-md-12 text-center' ng-if='!main.isAuth && main.xboxGames.length === 1' class='text-center' ng-show='main.hasXbox === true'>
+
+      <div class='col-md-4 col-md-offset-4' ng-if='!main.isAuth && main.psGames.length' ng-show='main.hasPlaystation === true'>
+        <a class='btn btn-primary btn-lg btn-block active center-block signin-btn' role='button' ui-sref='signin'>Sign in to start swapping!</a>
+      </div>
+
+      <div class='text-center h4' ng-if='main.submitted === true && main.hasPlaystation === true && !main.psGames.length'>Sorry, please try a different Playstation 4 game.</div>
+
+      <div class='col-md-12 text-center h4' ng-if='!main.isAuth && main.xboxGames.length === 1' ng-show='main.hasXbox === true'>
         There is
         {{main.xboxGames.length}}
         gamer who wants to swap
-        {{main.xboxGames[0].title}}
-        ({{main.xboxGames[0].platform}}).
+        {{main.results[0].title}}
+        ({{main.results[0].platform}}).
       </div>
-      <div class='col-md-12 text-center' ng-if='!main.isAuth && main.xboxGames.length > 1' ng-show='main.hasXbox === true'>
+
+      <div class='col-md-12 text-center h4' ng-if='!main.isAuth && main.xboxGames.length > 1' ng-show='main.hasXbox === true'>
         There are
         {{main.xboxGames.length}}
-        gamers who wants to swap
-        {{main.xboxGames[0].title}}
-        ({{main.xboxGames[0].platform}}).
+        gamers who want to swap
+        {{main.results[0].title}}
+        ({{main.results[0].platform}}).
       </div>
+
       <div class='col-md-12' ng-if='!main.isAuth && main.xboxGames.length' ng-show='main.hasXbox === true'>
         <img class='boxart center-block' ng-src='{{main.xboxGames[0].thumbnail}}'>
       </div>
+
       <div class='col-md-12 text-center' ng-if='!main.isAuth && main.xboxGames.length' ng-show='main.hasXbox === true'>
         <button class='btn btn-default inline active' ng-click='main.displayPlaystation()'>PS4</button>
         <button class='btn btn-default inline active' ng-click='main.displayXbox()'>Xbox One</button>
       </div>
-      <div class='text-center' ng-if='main.submitted === true && main.hasXbox === true && !main.xboxGames.length'>Sorry, please try a different Xbox One game.</div>
+
+      <div class='col-md-4 col-md-offset-4' ng-if='!main.isAuth && main.xboxGames.length' ng-show='main.hasXbox === true'>
+        <a class='btn btn-primary btn-lg btn-block active center-block signin-btn' role='button' ui-sref='signin'>Sign in to start swapping!</a>
+      </div>
+
+      <div class='text-center h4' ng-if='main.submitted === true && main.hasXbox === true && !main.xboxGames.length'>Sorry, please try a different Xbox One game.</div>
+
     </div>
-    <div class='text-center' ng-if='main.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
+
+    <div class='text-center h4' ng-if='main.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
+
   </div>
 
   <div class='container-fluid'>
-    <div class='row' ng-if='main.isAuth && main.swaps.length'>  <!-- NOTHING SHOWS IF USER IS AUTHORIZED BUT HASN'T GOT ANY SWAPS -->
+
+    <div class='text-center h2' ng-if='main.isAuth && !main.swaps.length'>
+      <p>No swaps found!</p>
+      <p>Add more games to your profile to start swapping.</p>
+    </div>
+
+    <div class='row' ng-if='main.isAuth && main.swaps.length'>
+
       <div class='col-md-4 col-md-offset-1 text-center h1'>
         You Have
       </div>
+
       <div class='col-md-4 col-md-offset-2 text-center h1'>
         You Want
       </div>
+
       <div class='col-md-4 col-md-offset-1 text-center'>
         <img class='boxart center-block' ng-src='{{main.swaps[main.first].thumbnail}}'>
       </div>
+
       <div class='col-md-2 vcenterparent'>
+
         <button class='btn btn-primary btn-block vcenter center-block swapbtn' ng-click='main.addRecipient(main.swaps[main.first].id, main.swaps[main.first].username)' ui-sref='messages'>Swap!</button>
-        <button class='btn btn-default inline active prev-button' ng-click='main.previous()'>Prev</button>
-        <button class='btn btn-default inline active next-button' ng-click='main.next()'>Next</button>
+
+        <div class='col-md-6 vcenterparent'>
+
+          <button class='btn btn-default inline active prev-button' ng-click='main.previous()'>Prev</button>
+
+        </div>
+
+        <div class='col-md-6 vcenterparent'>
+
+          <button class='btn btn-default inline active next-button' ng-click='main.next()'>Next</button>
+
+        </div>
+
       </div>
+
       <div class='col-md-4 text-center nopadding'>
+
         <img class='boxart center-block' ng-src='{{main.swaps[main.second].thumbnail}}'>
+
       </div>
+
+      <div class='col-md-4 col-md-offset-1 text-center h1'>
+        {{main.userInfo.username}}
+      </div>
+
+      <div class='col-md-4 col-md-offset-2 text-center h1'>
+        {{main.swaps[main.first].username}}
+      </div>
+
     </div>
-    <div class='col-md-4 col-md-offset-4' ng-if='!main.isAuth && main.xboxGames.length'>
-      <a class='btn btn-primary btn-lg btn-block active center-block signin-btn' role='button' ui-sref='signup'>Sign in to start swapping!</a>
-    </div>
+
   </div>
+
 </div>

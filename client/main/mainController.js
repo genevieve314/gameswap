@@ -21,6 +21,7 @@ angular
       this.hasPlaystation = false;
       this.hasXbox = false;
       this.results = data.results;
+      console.log(this.results[0].title);
       for (var i = 0; i < this.results.length; i++) {
         if (this.results[i].title.toLowerCase() === game.toLowerCase()) {
           if (this.results[i].platform === 'Playstation 4') {
