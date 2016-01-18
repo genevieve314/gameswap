@@ -15,36 +15,36 @@ angular
 
   .config(function($stateProvider, $urlRouterProvider, $httpProvider){
 
-	$urlRouterProvider.otherwise('/');
+	  $urlRouterProvider.otherwise('/');
 
-	$stateProvider
-		.state('main', {
-			url: '/',
-			templateUrl: './main/main.html',
-		})
-		.state('signin', {
-			url: '/signin',
-			templateUrl: './auth/signin/signin.html',
-		})
-		.state('signup', {
-			url: '/signup',
-			templateUrl: './auth/signup/signup.html',
-		})
-		.state('userprofile', {
-			url: '/userprofile',
-		  templateUrl: './userprofile/userprofile.html',
-      authenticate: true
-		})
-    .state('messages', {
-      url: '/messages',
-      templateUrl: './messages/messages.html',
-      authenticate: true
-    });
+	  $stateProvider
+		  .state('main', {
+			  url: '/',
+			  templateUrl: './main/main.html',
+		  })
+		  .state('signin', {
+			  url: '/signin',
+			  templateUrl: './auth/signin/signin.html',
+		  })
+		  .state('signup', {
+			  url: '/signup',
+			  templateUrl: './auth/signup/signup.html',
+		  })
+		  .state('userprofile', {
+			  url: '/userprofile',
+		    templateUrl: './userprofile/userprofile.html',
+        authenticate: true
+		  })
+      .state('messages', {
+        url: '/messages',
+        templateUrl: './messages/messages.html',
+        authenticate: true
+      });
 
-	$httpProvider.interceptors.push('AttachTokens');
+	  $httpProvider.interceptors.push('AttachTokens');
 
 })
-  .factory('AttachTokens', function ($window) {
+.factory('AttachTokens', function ($window) {
   var attach = {
     request: function (object) {
       var jwt = $window.localStorage.getItem('com.gameswap');
@@ -59,16 +59,10 @@ angular
 })
 .run(function ($rootScope, $location, AuthServices, IndexServices) {
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-
-    console.log("!AuthServices.isAuth() returns", !AuthServices.isAuth())
-    console.log("toState: ",toState, "toParams: ",toParams);
     IndexServices.checkState();
-
-
     if (toState.authenticate && !AuthServices.isAuth()) {
       e.preventDefault();
-      $location.path('/signin');
-      
+      $location.path('/signin');      
     }
   });
 });

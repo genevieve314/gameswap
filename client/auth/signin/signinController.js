@@ -10,20 +10,17 @@ angular.module('auth.signin', [])
 	 	console.log(user);
 	 	AuthServices.checkSignin(user)
 	 		.then(function(token){
-	 		  if(token){
-	 			console.log('the token is: ', token);
-
-        		$location.path('/userprofile');
-        	  }	else {
-        	  	console.log('Error authenticating user');
-        	  	signin.email = '';
-        	  	signin.password = ''; // clear the fields
-        	  	signin.isInvalid = true;
-        	  }
+	 		    if(token){
+        		    $location.path('/userprofile');
+        	    } else {
+        	  		console.log('Error authenticating user');
+        	  		signin.email = '';
+        	  		signin.password = ''; 
+        	  		signin.isInvalid = true;
+        	    }
 	 		})
 	 		.catch(function(error) {
-	 			console.log("this is the error message from the signin Controller: ");
-        		console.error(error);								
+        		console.error(error);	// this error never actually fires							
       		}); 
 	}
 })
