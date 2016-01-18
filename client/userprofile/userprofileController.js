@@ -30,7 +30,7 @@ angular.module('userprofile', [])
       ProfileServices.updateProfile(update)
         .then(function(resp){
 
-          setTimeout(loadProfile, 1000);
+          setTimeout(loadProfile, 200);
 
         });
       this.toggleUpdate();
@@ -44,7 +44,7 @@ angular.module('userprofile', [])
           condition: game.condition
   			}).then(function(resp){
 
-          setTimeout(loadProfile, 1000);
+          setTimeout(loadProfile, 200);
         });
       } else {
         console.log('ERROR: no platform chosen');
@@ -59,7 +59,7 @@ angular.module('userprofile', [])
           platform: game.platform 
         }).then(function(resp){
 
-          setTimeout(loadProfile, 1000);
+          setTimeout(loadProfile, 200);
         });
       } else {
         console.log('ERROR: no platform chosen');
