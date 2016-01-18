@@ -3,7 +3,6 @@ angular.module('index.services', [])
 	
 	this.checkState = function(){
 		var hasToken = !!$window.localStorage.getItem('com.gameswap')
-  		console.log('checkState called');
   		console.log('hasToken: ', hasToken);
     	if (hasToken) {
       		this.isAuth = true;
