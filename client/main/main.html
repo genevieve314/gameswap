@@ -1,9 +1,10 @@
 <div class='row nav head-space-md foot-space-sm' ng-controller='IndexController as index'>
     <div class='col-md-1'></div>
     <a ui-sref='main' class='col-md-2'>GameSwap</a>
-    <div class='col-md-6'></div>
-    <a class='col-md-1 col-md-offset-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
+    <div class='col-md-5'></div>
+    <a class='col-md-1 col-md-offset-2' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
     <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
+    <a ng-show='index.isAuth' class='col-md-1' ui-sref='messages'>Messages</a>
     <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
   </div>
 
@@ -29,16 +30,16 @@
         There is
         {{main.psGames.length}}
         gamer who wants to swap
-        {{main.results[0].title}}
-        ({{main.results[0].platform}}).
+        {{main.psGames[0].title}}
+        (Playstation 4).
       </div>
 
       <div class='col-md-12 text-center h4' ng-if='!main.isAuth && main.psGames.length > 1' ng-show='main.hasPlaystation === true'>
         There are
         {{main.psGames.length}}
         gamers who want to swap
-        {{main.results[0].title}}
-        ({{main.results[0].platform}}).
+        {{main.psGames[0].title}}
+        (Playstation 4).
       </div>
 
       <div class='col-md-12' ng-if='!main.isAuth && main.psGames.length' ng-show='main.hasPlaystation === true'>
@@ -61,16 +62,16 @@
         There is
         {{main.xboxGames.length}}
         gamer who wants to swap
-        {{main.results[0].title}}
-        ({{main.results[0].platform}}).
+        {{main.xboxGames[0].title}}
+        (Xbox One).
       </div>
 
       <div class='col-md-12 text-center h4' ng-if='!main.isAuth && main.xboxGames.length > 1' ng-show='main.hasXbox === true'>
         There are
         {{main.xboxGames.length}}
         gamers who want to swap
-        {{main.results[0].title}}
-        ({{main.results[0].platform}}).
+        {{main.xboxGames[0].title}}
+        (Xbox One).
       </div>
 
       <div class='col-md-12' ng-if='!main.isAuth && main.xboxGames.length' ng-show='main.hasXbox === true'>
@@ -96,11 +97,6 @@
 
   <div class='container-fluid'>
 
-    <div class='text-center h2' ng-if='main.isAuth && !main.swaps.length'>
-      <p>No swaps found!</p>
-      <p>Add more games to your profile to start swapping.</p>
-    </div>
-
     <div class='row' ng-if='main.isAuth && main.swaps.length'>
 
       <div class='col-md-4 col-md-offset-1 text-center h1'>
@@ -117,7 +113,7 @@
 
       <div class='col-md-2 vcenterparent'>
         <div class="row vcenterparent">
-          <button class='vcenter col-md-12 btn btn-primary btn-block center-block swapbtn' ng-click='main.addRecipient(main.swaps[main.first].id, main.swaps[main.first].username)' ui-sref='messages'>Swap!</button>
+          <button class='vcenter col-md-12 btn btn-primary btn-block center-block swapbtn' ng-click='main.addRecipient(main.swaps[main.second].id, main.swaps[main.second].username)' ui-sref='messages'>Swap!</button>
         </div>
 
         <div class="row">
@@ -148,9 +144,14 @@
       </div>
 
       <div class='col-md-4 col-md-offset-2 text-center h1'>
-        {{main.swaps[main.first].username}}
+        {{main.swaps[main.second].username}}
       </div>
 
+    </div>
+
+    <div class='text-center h2' ng-if='main.isAuth && !main.swaps.length && main.showNoResults'>
+      <p>No swaps found!</p>
+      <p>Add more games to your profile to start swapping.</p>
     </div>
 
   </div>

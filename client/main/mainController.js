@@ -10,9 +10,9 @@ angular
   this.signOut = function(){
     AuthServices.signOut();
   };
-  this.psGames = [];
-  this.xboxGames = [];
   this.searchOfferings = function(game) {
+    this.psGames = [];
+    this.xboxGames = [];
     return MainService.searchOfferings({
       game: game
     })
@@ -67,10 +67,14 @@ angular
   this.displayPlaystation = function() {
     this.hasXbox = false;
     this.hasPlaystation = true;
+    console.log(this.hasPlaystation);
+    console.log(this.hasXbox);
   };
   this.displayXbox = function() {
     this.hasXbox = true;
     this.hasPlaystation = false;
+    console.log(this.hasPlaystation);
+    console.log(this.hasXbox);
   };
   this.addRecipient = function(recipientId, recipientName) {
     MainService.addRecipient(recipientId, recipientName);
@@ -151,8 +155,8 @@ angular
                   if (this.ps4Unique[this.psMatches[k].createdat] === undefined) {
                     this.ps4Unique[this.psMatches[k].createdat] = this.psMatches[k].createdat;
                     console.log('unique ps4 games',this.ps4Unique[this.psMatches[k].createdat]);
-                    this.swaps.push(this.psMatches[k]);
                     this.swaps.push(item);
+                    this.swaps.push(this.psMatches[k]);
                   }
                 }
               }
@@ -160,8 +164,8 @@ angular
                 if (this.psGamesSeeking[j].username === this.xboxMatches[o].username) {
                   if (this.ps4Unique[this.xboxMatches[o].createdat] === undefined) {
                     this.ps4Unique[this.xboxMatches[o].createdat] = this.xboxMatches[o].createdat;
-                    this.swaps.push(this.xboxMatches[o]);
                     this.swaps.push(item);
+                    this.swaps.push(this.xboxMatches[o]);
                   }
                 }
               }
@@ -176,8 +180,8 @@ angular
                 if (this.xboxGamesSeeking[l].username === this.psMatches[m].username) {
                   if (this.xboxUnique[this.psMatches[m].createdat] === undefined) {
                     this.xboxUnique[this.psMatches[m].createdat] = this.psMatches[m].createdat;
-                    this.swaps.push(this.psMatches[m]);
                     this.swaps.push(item);
+                    this.swaps.push(this.psMatches[m]);
                   }
                 }
               }
@@ -185,8 +189,8 @@ angular
                 if (this.xboxGamesSeeking[l].username === this.xboxMatches[n].username) {
                   if (this.xboxUnique[this.xboxMatches[n].createdat] === undefined) {
                     this.xboxUnique[this.xboxMatches[n].createdat] = this.xboxMatches[n].createdat;
-                    this.swaps.push(this.xboxMatches[n]);
                     this.swaps.push(item);
+                    this.swaps.push(this.xboxMatches[n]);
                   }
                 }
               }
