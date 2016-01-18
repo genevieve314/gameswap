@@ -24,6 +24,7 @@ angular
       this.recipientName = recipientName;
     };
     this.getRecipientId = function() {
+      console.log('recipientId', this.recipientId);
       return this.recipientId;
 
     };

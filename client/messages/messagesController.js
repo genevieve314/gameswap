@@ -2,6 +2,7 @@ angular
   .module('messages.controller', [])
   .controller('MessagesController', function (MainService, MessagesService, ProfileServices) {
     this.toId = MainService.getRecipientId();
+    console.log(this.toId);
     this.toName = MainService.getRecipientName();
     // console.log('this.to',this.to);
     this.sendMessage = function (messageText, to) {
@@ -31,15 +32,14 @@ angular
       ProfileServices.getProfileData()
         .then(function (resp) {
           this.username = resp.username;
-          this.toId = resp.id;  
         }.bind(this));
     };
 
     this.reply = function (userid, username) {
-      this.toid = userid;
+      this.toId = userid;
       this.toName = username;
     };
 
+    this.getUser();
     this.getMessages();
-    this.from = this.getUser();
 });
