@@ -1,6 +1,6 @@
 angular
   .module('messages.controller', [])
-  .controller('MessagesController', function (MainService, MessagesService, ProfileServices) {
+  .controller('MessagesController', function ($window, MainService, MessagesService, ProfileServices) {
     this.toId = MainService.getRecipientId();
     console.log(this.toId);
     this.toName = MainService.getRecipientName();
@@ -38,6 +38,7 @@ angular
     this.reply = function (userid, username) {
       this.toId = userid;
       this.toName = username;
+      $window.document.getElementById('messageText').focus();
     };
 
     this.getUser();
