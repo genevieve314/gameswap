@@ -56,7 +56,7 @@
         <a class='btn btn-primary btn-lg btn-block active center-block signin-btn' role='button' ui-sref='signin'>Sign in to start swapping!</a>
       </div>
 
-      <div class='text-center h4' ng-if='main.submitted === true && main.hasPlaystation === true && !main.psGames.length'>Sorry, please try a different Playstation 4 game.</div>
+      <div class='text-center h4' ng-if='!main.isAuth && main.submitted === true && main.hasPlaystation === true && !main.psGames.length'>Sorry, please try a different Playstation 4 game.</div>
 
       <div class='col-md-12 text-center h4' ng-if='!main.isAuth && main.xboxGames.length === 1' ng-show='main.hasXbox === true'>
         There is
@@ -87,11 +87,11 @@
         <a class='btn btn-primary btn-lg btn-block active center-block signin-btn' role='button' ui-sref='signin'>Sign in to start swapping!</a>
       </div>
 
-      <div class='text-center h4' ng-if='main.submitted === true && main.hasXbox === true && !main.xboxGames.length'>Sorry, please try a different Xbox One game.</div>
+      <div class='text-center h4' ng-if='!main.isAuth && main.submitted === true && main.hasXbox === true && !main.xboxGames.length'>Sorry, please try a different Xbox One game.</div>
 
     </div>
 
-    <div class='text-center h4' ng-if='main.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
+    <div class='text-center h4' ng-if='!main.isAuth && main.submitted === true && !main.results.length'>Sorry, please try a different game.</div>
 
   </div>
 
@@ -113,7 +113,7 @@
 
       <div class='col-md-2 vcenterparent'>
         <div class="row vcenterparent">
-          <button class='vcenter col-md-12 btn btn-primary btn-block center-block swapbtn' ng-click='main.addRecipient(main.swaps[main.second].id, main.swaps[main.second].username)' ui-sref='messages'>Swap!</button>
+          <button class='vcenter col-md-12 btn btn-primary btn-block btn-lg center-block swapbtn' ng-click='main.addRecipient(main.swaps[main.second].id, main.swaps[main.second].username)' ui-sref='messages'>Swap!</button>
         </div>
 
         <div class="row">
@@ -149,7 +149,7 @@
 
     </div>
 
-    <div class='text-center h2' ng-if='main.isAuth && !main.swaps.length && main.showNoResults'>
+    <div class='text-center h2' ng-if='main.isAuth && !main.swaps.length'>
       <p>No swaps found!</p>
       <p>Add more games to your profile to start swapping.</p>
     </div>

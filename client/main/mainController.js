@@ -17,9 +17,9 @@ angular
       game: game
     })
     .then(function(data) {
-      this.submitted = true;
       this.hasPlaystation = false;
       this.hasXbox = false;
+      this.submitted = true;
       this.results = data.results;
       console.log(this.results[0].title);
       for (var i = 0; i < this.results.length; i++) {
@@ -27,11 +27,13 @@ angular
           if (this.results[i].platform === 'Playstation 4') {
             if (this.hasPlaystation === false) {
               this.hasPlaystation = true;
+              this.hasXbox = false;
             }
             this.psGames.push(this.results[i]);
           } else if (this.results[i].platform === 'Xbox One') {
-            if (this.hasPlaystation === false) {
+            if (this.hasXbox === false) {
               this.hasXbox = true;
+              this.hasPlaystation = false;
             }
             this.xboxGames.push(this.results[i]);
           }
