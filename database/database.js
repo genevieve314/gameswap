@@ -9,7 +9,6 @@ var createConnection = function createConnection() {
         if (err) {
           console.error('error connecting: ' + err.stack);
         }
-        console.log('connected as id ' + connection.threadId);
     });
 
     connection.on('error',function(err){
@@ -96,8 +95,6 @@ module.exports = {
       if (err) {
         console.error('error 1 in db addOffering: ', err);
       }
-
-      console.log('game id in addOffering: ', data[0].id);
       insertValues.push(data[0].id);
       connection.query(insert, insertValues, function(err, data) {
         if (err) {
@@ -182,24 +179,11 @@ module.exports = {
     });
   },
 
-
-  // allMessagesByUserFrom: function (userid, callback) {
-  //   var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Messages, Users WHERE Messages.userfrom = ? AND Users.id = Messages.userto;";
-
-  //   connection.query(sql, userid, function (err, data) {
-  //     if (err) console.error('error in db allMessagesByUserFrom: ', err);
-  //     // console.log('data in allMessagesByUserFrom: ', data);
-  //     callback(data);
-  //   })
-  // },
-
-
   allMessages: function (userid, callback) {
     var sql = "SELECT Messages.message, Messages.createdat, Users.username, Users.id, Users.email FROM Users, Messages WHERE Messages.userto = ? AND Messages.userfrom = Users.id;";
 
     connection.query(sql, userid, function (err, data) {
       if (err) console.error('error in db allMessages: ', err);
-      console.log('db data in allMessages: ', data);
       callback(data);
     });
   }
