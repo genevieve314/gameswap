@@ -5,15 +5,12 @@ angular.module('profile.service', [])
 	var getProfileData = function(){
 		var token = $window.localStorage.getItem('com.gameswap');
 
-		// console.log("token in getProfileData ", token);
-
 		return $http({
 			method: 'POST',
 			url: '/profile',
 			data: {token: token}
 		})
 		.then(function(resp){
-			// console.log("resp in getProfileData ", resp);
 			return resp.data;
 		}, function(error) {
 			console.error('ERROR in getProfileData: ', error);
@@ -22,8 +19,6 @@ angular.module('profile.service', [])
 
 	var addGameOffering = function(game){
 		var token = $window.localStorage.getItem('com.gameswap');
-
-		console.log('game var passed in to addGameOffering service: ', game);
 
 		return $http({
 			method: 'POST',
@@ -40,8 +35,6 @@ angular.module('profile.service', [])
 
 	var addGameSeeking = function(game){
 		var token = $window.localStorage.getItem('com.gameswap');
-
-		console.log('game var passed in to addGameSeeking service: ', game);
 
 		return $http({
 			method: 'POST',
@@ -65,7 +58,6 @@ angular.module('profile.service', [])
 			geoloc: data.geoloc || "",
 			profilepic: data.profilepic || ""
 		};
-		console.log("update object in updateProfile ", update);
 
 		var token = $window.localStorage.getItem('com.gameswap');
 
@@ -80,13 +72,12 @@ angular.module('profile.service', [])
 			}, function(error) {
 				console.error('ERROR!!! ', error);
 			});
-		};
+	};
 
-return {
-	getProfileData: getProfileData,
-	addGameOffering: addGameOffering,
-	addGameSeeking: addGameSeeking,
-	updateProfile: updateProfile
-};
-
+	return {
+		getProfileData: getProfileData,
+		addGameOffering: addGameOffering,
+		addGameSeeking: addGameSeeking,
+		updateProfile: updateProfile
+	};
 });
