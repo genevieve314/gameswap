@@ -91,7 +91,7 @@ angular.module('userprofile', [])
   	}
 
     loadProfile();
-    console.log('LOADING PROFILE CONTROLLER');
+   // console.log('LOADING PROFILE CONTROLLER');
 
     /* getOffering and getSeeking are handled by loadProfile for now...
 

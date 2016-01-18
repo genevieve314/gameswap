@@ -82,37 +82,6 @@ angular.module('profile.service', [])
 			});
 		};
 
-
-		/*
-		var getOfferingList = function($http){
-		var token = $window.localStorage.getItem('com.gameswap');
-		return $http({
-		method: 'POST',
-		url: null   // ASK ERIC ABOUT DB ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
-		data: {token: token}
-	})
-	.then(function(resp){
-	return resp.data;
-}, function(error) {
-console.error('ERROR in getOfferingList: ', error);
-})
-};*/
-/*
-var getSeekingList = function($http){
-var token = $window.localStorage.getItem('com.gameswap');
-
-return $http({
-method: 'POST',
-// url: ''  // ASK ERIC ABOUT ENDPOINTS FOR GETTING OFFERING AND SEEKING LIBRARIES
-data: {token: token}
-})
-.then(function(resp){
-return resp.data;
-}, function(error) {
-console.error('ERROR in getSeekingList: ', error);
-})
-};*/
-
 return {
 	getProfileData: getProfileData,
 	addGameOffering: addGameOffering,
