@@ -7,7 +7,6 @@ angular.module('auth.signin', [])
 	signin.submit = function(){
 		user.email = signin.email;
 	 	user.password = signin.password;
-	 	console.log(user);
 	 	AuthServices.checkSignin(user)
 	 		.then(function(token){
 	 		    if(token){
@@ -15,12 +14,12 @@ angular.module('auth.signin', [])
         	    } else {
         	  		console.log('Error authenticating user');
         	  		signin.email = '';
-        	  		signin.password = ''; 
+        	  		signin.password = '';
         	  		signin.isInvalid = true;
         	    }
 	 		})
 	 		.catch(function(error) {
-        		console.error(error);	// this error never actually fires							
-      		}); 
+        		console.error(error);	// this error never actually fires
+      		});
 	}
 })
