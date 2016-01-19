@@ -27,15 +27,19 @@ router.post('/signin',function(req, res, next) {
   db.findUser(email, function(data) {
     if(data.length){
       var foundUser = data[0];
-      //TODO compare password async
-      if(bcrypt.compareSync(password, foundUser.password)) {
-        foundUser.id;
-        console.log('success logging in');
-        auth.authenticateUser(foundUser.id, email, res, req);
-      }else {
-        console.error('failed logging '+email+'in!');
-        res.sendStatus(500);
-      }
+      bcrypt.compare(password, foundUser.password, function(err, result){
+        if(err) {
+          throw err
+        }
+        if(result) {
+          foundUser.id;
+          console.log('success logging in');
+          auth.authenticateUser(foundUser.id, email, res, req);
+        }else {
+          console.error('failed logging '+email+'in!');
+          res.sendStatus(500);
+        }
+      });
     }else {
       console.error('user',email,'not found');
       res.sendStatus(500);
@@ -65,12 +69,15 @@ router.post('/signup',function(req, res, next) {
 
   db.findUser(email,function(data) {
     if(!data.length) {
-      //TODO hash password async
-      var hash = bcrypt.hashSync(password, 10);
-      db.addUser(email, username, hash, city, function(user) {
-        id =  user[0].id;
-        auth.authenticateUser(id, email, res);
+      bcrypt.genSalt(10, function(err, salt){
+        bcrypt.hash(password, salt, function(err, hash){
+          db.addUser(email, username, hash, city, function(user) {
+            id =  user[0].id;
+            auth.authenticateUser(id, email, res);
+        });
       });
+
+    });
     }else {
       console.error('user already '+email+' exists!');
       res.sendStatus(500);
