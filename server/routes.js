@@ -212,16 +212,6 @@ router.post('/searchseeking', auth.checkUser, function(req, res, next) {
   }
 });
 
-
-// router.get('/getmessagesfrom', auth.checkUser, function(req, res, next){
-//   var userfrom = req.user.id;
-//   console.log('user in get messages from, ',req.user);
-//   db.allMessagesByUserFrom(userfrom, function(results){
-//     console.log('messagesfrom results', results);
-//     res.json({results: results});
-//   })
-// });
-
 router.get('/getmessages', auth.checkUser, function(req, res, next){
   var userto = req.user.id;
   console.log('getting messges route hit');
