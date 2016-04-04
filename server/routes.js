@@ -218,10 +218,9 @@ router.get('/getmessages', auth.checkUser, function(req, res, next){
 
   console.log('req.user in getmessages route: ', req.user)
   db.allMessages(userto, function(results){
-
     res.json({results: results});
   })
-})
+});
 
 router.post('/addmessage', auth.checkUser, function(req, res, next) {
   var userfrom = req.user.id;
@@ -231,6 +230,16 @@ router.post('/addmessage', auth.checkUser, function(req, res, next) {
   db.addMessage(userfrom, userto, message);
   res.sendStatus(201);
 });
+
+router.get('/getmatches', auth.checkUser, function(req, res, next){
+  console.log('in /getmatches');
+  var user = req.user.id;
+
+  db.allGameMatchesByUser(user, function(results){
+    console.log('matches in getmatches route: ', results)
+    res.json({results: results})
+  })
+})
 
 
 module.exports = router;

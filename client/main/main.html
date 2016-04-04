@@ -1,21 +1,20 @@
 <div class='row nav head-space-md foot-space-sm' ng-controller='IndexController as index'>
-    <div class='col-md-1'></div>
-    <a ui-sref='main' class='col-md-2'>GameSwap</a>
-    <div class='col-md-5'></div>
-    <a class='col-md-1 col-md-offset-2' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
-    <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
-    <a ng-show='index.isAuth' class='col-md-1' ui-sref='messages'>Messages</a>
-    <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
+    <div class='col-md-1 col-sm-1 col-xs-1'></div>
+    <a ui-sref='main' class='col-md-2 col-sm-1'>GameSwap</a>
+    <a class='col-md-offset-7 col-md-1 col-sm-offset-6 col-sm-2 col-xs-offset-5' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
+    <a ng-show='index.isAuth' class='col-md-offset-5 col-md-1 col-sm-offset-5 col-sm-1 col-xs-offset-1' ui-sref='userprofile'>Profile</a>
+    <a ng-show='index.isAuth' class='col-md-1 col-sm-1' ui-sref='messages'>Messages</a>
+    <a ng-show='index.isAuth' class='col-md-1 col-sm-2' ng-click="index.signOut()" ui-sref='signin'>Sign Out</a>
   </div>
 
 <div ng-controller='MainController as main'>
   <header class='jumbotron no-head-space foot-space-lg' ng-if='!main.isAuth'  >
 
-    <h2 class='col-md-offset-2 col-md-8 head-space-xl foot-space-sm text-center'>
+    <h2 class='col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 head-space-xl foot-space-sm text-center'>
       Get the game you want, for the game you have.
     </h2>
 
-    <form name='searchForm' class='foot-space-sm col-md-offset-3 col-md-6' ng-submit='searchForm.$valid && main.searchOfferings(game); game=""' novalidate>
+    <form name='searchForm' class='foot-space-sm col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10' ng-submit='searchForm.$valid && main.searchOfferings(game); game=""' novalidate>
       <div class='form-group'>
         <input class='form-control' type='text' ng-model='game' placeholder='What game do you want?' required/>
       </div>

@@ -1,16 +1,14 @@
 <div class='row nav head-space-md foot-space-sm' ng-controller='IndexController as index'>
-  <div class='col-md-1'></div>
-  <a ui-sref='main' class='col-md-2'>GameSwap</a>
-  <div class='col-md-5'></div>
-  <a class='col-md-1 col-md-offset-2' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
-  <a ng-show='index.isAuth' class='col-md-1' ui-sref='userprofile'>Profile</a>
-  <a ng-show='index.isAuth' class='col-md-1' ui-sref='messages'>Messages</a>
-  <a ng-show='index.isAuth' class='col-md-1' ng-click="index.signOut()" ui-sref='main'>Sign Out</a>
+  <div class='col-md-1 col-sm-1 col-xs-1'></div>
+  <a ui-sref='main' class='col-md-2 col-sm-1'>GameSwap</a>
+  <a class='col-md-offset-7 col-md-1 col-sm-offset-6 col-sm-2 col-xs-offset-5 col-xs-1' ng-show='!index.isAuth' ui-sref='signin'>  Sign In  </a>
+  <a ng-show='index.isAuth' class='col-md-offset-5 col-md-1 col-sm-offset-5 col-sm-1 col-xs-offset-1' ui-sref='userprofile'>Profile</a>
+  <a ng-show='index.isAuth' class='col-md-1 col-sm-1' ui-sref='messages'>Messages</a>
+  <a ng-show='index.isAuth' class='col-md-1 col-sm-2' ng-click="index.signOut()" ui-sref='main'>Sign Out</a>
 </div>
 
-<div class='container-fluid col-md-offset-3 col-md-6' ng-controller='ProfileController as profile'>
+<div class='container-fluid col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10' ng-controller='ProfileController as profile'>
   <h3 class='head-space-md'>Your profile</h3>
-
   <table class='table message-border table-condensed'>
     <tr>
       <td class='table-tag'>Username:</td>
@@ -34,7 +32,7 @@
     <form ng-show='profile.updateClicked === true'>
       <input class='form-control' type='text' ng-model='profile.address.city' placeholder="City" />
       <br>
-      <button class='btn btn-default' ng-click='profile.submitUpdate(profile.address)'>Submit Edits</button>
+      <button class='btn btn-sm btn-xs btn-default' ng-click='profile.submitUpdate(profile.address)'>Submit Edits</button>
     </form>
   </div>
 
@@ -42,8 +40,8 @@
 
   <table class='table borderless whitesmoke margin-bottom-ten' ng-repeat='game in profile.gamesOffered'>
     <tr>
-      <td class='col-md-1'><b>Title:</b></td> <td class='col-md-2'>{{ game.title }}</td>
-      <td class='col-md-1'><b>Platform:</b></td> <td class='col-md-2'>{{ game.platform }}</td>
+      <td class='col-md-1 col-sm-1 col-xs-1'><b>Title:</b></td> <td class='col-md-2 col-sm-2 col-xs-2'>{{ game.title }}</td>
+      <td class='col-md-1 col-sm-1 col-xs-1'><b>Platform:</b></td> <td class='col-md-2 col-sm2 col-xs-2'>{{ game.platform }}</td>
     </tr>
   </table>
 
@@ -52,11 +50,11 @@
     <div class="form-group" ng-class="{ 'has-error' : offerForm.title.$invalid && !offerForm.title.$pristine }">
       Add a new title:
       <div class='row'>
-        <div class='col-md-8 nopadding-right'>
+        <div class='col-md-8 col-sm-7 col-xs-7 nopadding-right'>
           <input type="text" name="title" class="form-control" ng-model="profile.gameToOffer.title" required />
         </div>
 
-        <div class='col-md-3 nopadding'>
+        <div class='col-md-3 col-sm-3 col-xs-3 nopadding'>
           <select class="selectpicker btn btn-default form-control" role='button' ng-model='profile.gameToOffer.platform'>
             <option value="">Platform</option>
             <option value="Playstation 4">PlayStation 4</option>
@@ -64,7 +62,7 @@
           </select>
           <p ng-show="profile.noOffPlatform" class='text-danger'>Please choose a platform.</p>
         </div>
-        <div class='col-md-1 nopadding-left'>
+        <div class='col-md-1 col-sm-1 col-xs-1 nopadding-left'>
           <button type="submit" class="btn btn-primary" ng-disabled="offerForm.$invalid">Add</button>
         </div>
       </div>
@@ -76,8 +74,8 @@
   <div class='head-space-sm'>
     <table class='table borderless whitesmoke margin-bottom-ten' ng-repeat='game in profile.gamesSeeking'>
       <tr>
-        <td class='col-md-1'><b>Title:</b></td> <td class='col-md-2'>{{ game.title }}</td>
-        <td class='col-md-1'><b>Platform:</b></td> <td class='col-md-2'>{{ game.platform }}</td>
+        <td class='col-md-1 col-sm-1 col-xs-1'><b>Title:</b></td> <td class='col-md-2 col-sm-2 col-xs-2'>{{ game.title }}</td>
+        <td class='col-md-1 col-sm-1 col-xs-1'><b>Platform:</b></td> <td class='col-md-2 col-sm-2 col-xs-2'>{{ game.platform }}</td>
       </tr>
     </table>
   </div>

@@ -48,7 +48,7 @@ angular.module('userprofile', [])
         });
       } else {
         console.log('ERROR: no platform chosen');
-        this.noOffPlatform = true;         
+        this.noOffPlatform = true;
       }
   	};
 
@@ -56,21 +56,26 @@ angular.module('userprofile', [])
       if(game.platform){
         ProfileServices.addGameSeeking({
           title: game.title,
-          platform: game.platform 
+          platform: game.platform
         }).then(function(resp){
 
           setTimeout(loadProfile, 200);
         });
       } else {
         console.log('ERROR: no platform chosen');
-        this.noSeekPlatform = true;  
+        this.noSeekPlatform = true;
       }
   	};
 
   	this.signOut = function(){
   		AuthServices.signOut();
-  	}
+  	};
+
+    this.testdb = function(){
+      console.log('testing db');
+      ProfileServices.testdb();
+    }
 
     loadProfile();
-  
+
   })

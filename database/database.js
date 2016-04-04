@@ -22,6 +22,7 @@ createConnection();
 tables.create();
 
 module.exports = {
+  //***  USER FUNCTIONS  ***//
   findUser: function (email, callback) {
     var sql = 'SELECT * FROM Users WHERE email = ?;'
     var values = email;
@@ -63,6 +64,7 @@ module.exports = {
     });
   },
 
+  //*** USERS GAMES FUNCTIONS ***//
   addGame: function (title, platform, rating, description, callback) {
     var check = 'SELECT * FROM Games WHERE title = ? AND platform = ?;'
     var checkValues = [title, platform];
@@ -124,6 +126,14 @@ module.exports = {
     });
   },
 
+  //***  SEARCH GAMES FUNCTIONS ***//
+  allGameMatchesByUser: function(user, callback){
+    var sql =
+      "SELECT Games.title, Games.platform, Games.thumbnail, Games.id, Offering.* FROM Offering JOIN Seeking ON Seeking.gameid = Offering.gameid JOIN  Games ON Offering.gameid = Games.id WHERE ? = Seeking.userid"
+    var values = [user];
+
+  },
+
   searchOffering: function (title, callback) {
     var sql = "SELECT Games.title, Games.rating, Games.description, Games.platform, Games.thumbnail, Offering.game_condition, Offering.createdat, Users.username, Users.id, Users.city, Users.state, Users.zip, Users.geoloc FROM Games, Offering, Users WHERE Games.title = '" + title + "' AND Games.id = Offering.gameid AND Offering.userid = Users.id;";
 
@@ -168,8 +178,9 @@ module.exports = {
     });
   },
 
+  //*** MESSAGE FUNCTIONS ***//
   addMessage: function (useridfrom, useridto, text) {
-    var sql = "INSERT into Messages (userto, userfrom, message) values (?, ?, ?);";
+    var sql = "INSERT into Messages (userto, userfrom, Åamessage) values (?, ?, ?);";
     var values = [useridto, useridfrom, text];
 
     connection.query(sql, values, function (err) {

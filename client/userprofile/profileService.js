@@ -74,10 +74,27 @@ angular.module('profile.service', [])
 			});
 	};
 
+	var testdb = function(){
+		var token = $window.localStorage.getItem('com.gameswap');
+
+		return $http({
+			method: 'GET',
+			url: '/getmatches',
+			data: {token: token}
+		})
+		.then(function(resp){
+			return resp;
+		}, function(error) {
+			console.error('ERROR!!! ', error);
+		})
+	}
+
+
 	return {
 		getProfileData: getProfileData,
 		addGameOffering: addGameOffering,
 		addGameSeeking: addGameSeeking,
-		updateProfile: updateProfile
+		updateProfile: updateProfile,
+		testdb: testdb
 	};
 });
