@@ -84,11 +84,11 @@
     <div class="form-group" ng-class="{ 'has-error' : seekForm.title.$invalid && !seekForm.title.$pristine }">
       Add a new title:
       <div class='row'>
-        <div class='col-md-8 nopadding-right'>
+        <div class='col-md-8 col-sm-7 col-xs-7 nopadding-right'>
           <input type="text" name="title" class="form-control" ng-model="profile.gameToSeek.title" required />
         </div>
 
-        <div class='col-md-3 nopadding'>
+        <div class='col-md-3 col-sm-3 col-xs-3 nopadding'>
           <select class="selectpicker btn btn-default form-control" role='button' ng-model='profile.gameToSeek.platform'>
             <option value="">Platform</option>
             <option value="Playstation 4">PlayStation 4</option>
@@ -96,13 +96,13 @@
           </select>
           <p ng-show="profile.noSeekPlatform" class='text-danger'>Please choose a platform.</p>
         </div>
-        <div class='col-md-1 nopadding-left'>
+        <div class='col-md-1 col-sm-1 col-xs-1 nopadding-left'>
           <button type="submit" class="btn btn-primary" ng-disabled="seekForm.$invalid">Add</button>
         </div>
       </div>
     </div>
   </form>
-  <div class='col-md-8 col-md-offset-2' ng-show='profile.gamesOffered.length && profile.gamesSeeking.length'>
+  <div class='col-md-12 col-sm-12 col-xs-12 nopadding' ng-show='profile.gamesOffered.length && profile.gamesSeeking.length'>
     <a class='btn btn-primary btn-lg btn-block active center-block signin-btn' role='button' ui-sref='main'>See available game swaps in your city!</a>
   </div>
 </div>
